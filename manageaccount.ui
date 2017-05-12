@@ -1,0 +1,963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ManageAccount</class>
+ <widget class="QWidget" name="ManageAccount">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>488</width>
+    <height>335</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#ManageAccount {
+	background-color: rgb(255, 255, 255);
+	border-style: outset;
+	border-width: 0.5px;
+	border-color: black;
+	border-radius: 13px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QStackedWidget" name="ManageAccount_stack">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="edit_account">
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_2" stretch="0,1,1">
+         <item>
+          <widget class="QLabel" name="edit_account_title">
+           <property name="styleSheet">
+            <string notr="true">QLabel#edit_account_title {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	min-height: 75px;
+}</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; font-style:italic;&quot;&gt;------ EDIT ACCOUNT ------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="UserName_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#UserName_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Name : </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" colspan="2">
+              <widget class="QLineEdit" name="edit_username_account">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#edit_username_account {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#edit_username_account:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#edit_username_account:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="Account_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#Account_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Account : </string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QLineEdit" name="edit_account_name">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#edit_account_name {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#edit_account_name:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#edit_account_name:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="Role_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#Role_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Role : </string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="2">
+              <widget class="QLineEdit" name="edit_Role_account">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#edit_Role_account {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#edit_Role_account:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#edit_Role_account:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="State_label_edit">
+               <property name="styleSheet">
+                <string notr="true">QLabel#State_label_edit {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>State :</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QRadioButton" name="active_edit">
+               <property name="styleSheet">
+                <string notr="true">QRadioButton#active_edit {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Active</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="2">
+              <widget class="QRadioButton" name="inactive_edit">
+               <property name="styleSheet">
+                <string notr="true">QRadioButton#inactive_edit {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Inactive</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <item>
+              <widget class="QPushButton" name="OK_edit_account">
+               <property name="styleSheet">
+                <string notr="true">QPushButton#OK_edit_account {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#OK_edit_account:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#OK_edit_account:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+               </property>
+               <property name="text">
+                <string>OK</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Cancel_edit_account">
+               <property name="styleSheet">
+                <string notr="true">QPushButton#Cancel_edit_account {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#Cancel_edit_account:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#Cancel_edit_account:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+               </property>
+               <property name="text">
+                <string>Cancel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_3">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="add_account">
+      <layout class="QVBoxLayout" name="verticalLayout_7">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QLabel" name="add_account_title">
+           <property name="styleSheet">
+            <string notr="true">QLabel#add_account_title {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	min-height: 45px;
+}</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; font-style:italic;&quot;&gt;------ ADD ACCOUNT ------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_4">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="UserName_add_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#UserName_add_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Name : </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1" colspan="2">
+              <widget class="QLineEdit" name="add_user_name">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#add_user_name {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_user_name:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_user_name:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="Account_add_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#Account_add_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Account :      </string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1" colspan="2">
+              <widget class="QLineEdit" name="add_account_name">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#add_account_name {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_account_name:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_account_name:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="Role_add_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#Role_add_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Role : </string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" colspan="2">
+              <widget class="QLineEdit" name="add_role">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#add_role {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_role:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_role:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="add_password_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#add_password_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Password :</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1" colspan="2">
+              <widget class="QLineEdit" name="add_password">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#add_password {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_password:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#add_password:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QLabel" name="State_label_add">
+               <property name="styleSheet">
+                <string notr="true">QLabel#State_label_add {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>State :</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QRadioButton" name="active_add">
+               <property name="styleSheet">
+                <string notr="true">QRadioButton#active_add {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Active</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="2">
+              <widget class="QRadioButton" name="inactive_add">
+               <property name="styleSheet">
+                <string notr="true">QRadioButton#inactive_add {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Inactive</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="Ok_add_account">
+               <property name="styleSheet">
+                <string notr="true">QPushButton#Ok_add_account {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#Ok_add_account:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#Ok_add_account:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+               </property>
+               <property name="text">
+                <string>OK</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Cancel_add_account">
+               <property name="styleSheet">
+                <string notr="true">QPushButton#Cancel_add_account {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#Cancel_add_account:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#Cancel_add_account:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+               </property>
+               <property name="text">
+                <string>Cancel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer_5">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="reset_password">
+      <layout class="QVBoxLayout" name="verticalLayout_10">
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_9" stretch="0,1,1">
+         <item>
+          <widget class="QLabel" name="reset_password_title">
+           <property name="styleSheet">
+            <string notr="true">QLabel#reset_password_title {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	min-height: 95px;
+}</string>
+           </property>
+           <property name="text">
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:600; font-style:italic;&quot;&gt;------ RESET PASSWORD ------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="verticalLayout_8">
+           <item>
+            <layout class="QGridLayout" name="gridLayout_3">
+             <item row="0" column="0">
+              <widget class="QLabel" name="reset_pass_account_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#reset_pass_account_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Account :      </string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="reset_pass_account_name">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#reset_pass_account_name {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#reset_pass_account_name:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#reset_pass_account_name:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="reset_pass_label">
+               <property name="styleSheet">
+                <string notr="true">QLabel#reset_pass_label {
+	height: 35pt;
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 6em;
+	min-height: 35px;
+}</string>
+               </property>
+               <property name="text">
+                <string>Password :</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="reset_pass">
+               <property name="styleSheet">
+                <string notr="true">QLineEdit#reset_pass {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#reset_pass:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#reset_pass:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+               </property>
+               <property name="echoMode">
+                <enum>QLineEdit::Password</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_3">
+             <item>
+              <widget class="QPushButton" name="OK_reset_pass">
+               <property name="styleSheet">
+                <string notr="true">QPushButton#OK_reset_pass {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#OK_reset_pass:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#OK_reset_pass:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+               </property>
+               <property name="text">
+                <string>OK</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="Cancel_reset_pass">
+               <property name="styleSheet">
+                <string notr="true">QPushButton#Cancel_reset_pass {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#Cancel_reset_pass:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#Cancel_reset_pass:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+               </property>
+               <property name="text">
+                <string>Cancel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+ <slots>
+  <signal>edit()</signal>
+  <signal>add()</signal>
+  <signal>reset()</signal>
+  <slot>edit_account()</slot>
+  <slot>add_account()</slot>
+  <slot>reset_password()</slot>
+ </slots>
+</ui>
