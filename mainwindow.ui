@@ -6,14 +6,14 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>600</height>
+    <width>1002</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>1000</width>
-    <height>600</height>
+    <height>650</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -35,7 +35,7 @@
       <widget class="QWidget" name="rolePage">
        <layout class="QVBoxLayout" name="verticalLayout_35">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,1">
+         <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,3">
           <item>
            <widget class="QWidget" name="Feature_widget" native="true">
             <property name="styleSheet">
@@ -63,8 +63,8 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>300</width>
-                   <height>150</height>
+                   <width>200</width>
+                   <height>175</height>
                   </size>
                  </property>
                  <property name="maximumSize">
@@ -77,8 +77,7 @@
                   <string notr="true">font: 48pt &quot;MV Boli&quot;;
 image: url(:/images/Libpro.png);
 border-color: rgb(255, 255, 255);
-color: rgb(54, 3, 6);
-background-color: rgb(255, 255, 255);</string>
+color: rgb(54, 3, 6);</string>
                  </property>
                  <property name="text">
                   <string/>
@@ -93,7 +92,7 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="minimumSize">
                   <size>
                    <width>200</width>
-                   <height>0</height>
+                   <height>35</height>
                   </size>
                  </property>
                  <property name="maximumSize">
@@ -241,7 +240,7 @@ QPushButton#login_button:hover {
 }</string>
                     </property>
                     <property name="text">
-                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;right&quot;&gt;You are on the role:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;You are :&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                    </widget>
                   </item>
@@ -352,12 +351,18 @@ height: 35pt;
                   <string notr="true">background-color: rgb(255,255,255);</string>
                  </property>
                  <property name="currentIndex">
-                  <number>1</number>
+                  <number>0</number>
                  </property>
                  <widget class="QWidget" name="not_login">
                   <layout class="QVBoxLayout" name="verticalLayout_24">
                    <item>
                     <widget class="QLabel" name="label_19">
+                     <property name="minimumSize">
+                      <size>
+                       <width>71</width>
+                       <height>100</height>
+                      </size>
+                     </property>
                      <property name="styleSheet">
                       <string notr="true">QLabel#label_19 {
     background-color: rgb(255,255,255);
@@ -369,9 +374,22 @@ height: 35pt;
 }</string>
                      </property>
                      <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Login to see more features.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Login to see &lt;/p&gt;&lt;p align=&quot;center&quot;&gt;more features.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                     </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>40</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </widget>
@@ -386,7 +404,7 @@ height: 35pt;
                       <number>0</number>
                      </property>
                      <item>
-                      <layout class="QHBoxLayout" name="horizontalLayout_6">
+                      <layout class="QVBoxLayout" name="verticalLayout_27">
                        <property name="spacing">
                         <number>0</number>
                        </property>
@@ -406,9 +424,15 @@ height: 35pt;
                              <verstretch>0</verstretch>
                             </sizepolicy>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>119</width>
+                             <height>0</height>
+                            </size>
+                           </property>
                            <property name="maximumSize">
                             <size>
-                             <width>16777215</width>
+                             <width>200</width>
                              <height>16777215</height>
                             </size>
                            </property>
@@ -422,7 +446,7 @@ height: 35pt;
     border-style: outset;
     border-width: 0.5px;
     border-color: black;
-	border-radius: 13px;
+	border-radius: 19px;
 	font:normal 200 14pt &quot;Myriad Pro&quot;;
     min-width: 5em;
     padding: 1px;
@@ -453,9 +477,15 @@ QPushButton#reader_noti_button:hover {
                              <verstretch>0</verstretch>
                             </sizepolicy>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>119</width>
+                             <height>0</height>
+                            </size>
+                           </property>
                            <property name="maximumSize">
                             <size>
-                             <width>16777215</width>
+                             <width>200</width>
                              <height>16777215</height>
                             </size>
                            </property>
@@ -469,7 +499,7 @@ QPushButton#reader_noti_button:hover {
     border-style: outset;
     border-width: 0.5px;
     border-color: black;
-	border-radius: 13px;
+	border-radius: 19px;
 	font:normal 200 14pt &quot;Myriad Pro&quot;;
     min-width: 5em;
     padding: 1px;
@@ -494,9 +524,15 @@ QPushButton#reader_find_book_button:hover {
                          </item>
                          <item row="1" column="0">
                           <widget class="QPushButton" name="goto_basket_button">
+                           <property name="minimumSize">
+                            <size>
+                             <width>119</width>
+                             <height>0</height>
+                            </size>
+                           </property>
                            <property name="maximumSize">
                             <size>
-                             <width>16777215</width>
+                             <width>200</width>
                              <height>16777215</height>
                             </size>
                            </property>
@@ -510,7 +546,7 @@ QPushButton#reader_find_book_button:hover {
     border-style: outset;
     border-width: 0.5px;
     border-color: black;
-	border-radius: 13px;
+	border-radius: 19px;
 	font:normal 200 14pt &quot;Myriad Pro&quot;;
     min-width: 5em;
     padding: 1px;
@@ -538,9 +574,15 @@ QPushButton#goto_basket_button:hover {
                              <verstretch>0</verstretch>
                             </sizepolicy>
                            </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>121</width>
+                             <height>0</height>
+                            </size>
+                           </property>
                            <property name="maximumSize">
                             <size>
-                             <width>16777215</width>
+                             <width>200</width>
                              <height>16777215</height>
                             </size>
                            </property>
@@ -554,7 +596,7 @@ QPushButton#goto_basket_button:hover {
     border-style: outset;
     border-width: 0.5px;
     border-color: black;
-	border-radius: 13px;
+	border-radius: 19px;
 	font:normal 200 14pt &quot;Myriad Pro&quot;;
     min-width: 5em;
     padding: 2px;
@@ -581,6 +623,19 @@ QPushButton#reader_change_pass_button:hover {
                        </item>
                       </layout>
                      </item>
+                     <item>
+                      <spacer name="verticalSpacer_5">
+                       <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                       </property>
+                       <property name="sizeHint" stdset="0">
+                        <size>
+                         <width>20</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                      </spacer>
+                     </item>
                     </layout>
                    </item>
                   </layout>
@@ -592,19 +647,6 @@ QPushButton#reader_change_pass_button:hover {
                      <property name="spacing">
                       <number>0</number>
                      </property>
-                     <item>
-                      <spacer name="verticalSpacer_14">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>35</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
                      <item>
                       <layout class="QGridLayout" name="gridLayout_2">
                        <property name="horizontalSpacing">
@@ -619,6 +661,12 @@ QPushButton#reader_change_pass_button:hover {
                           <size>
                            <width>127</width>
                            <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
                           </size>
                          </property>
                          <property name="cursor">
@@ -659,6 +707,12 @@ QPushButton#manage_info_button:hover {
                            <height>0</height>
                           </size>
                          </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
                          <property name="cursor">
                           <cursorShape>PointingHandCursor</cursorShape>
                          </property>
@@ -695,6 +749,12 @@ QPushButton#manager_change_pass_button:hover {
                           <size>
                            <width>127</width>
                            <height>0</height>
+                          </size>
+                         </property>
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
                           </size>
                          </property>
                          <property name="cursor">
@@ -754,19 +814,6 @@ QPushButton#manage_account_button:hover {
                       <number>0</number>
                      </property>
                      <item>
-                      <spacer name="verticalSpacer_8">
-                       <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>20</width>
-                         <height>35</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                     <item>
                       <layout class="QGridLayout" name="gridLayout_5">
                        <property name="horizontalSpacing">
                         <number>0</number>
@@ -776,6 +823,12 @@ QPushButton#manage_account_button:hover {
                        </property>
                        <item row="1" column="0">
                         <widget class="QPushButton" name="manage_demand_button">
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
                          <property name="cursor">
                           <cursorShape>PointingHandCursor</cursorShape>
                          </property>
@@ -808,6 +861,12 @@ QPushButton#manage_demand_button:hover {
                        </item>
                        <item row="0" column="0">
                         <widget class="QPushButton" name="manage_book_button">
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
                          <property name="cursor">
                           <cursorShape>PointingHandCursor</cursorShape>
                          </property>
@@ -840,6 +899,12 @@ QPushButton#manage_book_button:hover {
                        </item>
                        <item row="2" column="0">
                         <widget class="QPushButton" name="librarian_change_pass_button">
+                         <property name="maximumSize">
+                          <size>
+                           <width>200</width>
+                           <height>16777215</height>
+                          </size>
+                         </property>
                          <property name="cursor">
                           <cursorShape>PointingHandCursor</cursorShape>
                          </property>
@@ -917,7 +982,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>8</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1016,13 +1081,13 @@ border-color: rgb(216,229,239);
                   <property name="widgetResizable">
                    <bool>true</bool>
                   </property>
-                  <widget class="QWidget" name="scrollAreaWidgetContents">
+                  <widget class="QWidget" name="book_scoll_area">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>63</width>
-                     <height>16</height>
+                     <width>696</width>
+                     <height>507</height>
                     </rect>
                    </property>
                   </widget>
@@ -1037,10 +1102,10 @@ border-color: rgb(216,229,239);
               <item>
                <widget class="QLabel" name="label">
                 <property name="styleSheet">
-                 <string notr="true">font: 20pt &quot;Times New Roman&quot;;</string>
+                 <string notr="true">font: 20pt &quot;Myriad Pro&quot;;</string>
                 </property>
                 <property name="text">
-                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;------ YOUR BASKET ------&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;THIS IS YOUR BASKET &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
                </widget>
               </item>
@@ -1056,13 +1121,13 @@ background-color: rgb(245,249,252);
                   <property name="widgetResizable">
                    <bool>true</bool>
                   </property>
-                  <widget class="QWidget" name="scrollAreaWidgetContents_5">
+                  <widget class="QWidget" name="book_basket_scoll_area">
                    <property name="geometry">
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>61</width>
-                     <height>16</height>
+                     <width>694</width>
+                     <height>452</height>
                     </rect>
                    </property>
                   </widget>
@@ -3701,8 +3766,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>59</width>
-                       <height>16</height>
+                       <width>606</width>
+                       <height>407</height>
                       </rect>
                      </property>
                     </widget>
@@ -3742,8 +3807,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>560</width>
-                       <height>457</height>
+                       <width>586</width>
+                       <height>465</height>
                       </rect>
                      </property>
                     </widget>
@@ -3947,8 +4012,15 @@ QPushButton#undo_noti_button:hover {
              </item>
              <item>
               <widget class="QWidget" name="login_widget" native="true">
+               <property name="minimumSize">
+                <size>
+                 <width>400</width>
+                 <height>0</height>
+                </size>
+               </property>
                <property name="styleSheet">
-                <string notr="true">background-color: rgb(245, 249, 252);</string>
+                <string notr="true">background-color: rgb(245, 249, 252);
+</string>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_13">
                 <item>
@@ -3959,18 +4031,18 @@ QPushButton#undo_noti_button:hover {
                      <widget class="QLabel" name="label_21">
                       <property name="minimumSize">
                        <size>
-                        <width>150</width>
-                        <height>120</height>
+                        <width>300</width>
+                        <height>200</height>
                        </size>
                       </property>
                       <property name="maximumSize">
                        <size>
-                        <width>150</width>
-                        <height>120</height>
+                        <width>16777215</width>
+                        <height>200</height>
                        </size>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">color: rgb(0, 0, 0);</string>
+                       <string notr="true">image: url(:/images/Libpro2.png);</string>
                       </property>
                       <property name="text">
                        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -4115,6 +4187,12 @@ QLineEdit#lineEdit_password:focus {
                    <layout class="QHBoxLayout" name="horizontalLayout_28">
                     <item>
                      <widget class="QPushButton" name="other_login_button">
+                      <property name="maximumSize">
+                       <size>
+                        <width>150</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
                       <property name="cursor">
                        <cursorShape>PointingHandCursor</cursorShape>
                       </property>
@@ -4160,6 +4238,12 @@ QPushButton#other_login_button:hover {
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>150</width>
+                        <height>16777215</height>
+                       </size>
                       </property>
                       <property name="cursor">
                        <cursorShape>PointingHandCursor</cursorShape>
@@ -4256,7 +4340,7 @@ QPushButton#close_login_form_button:hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1002</width>
      <height>21</height>
     </rect>
    </property>

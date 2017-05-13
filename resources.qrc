@@ -1,5 +1,10 @@
 <RCC>
     <qresource prefix="/images">
+        <file>error.png</file>
+        <file>OK.png</file>
+        <file>warning.png</file>
+        <file>Libpro_icon.ico</file>
         <file>Libpro.png</file>
+        <file>Libpro2.png</file>
     </qresource>
 </RCC>
