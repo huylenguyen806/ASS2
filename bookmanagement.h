@@ -15,10 +15,14 @@ public:
     explicit BookManagement(QWidget *parent = 0);
     ~BookManagement();
 
-private slots:
+public slots:
     void on_cancel_add_book_button_clicked();
 
     void on_cancel_edit_book_button_clicked();
+
+    void showaddbook();
+
+    void showeditbook();
 
 private:
     Ui::BookManagement *ui;

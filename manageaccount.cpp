@@ -38,3 +38,18 @@ void ManageAccount::on_Cancel_add_account_clicked()
     ui->add_user_name->clear();
     this->close();
 }
+
+void ManageAccount::showedit()
+{
+    ui->ManageAccount_stack->setCurrentWidget(ui->edit_account);
+}
+
+void ManageAccount::showadd()
+{
+    ui->ManageAccount_stack->setCurrentWidget(ui->add_account);
+}
+
+void ManageAccount::showresetpass()
+{
+    ui->ManageAccount_stack->setCurrentWidget(ui->reset_password);
+}

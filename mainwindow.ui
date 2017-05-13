@@ -916,7 +916,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>7</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1020,8 +1020,8 @@ border-color: rgb(216,229,239);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>63</width>
-                     <height>16</height>
+                     <width>584</width>
+                     <height>457</height>
                     </rect>
                    </property>
                   </widget>
@@ -1060,8 +1060,8 @@ background-color: rgb(245,249,252);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>61</width>
-                     <height>16</height>
+                     <width>582</width>
+                     <height>403</height>
                     </rect>
                    </property>
                   </widget>
@@ -4118,7 +4118,7 @@ QLineEdit#lineEdit_password:focus {
                        <cursorShape>PointingHandCursor</cursorShape>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QPushButton#pushButton_17 {
+                       <string notr="true">QPushButton#other_login_button {
     background-color: rgb(199,237,252);
     border-style: outset;
     border-width: 1px;
@@ -4128,12 +4128,12 @@ QLineEdit#lineEdit_password:focus {
     min-width: 5em;
     padding: 2px;
 }
-QPushButton#pushButton_17:pressed {
+QPushButton#other_login_button:pressed {
     background-color: rgb(178,231,250);
     border-style: outset;
     border-style: inset;
 }
-QPushButton#pushButton_17:hover {
+QPushButton#other_login_button:hover {
     background-color: rgb(178,231,250);
     border-style: inset;
 }</string>
@@ -4164,7 +4164,7 @@ QPushButton#pushButton_17:hover {
                        <cursorShape>PointingHandCursor</cursorShape>
                       </property>
                       <property name="styleSheet">
-                       <string notr="true">QPushButton#pushButton_9 {
+                       <string notr="true">QPushButton#close_login_form_button {
     background-color: rgb(199,237,252);
     border-style: outset;
     border-width: 1px;
@@ -4174,12 +4174,12 @@ QPushButton#pushButton_17:hover {
     min-width: 5em;
     padding: 2px;
 }
-QPushButton#pushButton_9:pressed {
+QPushButton#close_login_form_button:pressed {
     background-color: rgb(178,231,250);
     border-style: outset;
     border-style: inset;
 }
-QPushButton#pushButton_9:hover {
+QPushButton#close_login_form_button:hover {
     background-color: rgb(178,231,250);
     border-style: inset;
 }</string>

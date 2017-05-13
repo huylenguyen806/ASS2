@@ -26,7 +26,7 @@
    <item>
     <widget class="QStackedWidget" name="ManageAccount_stack">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="edit_account">
       <layout class="QVBoxLayout" name="verticalLayout_5">

@@ -23,6 +23,12 @@ public slots:
 
     void on_Cancel_add_account_clicked();
 
+    void showedit();
+
+    void showadd();
+
+    void showresetpass();
+
 private:
     Ui::ManageAccount *ui;
 };

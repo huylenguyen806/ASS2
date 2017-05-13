@@ -34,3 +34,13 @@ void BookManagement::on_cancel_edit_book_button_clicked()
     ui->publishing_house_edit->clear();
     this->close();
 }
+
+void BookManagement::showaddbook()
+{
+    ui->stackedWidget->setCurrentWidget(ui->add_book);
+}
+
+void BookManagement::showeditbook()
+{
+    ui->stackedWidget->setCurrentWidget(ui->edit_book);
+}
