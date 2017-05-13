@@ -7,7 +7,6 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     show_viewer();
-    ui->logo->setPicture(QPicture(qApp->applicationDirPath() + "Libpro.png"));
 }
 
 MainWindow::~MainWindow()

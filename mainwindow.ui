@@ -43,7 +43,7 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_7">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_2">
+              <layout class="QVBoxLayout" name="verticalLayout_2" stretch="1,0,0,0">
                <property name="spacing">
                 <number>0</number>
                </property>
@@ -63,18 +63,19 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>250</width>
-                   <height>200</height>
+                   <width>300</width>
+                   <height>150</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>300</width>
-                   <height>240</height>
+                   <width>16777215</width>
+                   <height>16777215</height>
                   </size>
                  </property>
                  <property name="styleSheet">
                   <string notr="true">font: 48pt &quot;MV Boli&quot;;
+image: url(:/images/Libpro.png);
 border-color: rgb(255, 255, 255);
 color: rgb(54, 3, 6);
 background-color: rgb(255, 255, 255);</string>
@@ -92,7 +93,7 @@ background-color: rgb(255, 255, 255);</string>
                  <property name="minimumSize">
                   <size>
                    <width>200</width>
-                   <height>35</height>
+                   <height>0</height>
                   </size>
                  </property>
                  <property name="maximumSize">
@@ -916,7 +917,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>8</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1020,8 +1021,8 @@ border-color: rgb(216,229,239);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>584</width>
-                     <height>457</height>
+                     <width>63</width>
+                     <height>16</height>
                     </rect>
                    </property>
                   </widget>
@@ -1060,8 +1061,8 @@ background-color: rgb(245,249,252);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>582</width>
-                     <height>403</height>
+                     <width>61</width>
+                     <height>16</height>
                     </rect>
                    </property>
                   </widget>
@@ -3700,8 +3701,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>580</width>
-                       <height>399</height>
+                       <width>59</width>
+                       <height>16</height>
                       </rect>
                      </property>
                     </widget>
@@ -3741,8 +3742,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>63</width>
-                       <height>16</height>
+                       <width>560</width>
+                       <height>457</height>
                       </rect>
                      </property>
                     </widget>

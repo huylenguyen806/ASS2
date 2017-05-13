@@ -35,3 +35,6 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     manageaccount.ui \
     bookmanagement.ui
+
+RESOURCES += \
+    resources.qrc
