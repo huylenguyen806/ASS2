@@ -19,3 +19,15 @@ void MainWindow::on_basket_clicked()
     noti->setText("The book is now in your basket.");
     noti->show();
 }
+
+void MainWindow::on_edit_book_manage_button_clicked()
+{
+    BookManagement *edit = new BookManagement();
+    edit->show();
+}
+
+void MainWindow::on_add_account_button_clicked()
+{
+    ManageAccount *add = new ManageAccount();
+    add->show();
+}

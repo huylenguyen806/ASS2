@@ -20,6 +20,10 @@ public:
 private slots:
     void on_basket_clicked();
 
+    void on_edit_book_manage_button_clicked();
+
+    void on_add_account_button_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

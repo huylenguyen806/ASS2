@@ -6,7 +6,7 @@ ManageAccount::ManageAccount(QWidget *parent) :
     ui(new Ui::ManageAccount)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint);
     setWindowModality(Qt::ApplicationModal);
 }
 

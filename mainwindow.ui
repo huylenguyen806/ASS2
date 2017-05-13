@@ -916,7 +916,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>8</number>
+             <number>7</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1020,8 +1020,8 @@ border-color: rgb(216,229,239);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>584</width>
-                     <height>457</height>
+                     <width>63</width>
+                     <height>16</height>
                     </rect>
                    </property>
                   </widget>
@@ -1060,8 +1060,8 @@ background-color: rgb(245,249,252);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>582</width>
-                     <height>403</height>
+                     <width>61</width>
+                     <height>16</height>
                     </rect>
                    </property>
                   </widget>
@@ -3741,8 +3741,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>560</width>
-                       <height>457</height>
+                       <width>63</width>
+                       <height>16</height>
                       </rect>
                      </property>
                     </widget>
