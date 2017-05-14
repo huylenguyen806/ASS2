@@ -11,6 +11,8 @@
 #include <QBoxLayout>
 #include <QSpacerItem>
 #include <QFrame>
+#include <QListWidgetItem>
+#include "bookwidget.h"
 namespace Ui {
 class MainWindow;
 }
@@ -24,7 +26,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_basket_clicked();
 
     void on_edit_book_manage_button_clicked();
 
@@ -69,6 +70,8 @@ private slots:
     void on_reset_pass_button_clicked();
 
     void createBookWidget();
+
+    void put_in_basket_click();
 
 private:
     Ui::MainWindow *ui;

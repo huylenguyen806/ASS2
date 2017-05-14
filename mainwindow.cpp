@@ -21,36 +21,41 @@ void MainWindow::login()
 
 }
 
+void MainWindow::put_in_basket_click()
+{
+    if(ui->login_button->text() == "Login")
+    {
+        createMessageBox("Error", "Please login to continue.");
+    }
+    else{
+        createMessageBox("OK", "The book is now in your basket.");
+    }
+}
+
 void MainWindow::createBookWidget()
 {
     //vertical layout in book_scoll_area
     QVBoxLayout *vlayout = new QVBoxLayout(ui->book_scoll_area);
+    QString book_ID;
     for(int i = 0; i < 10; ++i){
     //create widget contains books' info and button
-    QWidget *newbook = new QWidget();
-    newbook->setMinimumHeight(100);
-    newbook->setMaximumHeight(100);
-    //create horizontal layout
-    QHBoxLayout *newlayout = new QHBoxLayout(newbook);
-    //create label contains books' info
-    QLabel *newlabel = new QLabel();
-    newlabel->setText("Newbook");
-    //create button
-    QPushButton *newbutton = new QPushButton();
-    newbutton->setText("Put in basket");
+    BookWidget *book = new BookWidget();
+    QWidget *widget = book->createWidgetForDisplayingBook();
+    //book_ID =  book->get_book_info(book_ID);
     //create line
     QFrame *line = new QFrame();
     line->setFrameShape(QFrame::HLine);
     line->setFrameShadow(QFrame::Sunken);
     //add widgets
-    newlayout->addWidget(newlabel,5,0);
-    newlayout->addWidget(newbutton,1,0);
-    vlayout->addWidget(newbook,0,0);
+    vlayout->addWidget(widget,0,0);
     vlayout->addWidget(line,0,0);
     }
     //create spacer
     QSpacerItem *newspacer = new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding);
     vlayout->addSpacerItem(newspacer);
+    foreach (QPushButton *button, ui->find_books->findChildren<QPushButton*>()) {
+        connect(button,SIGNAL(clicked(bool)),this,SLOT(put_in_basket_click()));
+    }
 }
 
 void MainWindow::createMessageBox(QString type, QString text)
@@ -92,16 +97,6 @@ void MainWindow::show_viewer()
     ui->main_ui->setCurrentWidget(ui->find_books);
 }
 
-void MainWindow::on_basket_clicked()
-{
-    if(ui->login_button->text() == "Login")
-    {
-        createMessageBox("Error", "Please login to continue.");
-    }
-    else{
-        createMessageBox("OK", "The book is now in your basket.");
-    }
-}
 
 void MainWindow::on_edit_book_manage_button_clicked()
 {

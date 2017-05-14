@@ -989,7 +989,7 @@ QPushButton#librarian_change_pass_button:hover {
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_6">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="12,0">
+                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="12">
                   <item>
                    <widget class="QLineEdit" name="search_books">
                     <property name="enabled">
@@ -1036,48 +1036,10 @@ QLineEdit#search_books:focus {
                     </property>
                    </widget>
                   </item>
-                  <item>
-                   <widget class="QPushButton" name="basket">
-                    <property name="cursor">
-                     <cursorShape>PointingHandCursor</cursorShape>
-                    </property>
-                    <property name="styleSheet">
-                     <string notr="true">QPushButton#basket {
-	height: 30px;
-    background-color: rgb(199,237,252);
-    border-style: outset;
-    border-width: 1px;
-    border-radius: 5px;
-    border-color: white;
-	font:normal 200 12pt &quot;Myriad Pro&quot;;
-    min-width: 5em;
-    padding: 2px;
-}
-QPushButton#basket:pressed {
-    background-color: rgb(178,231,250);
-    border-style: outset;
-    border-style: inset;
-}
-QPushButton#basket:hover {
-    background-color: rgb(178,231,250);
-    border-style: inset;
-}</string>
-                    </property>
-                    <property name="text">
-                     <string>Put In Basket</string>
-                    </property>
-                   </widget>
-                  </item>
                  </layout>
                 </item>
                 <item>
                  <widget class="QScrollArea" name="book_area">
-                  <property name="styleSheet">
-                   <string notr="true">QScrollArea#book_area {
-border: 1px;
-border-color: rgb(216,229,239);
-}</string>
-                  </property>
                   <property name="widgetResizable">
                    <bool>true</bool>
                   </property>
@@ -1086,8 +1048,8 @@ border-color: rgb(216,229,239);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>696</width>
-                     <height>507</height>
+                     <width>694</width>
+                     <height>509</height>
                     </rect>
                    </property>
                   </widget>
@@ -3766,8 +3728,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>606</width>
-                       <height>407</height>
+                       <width>692</width>
+                       <height>449</height>
                       </rect>
                      </property>
                     </widget>
@@ -3807,8 +3769,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>586</width>
-                       <height>465</height>
+                       <width>63</width>
+                       <height>16</height>
                       </rect>
                      </property>
                     </widget>

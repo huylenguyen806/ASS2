@@ -26,11 +26,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += main.cpp\
         mainwindow.cpp \
     manageaccount.cpp \
-    bookmanagement.cpp
+    bookmanagement.cpp \
+    bookwidget.cpp
 
 HEADERS  += mainwindow.h \
     manageaccount.h \
-    bookmanagement.h
+    bookmanagement.h \
+    bookwidget.h
 
 FORMS    += mainwindow.ui \
     manageaccount.ui \
