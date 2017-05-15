@@ -11,9 +11,8 @@ class BookWidget
 {
 public:
     BookWidget();
-    void createBookWidget(QWidget *book);
+    QWidget* createBookWidget(QString name, QString content, QString artist, QString Publishing_house, QString genre);
     void createBookButton(QPushButton *button);
-    QWidget* createWidgetForDisplayingBook();
     QString get_book_info(QString chose_info);
 };
 

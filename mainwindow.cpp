@@ -8,7 +8,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     setWindowIcon(QIcon(":/images/Libpro_icon.ico"));
     //show_viewer();
-    createBookWidget();
+    createDisplayBookWidget();
     createBookManagerWidget();
     ui->manage_user_label->setHidden(true);
 }
@@ -39,16 +39,17 @@ void MainWindow::createBookManagerWidget()
     for(int i = 0 ; i < 10; ++i){
     QListWidgetItem *newitem = new QListWidgetItem();
     BookWidget *book = new BookWidget();
-    QWidget *bookwidget = new QWidget();
-    book->createBookWidget(bookwidget);
-    newitem->setSizeHint(QSize(0,155));
+    QWidget *bookwidget = book->createBookWidget("Object Oriented Cpp Programming 4th edition."
+                                                 ,"good programming book for programmers."
+                                                 ,"Someone","Something","Science/Programming book");
+    newitem->setSizeHint(QSize(0,150));
+    newitem->setIcon(QIcon(":/images/OK.png"));
     ui->manage_book_area->addItem(newitem);
     ui->manage_book_area->setItemWidget(newitem,bookwidget);
-    ui->manage_book_area->setStyleSheet("QListWidgetItem:hover{background-color:green;}");
     }
 }
 
-void MainWindow::createBookWidget()
+void MainWindow::createDisplayBookWidget()
 {
     //vertical layout in book_scoll_area
     QVBoxLayout *vlayout = new QVBoxLayout(ui->book_scoll_area);
@@ -56,22 +57,29 @@ void MainWindow::createBookWidget()
     for(int i = 0; i < 10; ++i){
     //create widget contains books' info and button
     BookWidget *book = new BookWidget();
-    QWidget *widget = book->createWidgetForDisplayingBook();
+    QWidget *newbook = new QWidget();
+    QWidget *bookwidget = book->createBookWidget("Object Oriented Cpp Programming 4th edition."
+                                                 ,"good programming book for programmers."
+                                                 ,"Someone","Something","Science/Programming book");
+    QPushButton *newbutton = new QPushButton();
+    book->createBookButton(newbutton);
+    QHBoxLayout *hlayout = new QHBoxLayout(newbook);
+    hlayout->addWidget(bookwidget,6,0);
+    hlayout->addWidget(newbutton,1,0);
     //book_ID =  book->get_book_info(book_ID);
     //create line
     QFrame *line = new QFrame();
     line->setFrameShape(QFrame::HLine);
     line->setFrameShadow(QFrame::Sunken);
     //add widgets
-    vlayout->addWidget(widget,0,0);
+    vlayout->addWidget(newbook,0,0);
     vlayout->addWidget(line,0,0);
+    //connect to slot
+    connect(newbutton,SIGNAL(clicked()),this,SLOT(put_in_basket_click()));
     }
     //create spacer
     QSpacerItem *newspacer = new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding);
     vlayout->addSpacerItem(newspacer);
-    foreach (QPushButton *button, ui->find_books->findChildren<QPushButton*>()) {
-        connect(button,SIGNAL(clicked(bool)),this,SLOT(put_in_basket_click()));
-    }
 }
 
 void MainWindow::createMessageBox(QString type, QString text)

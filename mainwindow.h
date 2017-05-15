@@ -69,7 +69,7 @@ private slots:
 
     void on_reset_pass_button_clicked();
 
-    void createBookWidget();
+    void createDisplayBookWidget();
 
     void put_in_basket_click();
 

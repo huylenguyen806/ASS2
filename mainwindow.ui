@@ -982,14 +982,14 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>0</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
               <item>
                <layout class="QVBoxLayout" name="verticalLayout_6">
                 <item>
-                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="12">
+                 <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="12,0">
                   <item>
                    <widget class="QLineEdit" name="search_books">
                     <property name="enabled">
@@ -1036,6 +1036,33 @@ QLineEdit#search_books:focus {
                     </property>
                    </widget>
                   </item>
+                  <item>
+                   <widget class="QPushButton" name="find_book_button">
+                    <property name="styleSheet">
+                     <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+                    </property>
+                    <property name="text">
+                     <string>      Find      </string>
+                    </property>
+                   </widget>
+                  </item>
                  </layout>
                 </item>
                 <item>
@@ -1074,26 +1101,7 @@ QLineEdit#search_books:focus {
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_47">
                 <item>
-                 <widget class="QScrollArea" name="list_books_in_basket">
-                  <property name="styleSheet">
-                   <string notr="true">QAbstractScrollArea#list_books_in_basket {
-background-color: rgb(245,249,252);
-}</string>
-                  </property>
-                  <property name="widgetResizable">
-                   <bool>true</bool>
-                  </property>
-                  <widget class="QWidget" name="book_basket_scoll_area">
-                   <property name="geometry">
-                    <rect>
-                     <x>0</x>
-                     <y>0</y>
-                     <width>692</width>
-                     <height>551</height>
-                    </rect>
-                   </property>
-                  </widget>
-                 </widget>
+                 <widget class="QListWidget" name="list_book_in_basket"/>
                 </item>
                </layout>
               </item>

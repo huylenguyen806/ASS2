@@ -5,8 +5,13 @@ BookWidget::BookWidget()
 
 }
 
-void BookWidget::createBookWidget(QWidget *book)
+QWidget* BookWidget::createBookWidget(QString name,
+                                      QString content_str,
+                                      QString artist_str,
+                                      QString Publishing_house,
+                                      QString genre)
 {
+    QWidget *book = new QWidget();
     book->setMaximumHeight(150);
     book->setMinimumHeight(150);
     QHBoxLayout *hbox = new QHBoxLayout();
@@ -16,13 +21,17 @@ void BookWidget::createBookWidget(QWidget *book)
     QLabel *artist = new QLabel();
 
     //add book's info here
-    content->setText("Content: bla bla bla");
+    content->setTextFormat(Qt::RichText);
+    content->setText("<b>Content: </b>" + content_str);
     content->setFont(QFont("Myriad Pro",12));
     content->setWordWrap(true);
-    book_name->setText("flajhlgkjgafhflsfhsafjg");
+    book_name->setText(name);
     book_name->setFont(QFont("Myriad Pro",15,QFont::Bold));
     book_name->setWordWrap(true);
-    artist->setText("Artist: blabla bla\nPublishing house: Blaflsh\nGenre: flafsjflsfs");
+    artist->setTextFormat(Qt::RichText);
+    artist->setText("<b>Artist: </b>" + artist_str + "<br />"
+                    + "<b>Publishing house: </b>" + Publishing_house + "<br />"
+                    + "<b>Genre: </b>" + genre);
     artist->setFont(QFont("Myriad Pro",12));
     artist->setWordWrap(true);
 
@@ -30,6 +39,7 @@ void BookWidget::createBookWidget(QWidget *book)
     hbox->addWidget(artist,2,0);
     vbox->addWidget(book_name,0,0);
     vbox->addLayout(hbox,1);
+    return book;
 }
 
 void BookWidget::createBookButton(QPushButton *button)
@@ -51,18 +61,6 @@ void BookWidget::createBookButton(QPushButton *button)
                                  "border-style: inset;}");
 }
 
-QWidget *BookWidget::createWidgetForDisplayingBook()
-{
-    QWidget *newbook = new QWidget();
-    QWidget *book = new QWidget();
-    createBookWidget(book);
-    QPushButton *newbutton = new QPushButton();
-    createBookButton(newbutton);
-    QHBoxLayout *hlayout = new QHBoxLayout(newbook);
-    hlayout->addWidget(book,6,0);
-    hlayout->addWidget(newbutton,1,0);
-    return newbook;
-}
 
 QString BookWidget::get_book_info(QString chose_info)
 {
