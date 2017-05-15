@@ -73,6 +73,26 @@ private slots:
 
     void put_in_basket_click();
 
+    void createBookManagerWidget();
+
+    void ListItemClicked(QWidget *widget);
+
+    void on_edit_account_button_clicked();
+
+    void on_remove_account_button_clicked();
+
+    void on_lock_account_button_clicked();
+
+    void on_unlock_account_button_clicked();
+
+    void on_remove_info_button_clicked();
+
+    void on_add_info_button_clicked();
+
+    void on_edit_info_button_clicked();
+
+    void on_cancel_change_pass_button_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

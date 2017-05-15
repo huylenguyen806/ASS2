@@ -7,8 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/images/Libpro_icon.ico"));
-    show_viewer();
+    //show_viewer();
     createBookWidget();
+    createBookManagerWidget();
+    ui->manage_user_label->setHidden(true);
 }
 
 MainWindow::~MainWindow()
@@ -29,6 +31,20 @@ void MainWindow::put_in_basket_click()
     }
     else{
         createMessageBox("OK", "The book is now in your basket.");
+    }
+}
+
+void MainWindow::createBookManagerWidget()
+{
+    for(int i = 0 ; i < 10; ++i){
+    QListWidgetItem *newitem = new QListWidgetItem();
+    BookWidget *book = new BookWidget();
+    QWidget *bookwidget = new QWidget();
+    book->createBookWidget(bookwidget);
+    newitem->setSizeHint(QSize(0,155));
+    ui->manage_book_area->addItem(newitem);
+    ui->manage_book_area->setItemWidget(newitem,bookwidget);
+    ui->manage_book_area->setStyleSheet("QListWidgetItem:hover{background-color:green;}");
     }
 }
 
@@ -138,7 +154,7 @@ void MainWindow::on_login_button_clicked()
 
 void MainWindow::on_close_login_form_button_clicked()
 {
-    ui->mainStack->setCurrentWidget(ui->rolePage);
+    show_viewer();
     clear_all_lineEdit();
 }
 
@@ -198,7 +214,105 @@ void MainWindow::on_manage_demand_button_clicked()
 
 void MainWindow::on_reset_pass_button_clicked()
 {
-    ManageAccount *reset = new ManageAccount();
-    reset->showresetpass();
-    reset->show();
+    if(ui->list_Accounts->selectedItems().size() != 0)
+    {
+        ManageAccount *reset = new ManageAccount();
+        reset->showresetpass();
+        reset->show();
+    }
+    else {
+        createMessageBox("Error", "Please choose an account to reset password.");
+    }
+}
+
+void MainWindow::ListItemClicked(QWidget *widget)
+{
+    widget->setStyleSheet("background-color: green");
+}
+
+void MainWindow::on_edit_account_button_clicked()
+{
+    if(ui->list_Accounts->selectedItems().size() != 0)
+    {
+        ManageAccount *edit = new ManageAccount();
+        edit->showedit();
+        edit->show();
+        //add code show info and edit info in database here
+    }
+    else {
+        createMessageBox("Error","Please choose an account to edit.");
+    }
+}
+
+void MainWindow::on_remove_account_button_clicked()
+{
+    if(ui->list_Accounts->selectedItems().size() != 0)
+    {
+        delete ui->list_Accounts->currentItem();
+        //add code delete in database here
+    }
+    else {
+        createMessageBox("Error","Please choose an account to remove.");
+    }
+}
+
+void MainWindow::on_lock_account_button_clicked()
+{
+    if(ui->list_Accounts->selectedItems().size() != 0)
+    {
+        //add code lock account in database here
+        //if currentItem is locked, show messagebox "This account is already locked."
+    }
+    else {
+        createMessageBox("Error", "Please choose an account to lock");
+    }
+}
+
+void MainWindow::on_unlock_account_button_clicked()
+{
+    if(ui->list_Accounts->selectedItems().size() != 0)
+    {
+        //if currentItem is not locked, show messagebox "This account is already unlocked."
+    }
+    else{
+        createMessageBox("Error", "Please choose an account to unlock.");
+    }
+}
+
+void MainWindow::on_remove_info_button_clicked()
+{
+    if(ui->list_Users->selectedItems().size() != 0)
+    {
+        //add code remove user in database here.
+        // if remove success, show messagebox "The account has been removed."
+    }
+    else {
+        createMessageBox("Error", "Please choose an user to remove.");
+    }
+}
+
+void MainWindow::on_add_info_button_clicked()
+{
+    clear_all_lineEdit();
+    ui->manage_user_label->setText("ADD USER'S INFO");
+    ui->manage_user_label->setFont(QFont("Arial",16,QFont::Bold));
+    ui->manage_user_label->setVisible(true);
+}
+
+void MainWindow::on_edit_info_button_clicked()
+{
+    if(ui->list_Users->selectedItems().size() != 0)
+    {
+        ui->manage_user_label->setText("EDIT USER'S INFO");
+        ui->manage_user_label->setFont(QFont("Arial",16,QFont::Bold));
+        ui->manage_user_label->setVisible(true);
+    }
+    else {
+        createMessageBox("Error", "Please choose an user to edit.");
+    }
+}
+
+void MainWindow::on_cancel_change_pass_button_clicked()
+{
+    clear_all_lineEdit();
 }

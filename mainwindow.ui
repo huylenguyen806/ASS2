@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1002</width>
-    <height>650</height>
+    <width>1000</width>
+    <height>749</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -982,7 +982,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1048,8 +1048,8 @@ QLineEdit#search_books:focus {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>694</width>
-                     <height>509</height>
+                     <width>692</width>
+                     <height>608</height>
                     </rect>
                    </property>
                   </widget>
@@ -1088,8 +1088,8 @@ background-color: rgb(245,249,252);
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>694</width>
-                     <height>452</height>
+                     <width>692</width>
+                     <height>551</height>
                     </rect>
                    </property>
                   </widget>
@@ -2456,6 +2456,16 @@ QPushButton#remove_info_button:hover {
                        <string notr="true"/>
                       </property>
                       <layout class="QVBoxLayout" name="verticalLayout_28">
+                       <item alignment="Qt::AlignHCenter">
+                        <widget class="QLabel" name="manage_user_label">
+                         <property name="styleSheet">
+                          <string notr="true"/>
+                         </property>
+                         <property name="text">
+                          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                         </property>
+                        </widget>
+                       </item>
                        <item>
                         <layout class="QVBoxLayout" name="verticalLayout_29">
                          <property name="spacing">
@@ -3719,21 +3729,7 @@ QPushButton#add_book_button:hover {
                    </layout>
                   </item>
                   <item>
-                   <widget class="QScrollArea" name="list_bookData">
-                    <property name="widgetResizable">
-                     <bool>true</bool>
-                    </property>
-                    <widget class="QWidget" name="scrollAreaWidgetContents_2">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>0</y>
-                       <width>692</width>
-                       <height>449</height>
-                      </rect>
-                     </property>
-                    </widget>
-                   </widget>
+                   <widget class="QListWidget" name="manage_book_area"/>
                   </item>
                  </layout>
                 </item>
@@ -4302,7 +4298,7 @@ QPushButton#close_login_form_button:hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1002</width>
+     <width>1000</width>
      <height>21</height>
     </rect>
    </property>
