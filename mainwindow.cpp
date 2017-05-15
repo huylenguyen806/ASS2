@@ -7,7 +7,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowIcon(QIcon(":/images/Libpro_icon.ico"));
-    //show_viewer();
+    show_viewer();
     createDisplayBookWidget();
     createBookManagerWidget();
     ui->manage_user_label->setHidden(true);
