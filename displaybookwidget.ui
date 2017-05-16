@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DisplayBookWidget</class>
+ <widget class="QWidget" name="DisplayBookWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>684</width>
+    <height>211</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_4">
+   <item>
+    <widget class="QWidget" name="widget" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
+        <item>
+         <widget class="QLabel" name="title">
+          <property name="text">
+           <string>TextLabel</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,2,1,0">
+          <item>
+           <widget class="QLabel" name="content_author">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="publisher_genre_language">
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="put_in_basket_button">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
+	height: 75px;
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: white;
+    font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+	background-color: rgb(178,231,250);
+	border-style: outset;
+	border-style: inset;
+}
+QPushButton:hover {
+	background-color: rgb(178,231,250);
+	border-style: inset;
+}</string>
+            </property>
+            <property name="text">
+             <string>Put in basket</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_3">
+            <item>
+             <widget class="QPushButton" name="read_button">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	height: 35px;
+    background-color: #7bcd8a;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: white;
+    font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 3em;
+    padding: 2px;
+}
+QPushButton:pressed {
+	background-color:#095115;
+	border-style: outset;
+	border-style: inset;
+}
+QPushButton:hover {
+	background-color: #b5dfa5;
+	border-style: inset;
+}</string>
+              </property>
+              <property name="text">
+               <string>Read</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="Return_button">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	height: 35px;
+    background-color: #7bcd8a;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: white;
+    font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 3em;
+    padding: 2px;
+}
+QPushButton:pressed {
+	background-color:#095115;
+	border-style: outset;
+	border-style: inset;
+}
+QPushButton:hover {
+	background-color: #b5dfa5;
+	border-style: inset;
+}</string>
+              </property>
+              <property name="text">
+               <string>Return</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

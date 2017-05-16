@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -27,16 +28,17 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     manageaccount.cpp \
     bookmanagement.cpp \
-    bookwidget.cpp
+    displaybookwidget.cpp
 
 HEADERS  += mainwindow.h \
     manageaccount.h \
     bookmanagement.h \
-    bookwidget.h
+    displaybookwidget.h
 
 FORMS    += mainwindow.ui \
     manageaccount.ui \
-    bookmanagement.ui
+    bookmanagement.ui \
+    displaybookwidget.ui
 
 RESOURCES += \
     resources.qrc

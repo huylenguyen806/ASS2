@@ -12,7 +12,11 @@
 #include <QSpacerItem>
 #include <QFrame>
 #include <QListWidgetItem>
-#include "bookwidget.h"
+#include "displaybookwidget.h"
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlRecord>
+#include <QApplication>
 namespace Ui {
 class MainWindow;
 }
@@ -24,6 +28,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 
 private slots:
 
@@ -71,7 +76,7 @@ private slots:
 
     void createDisplayBookWidget();
 
-    void put_in_basket_click();
+    void put_in_basket_click(books *book_info);
 
     void createBookManagerWidget();
 
@@ -93,8 +98,15 @@ private slots:
 
     void on_cancel_change_pass_button_clicked();
 
+    void on_remove_frome_basket_button_clicked();
+
+    void on_remove_book_button_clicked();
+
+    void on_borrow_button_clicked();
+
 private:
     Ui::MainWindow *ui;
+    QSqlDatabase bookdata;
 };
 
 #endif // MAINWINDOW_H
