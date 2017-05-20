@@ -2,19 +2,19 @@
 #define DISPLAYBOOKWIDGET_H
 
 #include <QWidget>
-#include <QSqlDatabase>
-#include <QSqlQuery>
 
 class books
 {
 public:
     books();
+    ~books();
     QString title;
     QString author;
-    QString content;
+    QString bookID;
     QString publisher;
     QString genre;
-    QString language;
+    QString publisherDate;
+    QByteArray Image;
 };
 
 namespace Ui {

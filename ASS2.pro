@@ -28,12 +28,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     manageaccount.cpp \
     bookmanagement.cpp \
-    displaybookwidget.cpp
+    displaybookwidget.cpp \
+    database.cpp
 
 HEADERS  += mainwindow.h \
     manageaccount.h \
     bookmanagement.h \
-    displaybookwidget.h
+    displaybookwidget.h \
+    database.h \
+    maindatabase.h
 
 FORMS    += mainwindow.ui \
     manageaccount.ui \

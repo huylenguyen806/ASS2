@@ -6,16 +6,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    bookdata = QSqlDatabase::addDatabase("QSQLITE");
-    bookdata.setDatabaseName(qApp->applicationDirPath().append("/Books.db"));
-    if(!bookdata.open())
-    {
-        QMessageBox *alert = new QMessageBox();
-        alert->setText("Failed to open database of books !");
-        alert->show();
-    }
+    ////////////////////////////////////////////////
     setWindowIcon(QIcon(":/images/Libpro_icon.ico"));
-    //show_viewer();
+    show_viewer();
     createDisplayBookWidget();
     createBookManagerWidget();
     ui->manage_user_label->setHidden(true);
@@ -43,9 +36,9 @@ void MainWindow::put_in_basket_click(books* book_info)
         DisplayBookWidget* displaybook = new DisplayBookWidget();
         displaybook->book_info->title = book_info->title;
         displaybook->book_info->author = book_info->author;
-        displaybook->book_info->content = book_info->content;
+        displaybook->book_info->bookID = book_info->bookID;
         displaybook->book_info->genre = book_info->genre;
-        displaybook->book_info->language = book_info->language;
+        displaybook->book_info->publisherDate = book_info->publisherDate;
         displaybook->book_info->publisher = book_info->publisher;
         displaybook->set_displaying_book();
         displaybook->hideButton();
@@ -58,31 +51,22 @@ void MainWindow::put_in_basket_click(books* book_info)
 
 void MainWindow::createBookManagerWidget()
 {
-    QSqlQuery qry;
-    if(qry.exec("SELECT * FROM DATA")){
-        int titleIndex = qry.record().indexOf("TITLE");
-        int contentIndex = qry.record().indexOf("CONTENT");
-        int authorIndex = qry.record().indexOf("AUTHOR");
-        int publisherIndex = qry.record().indexOf("PUBLISHER");
-        int genreIndex = qry.record().indexOf("GENRE");
-        int languageIndex = qry.record().indexOf("LANGUAGE");
-        while(qry.next()){
-            //get data
-            DisplayBookWidget* displaybook = new DisplayBookWidget();
-            displaybook->book_info->title = qry.value(titleIndex).toString();
-            displaybook->book_info->content = qry.value(contentIndex).toString();
-            displaybook->book_info->author = qry.value(authorIndex).toString();
-            displaybook->book_info->publisher = qry.value(publisherIndex).toString();
-            displaybook->book_info->genre = qry.value(genreIndex).toString();
-            displaybook->book_info->language = qry.value(languageIndex).toString();
-            displaybook->set_displaying_book();
-            displaybook->hideButton();
-            displaybook->hideRButton();
-            QListWidgetItem *newitem = new QListWidgetItem();
-            newitem->setSizeHint(QSize(0,150));
-            ui->manage_book_area->addItem(newitem);
-            ui->manage_book_area->setItemWidget(newitem,displaybook);
-        }
+    for(int i = 0; i < data.BookData.size(); ++i){
+        //get data
+        DisplayBookWidget* displaybook = new DisplayBookWidget();
+        displaybook->book_info->title = data.BookData[i].BName;
+        displaybook->book_info->bookID = data.BookData[i].BookID;
+        displaybook->book_info->author = data.BookData[i].Author;
+        displaybook->book_info->publisher = data.BookData[i].Publisher;
+        displaybook->book_info->genre = data.BookData[i].Kind;
+        displaybook->book_info->publisherDate = data.BookData[i].PublishedDate;
+        displaybook->set_displaying_book();
+        displaybook->hideButton();
+        displaybook->hideRButton();
+        QListWidgetItem *newitem = new QListWidgetItem();
+        newitem->setSizeHint(QSize(0,150));
+        ui->manage_book_area->addItem(newitem);
+        ui->manage_book_area->setItemWidget(newitem,displaybook);
     }
 }
 
@@ -90,33 +74,24 @@ void MainWindow::createDisplayBookWidget()
 {
     //vertical layout in book_scoll_area
     QVBoxLayout *vlayout = new QVBoxLayout(ui->book_scoll_area);
-    QSqlQuery qry;
-    if(qry.exec("SELECT * FROM DATA")){
-        int titleIndex = qry.record().indexOf("TITLE");
-        int contentIndex = qry.record().indexOf("CONTENT");
-        int authorIndex = qry.record().indexOf("AUTHOR");
-        int publisherIndex = qry.record().indexOf("PUBLISHER");
-        int genreIndex = qry.record().indexOf("GENRE");
-        int languageIndex = qry.record().indexOf("LANGUAGE");
-        while(qry.next()){
-            //get data
-            DisplayBookWidget* displaybook = new DisplayBookWidget();
-            displaybook->book_info->title = qry.value(titleIndex).toString();
-            displaybook->book_info->content = qry.value(contentIndex).toString();
-            displaybook->book_info->author = qry.value(authorIndex).toString();
-            displaybook->book_info->publisher = qry.value(publisherIndex).toString();
-            displaybook->book_info->genre = qry.value(genreIndex).toString();
-            displaybook->book_info->language = qry.value(languageIndex).toString();
-            displaybook->set_displaying_book();
-            displaybook->hideRButton();
-            vlayout->addWidget(displaybook,0,0);
-            //connect to slot
-            connect(displaybook,SIGNAL(put_in_basket_button_clicked(books*)),this,SLOT(put_in_basket_click(books*)));
-        }
-        //create spacer
-        QSpacerItem *newspacer = new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding);
-        vlayout->addSpacerItem(newspacer);
+    for(int i = 0; i < data.BookData.size(); ++i){
+        //get data
+        DisplayBookWidget* displaybook = new DisplayBookWidget();
+        displaybook->book_info->title = data.BookData[i].BName;
+        displaybook->book_info->bookID = data.BookData[i].BookID;
+        displaybook->book_info->author = data.BookData[i].Author;
+        displaybook->book_info->publisher = data.BookData[i].Publisher;
+        displaybook->book_info->genre = data.BookData[i].Kind;
+        displaybook->book_info->publisherDate = data.BookData[i].PublishedDate;
+        displaybook->set_displaying_book();
+        displaybook->hideRButton();
+        vlayout->addWidget(displaybook,0,0);
+        //connect to slot
+        connect(displaybook,SIGNAL(put_in_basket_button_clicked(books*)),this,SLOT(put_in_basket_click(books*)));
     }
+    //create spacer
+    QSpacerItem *newspacer = new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding);
+    vlayout->addSpacerItem(newspacer);
 }
 
 void MainWindow::createMessageBox(QString type, QString text)
@@ -392,4 +367,70 @@ void MainWindow::on_remove_book_button_clicked()
 void MainWindow::on_borrow_button_clicked()
 {
 
+}
+
+void MainWindow::on_other_login_button_clicked()
+{
+    QString account = ui->lineEdit_username->text();
+    QString password = ui->lineEdit_password->text();
+    for(int i = 0; i < data.AccountData.size(); ++i){
+        if(data.AccountData[i].Username == account && data.AccountData[i].Password == password){
+            if(data.AccountData[i].active == true){
+                ui->lineEdit_username->clear();
+                ui->lineEdit_password->clear();
+                ui->mainStack->setCurrentWidget(ui->rolePage);
+                ui->role_select->clear();
+                ui->login_button->setText("Logout");
+                for(int j = 0; j < data.AccountRoleMapData.size(); ++j){
+                    if(data.AccountRoleMapData[j].Account_No == data.AccountData[i].Username){
+                        for(int k = 0; k < data.RoleData.size(); ++k){
+                            if(data.RoleData[k].Role_ID == data.AccountRoleMapData[j].roles){
+                                if(data.RoleData[k].Role_Desc == "READER")
+                                    ui->role_select->addItem("Reader");
+                                else if(data.RoleData[k].Role_Desc == "USER_MANAGER")
+                                    ui->role_select->addItem("UserManager");
+                                else if(data.RoleData[k].Role_ID == "LIBRARIAN")
+                                    ui->role_select->addItem("Librarian");
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                createMessageBox("Error", "Your account has been locked");
+            }
+        }
+    }
+}
+
+void MainWindow::set_reader()
+{
+    ui->main_ui_2->setCurrentWidget(ui->reader);
+    ui->main_ui->setCurrentWidget(ui->find_books);
+}
+
+void MainWindow::set_usermanager()
+{
+    ui->main_ui_2->setCurrentWidget(ui->usermanager);
+    ui->main_ui->setCurrentWidget(ui->account_manage);
+}
+
+void MainWindow::set_librarian()
+{
+    ui->main_ui_2->setCurrentWidget(ui->librarian);
+    ui->main_ui->setCurrentWidget(ui->books_info);
+}
+
+void MainWindow::on_role_select_currentTextChanged()
+{
+    QString arg1 = ui->role_select->currentText();
+    if(arg1 == "Reader"){
+        set_reader();
+    }
+    else if (arg1 == "UserManager"){
+        set_usermanager();
+    }
+    else if(arg1 == "Librarian"){
+        set_librarian();
+    }
 }

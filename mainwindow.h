@@ -17,6 +17,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QApplication>
+#include "database.h"
 namespace Ui {
 class MainWindow;
 }
@@ -104,9 +105,16 @@ private slots:
 
     void on_borrow_button_clicked();
 
+    void on_other_login_button_clicked();
+
+    void on_role_select_currentTextChanged();
+
 private:
     Ui::MainWindow *ui;
-    QSqlDatabase bookdata;
+    Database data;
+    void set_reader();
+    void set_usermanager();
+    void set_librarian();
 };
 
 #endif // MAINWINDOW_H
