@@ -351,7 +351,7 @@ height: 35pt;
                   <string notr="true">background-color: rgb(255,255,255);</string>
                  </property>
                  <property name="currentIndex">
-                  <number>3</number>
+                  <number>1</number>
                  </property>
                  <widget class="QWidget" name="not_login">
                   <layout class="QVBoxLayout" name="verticalLayout_24">
@@ -982,7 +982,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>7</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1075,8 +1075,8 @@ QPushButton:hover {
                     <rect>
                      <x>0</x>
                      <y>0</y>
-                     <width>61</width>
-                     <height>16</height>
+                     <width>692</width>
+                     <height>608</height>
                     </rect>
                    </property>
                   </widget>
@@ -1246,7 +1246,7 @@ QPushButton#remove_frome_basket_button:hover {
                  </widget>
                 </item>
                 <item row="0" column="3">
-                 <widget class="QPushButton" name="undo_button">
+                 <widget class="QPushButton" name="remove_allbook_button">
                   <property name="minimumSize">
                    <size>
                     <width>121</width>
@@ -1263,7 +1263,7 @@ QPushButton#remove_frome_basket_button:hover {
                    <cursorShape>PointingHandCursor</cursorShape>
                   </property>
                   <property name="styleSheet">
-                   <string notr="true">QPushButton#undo_button {
+                   <string notr="true">QPushButton {
 	color: rgb(255, 255, 255);
 	height: 25;
     background-color: rgb(0,175,240);
@@ -1275,18 +1275,18 @@ QPushButton#remove_frome_basket_button:hover {
     min-width: 5em;
     padding: 2px
 }
-QPushButton#undo_button:pressed {
+QPushButton:pressed {
     background-color: rgb(0,138,195);
     border-style: outset;
     border-style: inset;
 }
-QPushButton#undo_button:hover {
+QPushButton:hover {
     background-color: rgb(0,158,218);
     border-style: inset;
 }</string>
                   </property>
                   <property name="text">
-                   <string>Undo</string>
+                   <string>Remove all</string>
                   </property>
                  </widget>
                 </item>
@@ -1762,7 +1762,7 @@ QLineEdit#user_name:focus {
 }</string>
                            </property>
                            <property name="clearButtonEnabled">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </property>
                           </widget>
                          </item>
@@ -1965,7 +1965,7 @@ QLineEdit#ID:focus {
 }</string>
                            </property>
                            <property name="clearButtonEnabled">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </property>
                           </widget>
                          </item>
@@ -2026,7 +2026,7 @@ QLineEdit#email:focus {
 }</string>
                            </property>
                            <property name="clearButtonEnabled">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </property>
                           </widget>
                          </item>
@@ -2206,7 +2206,7 @@ QLineEdit#lineEdit_7:focus {
 }</string>
                            </property>
                            <property name="clearButtonEnabled">
-                            <bool>true</bool>
+                            <bool>false</bool>
                            </property>
                           </widget>
                          </item>

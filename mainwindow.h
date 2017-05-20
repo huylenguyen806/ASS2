@@ -49,8 +49,6 @@ private slots:
 
     void clear_all_lineEdit();
 
-    void login();
-
     void createMessageBox(QString type, QString text);
 
     void on_reader_find_book_button_clicked();
@@ -109,12 +107,26 @@ private slots:
 
     void on_role_select_currentTextChanged();
 
+    void on_lineEdit_username_returnPressed();
+
+    void on_lineEdit_password_returnPressed();
+
+    void on_ok_change_pass_button_clicked();
+
+    void on_remove_allbook_button_clicked();
+
+    void on_borrow_all_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Database data;
+    CurrentUser user;
     void set_reader();
     void set_usermanager();
     void set_librarian();
+    void login();
+    void get_user_role(QString role);
+    void get_current_user(QString userID);
 };
 
 #endif // MAINWINDOW_H

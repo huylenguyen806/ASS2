@@ -18,6 +18,8 @@ public:
     QVector<Books_c> BookData;
     QVector<AccountRoleMap_c> AccountRoleMapData;
     QVector<Role_c> RoleData;
+    QVector<UserDemand_c> UserDemandData;
+    void write_into_userdemand_data(QString userid, QString borrowBookId);
 };
 
 #endif // DATABASE_H

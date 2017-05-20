@@ -13,7 +13,7 @@ public:
     QString bookID;
     QString publisher;
     QString genre;
-    QString publisherDate;
+    QString publishedDate;
     QByteArray Image;
 };
 

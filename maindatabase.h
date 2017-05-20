@@ -15,6 +15,7 @@ public:
     QString DayOfBirth;
     QString ID_StudentID;
     QString Career;
+    QString email;
 };
 
 class Account_c
@@ -50,6 +51,44 @@ public:
     QString Publisher;
     QString Kind;
     QByteArray Image;
+};
+
+class UserDemand_c
+{
+public:
+    QString UserID;
+    QString BorrowBookID;
+};
+
+class CurrentUser
+{
+public:
+    QString currentAccount_name;
+    QString currentRole;
+    QString currentUserID;
+    bool currentActive;
+    QString currentName;
+    QString currentBirthday;
+    QString currentGender;
+    QString currentID;
+    QString currentCareer;
+    QString currentEmail;
+    QString currentPass;
+    QVector<Books_c> BasketData;
+    void clear(){
+        currentAccount_name.clear();
+        currentActive = 0;
+        currentBirthday.clear();
+        currentCareer.clear();
+        currentEmail.clear();
+        currentGender.clear();
+        currentID.clear();
+        currentName.clear();
+        currentRole.clear();
+        currentUserID.clear();
+        currentPass.clear();
+        BasketData.clear();
+    }
 };
 
 #endif // MAINDATABASE_H

@@ -19,11 +19,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::login()
-{
-
-}
-
 void MainWindow::put_in_basket_click(books* book_info)
 {
     if(ui->login_button->text() == "Login")
@@ -38,7 +33,7 @@ void MainWindow::put_in_basket_click(books* book_info)
         displaybook->book_info->author = book_info->author;
         displaybook->book_info->bookID = book_info->bookID;
         displaybook->book_info->genre = book_info->genre;
-        displaybook->book_info->publisherDate = book_info->publisherDate;
+        displaybook->book_info->publishedDate = book_info->publishedDate;
         displaybook->book_info->publisher = book_info->publisher;
         displaybook->set_displaying_book();
         displaybook->hideButton();
@@ -46,6 +41,15 @@ void MainWindow::put_in_basket_click(books* book_info)
         newitem->setSizeHint(QSize(0,150));
         ui->list_book_in_basket->addItem(newitem);
         ui->list_book_in_basket->setItemWidget(newitem,displaybook);
+        //put in vector basketData
+        Books_c tempBook;
+        tempBook.BName = book_info->title;
+        tempBook.Author = book_info->author;
+        tempBook.BookID = book_info->bookID;
+        tempBook.Kind = book_info->genre;
+        tempBook.PublishedDate = book_info->publishedDate;
+        tempBook.Publisher = book_info->publisher;
+        user.BasketData.append(tempBook);
     }
 }
 
@@ -59,7 +63,7 @@ void MainWindow::createBookManagerWidget()
         displaybook->book_info->author = data.BookData[i].Author;
         displaybook->book_info->publisher = data.BookData[i].Publisher;
         displaybook->book_info->genre = data.BookData[i].Kind;
-        displaybook->book_info->publisherDate = data.BookData[i].PublishedDate;
+        displaybook->book_info->publishedDate = data.BookData[i].PublishedDate;
         displaybook->set_displaying_book();
         displaybook->hideButton();
         displaybook->hideRButton();
@@ -82,7 +86,7 @@ void MainWindow::createDisplayBookWidget()
         displaybook->book_info->author = data.BookData[i].Author;
         displaybook->book_info->publisher = data.BookData[i].Publisher;
         displaybook->book_info->genre = data.BookData[i].Kind;
-        displaybook->book_info->publisherDate = data.BookData[i].PublishedDate;
+        displaybook->book_info->publishedDate = data.BookData[i].PublishedDate;
         displaybook->set_displaying_book();
         displaybook->hideRButton();
         vlayout->addWidget(displaybook,0,0);
@@ -163,6 +167,28 @@ void MainWindow::on_info_button_clicked()
     }
     else if(ui->login_button->text() == "Logout")
     {
+        //set
+        ui->user_name->setText(user.currentName);
+        ui->email->setText(user.currentEmail);
+        ui->account_name->setText(user.currentAccount_name);
+        ui->libID->setText(user.currentUserID);
+        ui->birthday->setText(user.currentBirthday);
+        ui->ID->setText(user.currentID);
+        ui->career->setText(user.currentCareer);
+        if(user.currentGender == "Male")
+            ui->male->setChecked(true);
+        else if(user.currentGender == "Female")
+            ui->female->setChecked(true);
+        else ui->other->setChecked(true);
+        //readonly state
+        ui->user_name->setReadOnly(true);
+        ui->email->setReadOnly(true);
+        ui->account_name->setReadOnly(true);
+        ui->libID->setReadOnly(true);
+        ui->birthday->setReadOnly(true);
+        ui->ID->setReadOnly(true);
+        ui->career->setReadOnly(true);
+        //set widget
         ui->main_ui->setCurrentWidget(ui->info);
     }
 }
@@ -176,6 +202,7 @@ void MainWindow::on_close_login_form_button_clicked()
 {
     show_viewer();
     clear_all_lineEdit();
+    ui->login_button->setText("Login");
 }
 
 void MainWindow::on_reader_find_book_button_clicked()
@@ -366,41 +393,36 @@ void MainWindow::on_remove_book_button_clicked()
 
 void MainWindow::on_borrow_button_clicked()
 {
-
+    if(ui->list_book_in_basket->selectedItems().size() == 0)
+        createMessageBox("Error", "Please choose a book to borrow.");
+    else {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Are you sure you want to borrow this book?");
+        alert->setWindowIcon(QIcon(":/images/warning.png"));
+        alert->setWindowTitle("Warning");
+        QPushButton *Y = alert->addButton(QMessageBox::Yes);
+        QPushButton *N = alert->addButton(QMessageBox::No);
+        alert->exec();
+        if(alert->clickedButton() == Y){
+            int idrow = ui->list_book_in_basket->currentRow();
+            for(int i = 0; i < user.BasketData.size(); ++i){
+                if(idrow == i){
+                    data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID);
+                    user.BasketData.erase(user.BasketData.begin() + i);
+                    delete ui->list_book_in_basket->currentItem();
+                    ui->list_book_in_basket->clearSelection();
+                    break;
+                }
+            }
+        }
+        else if(alert->clickedButton() == N)
+            alert->close();
+    }
 }
 
 void MainWindow::on_other_login_button_clicked()
 {
-    QString account = ui->lineEdit_username->text();
-    QString password = ui->lineEdit_password->text();
-    for(int i = 0; i < data.AccountData.size(); ++i){
-        if(data.AccountData[i].Username == account && data.AccountData[i].Password == password){
-            if(data.AccountData[i].active == true){
-                ui->lineEdit_username->clear();
-                ui->lineEdit_password->clear();
-                ui->mainStack->setCurrentWidget(ui->rolePage);
-                ui->role_select->clear();
-                ui->login_button->setText("Logout");
-                for(int j = 0; j < data.AccountRoleMapData.size(); ++j){
-                    if(data.AccountRoleMapData[j].Account_No == data.AccountData[i].Username){
-                        for(int k = 0; k < data.RoleData.size(); ++k){
-                            if(data.RoleData[k].Role_ID == data.AccountRoleMapData[j].roles){
-                                if(data.RoleData[k].Role_Desc == "READER")
-                                    ui->role_select->addItem("Reader");
-                                else if(data.RoleData[k].Role_Desc == "USER_MANAGER")
-                                    ui->role_select->addItem("UserManager");
-                                else if(data.RoleData[k].Role_ID == "LIBRARIAN")
-                                    ui->role_select->addItem("Librarian");
-                            }
-                        }
-                    }
-                }
-            }
-            else {
-                createMessageBox("Error", "Your account has been locked");
-            }
-        }
-    }
+    login();
 }
 
 void MainWindow::set_reader()
@@ -433,4 +455,171 @@ void MainWindow::on_role_select_currentTextChanged()
     else if(arg1 == "Librarian"){
         set_librarian();
     }
+}
+
+void MainWindow::login()
+{
+    QString account = ui->lineEdit_username->text();
+    QString password = ui->lineEdit_password->text();
+    if(account.isEmpty() == true || password.isEmpty() == true){
+        if(account.isEmpty() == true && password.isEmpty() == false)
+            createMessageBox("Error", "Please enter your username.");
+        else if(password.isEmpty() == true && account.isEmpty() == false)
+            createMessageBox("Error", "Please enter your password.");
+        else createMessageBox("Error", "Please enter your username and password.");
+    }
+    else {
+        bool check = 0;
+        for(int i = 0; i < data.AccountData.size(); ++i){
+            if(data.AccountData[i].Username == account && data.AccountData[i].Password == password){
+                if(data.AccountData[i].active == true){
+                    ui->lineEdit_username->clear();
+                    ui->lineEdit_password->clear();
+                    ui->mainStack->setCurrentWidget(ui->rolePage);
+                    ui->role_select->clear();
+                    ui->login_button->setText("Logout");
+                    user.currentUserID = data.AccountData[i].ID;
+                    get_current_user(user.currentUserID);
+                    for(int j = 0; j < data.AccountRoleMapData.size(); ++j){
+                        if(data.AccountRoleMapData[j].Account_No == data.AccountData[i].Username){
+                            for(int k = 0; k < data.RoleData.size(); ++k){
+                                if(data.RoleData[k].Role_ID == data.AccountRoleMapData[j].roles){
+                                    user.currentRole = data.RoleData[k].Role_Desc;
+                                    get_user_role(data.RoleData[k].Role_Desc);
+                                }
+                            }
+                        }
+                    }
+                    check = 1;
+                    break;
+                }
+                else {
+                    createMessageBox("Error", "Your account has been locked");
+                }
+            }
+            else check = 0;
+        }
+        if(check == 0)
+            createMessageBox("Error", "Wrong username or password.");
+    }
+}
+
+void MainWindow::on_lineEdit_username_returnPressed()
+{
+    login();
+}
+
+void MainWindow::on_lineEdit_password_returnPressed()
+{
+    login();
+}
+
+void MainWindow::get_user_role(QString role)
+{
+    if(role.contains('&')){
+        QVector<QString> role_vec;
+        QString temp;
+        for(int i = 0; i < role.length(); ++i){
+            if(role[i] != '&'){
+                temp.append(role[i]);
+            }
+            if(role[i] == '&' || i == role.length() - 1){
+                role_vec.append(temp);
+                temp.clear();
+                continue;
+            }
+        }
+        for(int i = 0; i < role_vec.size(); ++i){
+            if(role_vec[i] == "READER")
+                ui->role_select->addItem("Reader");
+            else if(role_vec[i] == "USER_MANAGER")
+                ui->role_select->addItem("UserManager");
+            else if(role_vec[i] == "LIBRARIAN")
+                ui->role_select->addItem("Librarian");
+        }
+    }
+    else {
+        if(role == "READER")
+            ui->role_select->addItem("Reader");
+        else if(role == "USER_MANAGER")
+            ui->role_select->addItem("UserManager");
+        else if(role == "LIBRARIAN")
+            ui->role_select->addItem("Librarian");
+    }
+}
+
+void MainWindow::get_current_user(QString userID)
+{
+    for(int i = 0; i < data.UserData.size(); ++i){
+        if(userID == data.UserData[i].UserID){
+            user.currentName = data.UserData[i].Name;
+            user.currentGender = data.UserData[i].Gender;
+            user.currentCareer = data.UserData[i].Career;
+            user.currentBirthday = data.UserData[i].DayOfBirth;
+            user.currentID = data.UserData[i].ID_StudentID;
+            user.currentEmail = data.UserData[i].email;
+        }
+    }
+    for(int i = 0; i < data.AccountData.size(); ++i){
+        if(userID == data.AccountData[i].ID){
+            user.currentAccount_name = data.AccountData[i].Username;
+            user.currentActive = data.AccountData[i].active;
+            user.currentPass = data.AccountData[i].Password;
+        }
+    }
+}
+
+void MainWindow::on_ok_change_pass_button_clicked()
+{
+    QString oldpass = ui->change_current_pass->text();
+    //add code for encryption here // encrypt to oldpass
+    if(oldpass == user.currentPass){
+        if(ui->new_pass->text().isEmpty() == true || ui->confirm_new_pass->text().isEmpty() == true){
+            if(ui->confirm_new_pass->text().isEmpty() == false)
+                createMessageBox("Error", "Please enter your new password.");
+            else if(ui->new_pass->text().isEmpty() == false)
+                createMessageBox("Error", "Please confirm your new password.");
+            else createMessageBox("Error", "Please enter and confirm your new password.");
+        }
+        else if(ui->new_pass->text() == ui->confirm_new_pass->text()){
+            //change password in data here
+        }
+    }
+    else createMessageBox("Error", "Wrong current password.");
+}
+
+void MainWindow::on_remove_allbook_button_clicked()
+{
+    QMessageBox *noti = new QMessageBox();
+    noti->setWindowTitle("Warning");
+    noti->setWindowIcon(QIcon(":/images/warning.png"));
+    noti->setText("Are you sure you want to remove all books from your basket?");
+    QPushButton *Y = noti->addButton(QMessageBox::Yes);
+    QPushButton *N = noti->addButton(QMessageBox::No);
+    noti->setDefaultButton(N);
+    noti->exec();
+    if(noti->clickedButton() == Y)
+        ui->list_book_in_basket->clear();
+    else if(noti->clickedButton() == N)
+        noti->close();
+}
+
+void MainWindow::on_borrow_all_button_clicked()
+{
+    QMessageBox *alert = new QMessageBox();
+    alert->setText("Are you sure you want to borrow all?");
+    alert->setWindowIcon(QIcon(":/images/warning.png"));
+    alert->setWindowTitle("Warning");
+    QPushButton *Y = alert->addButton(QMessageBox::Yes);
+    QPushButton *N = alert->addButton(QMessageBox::No);
+    alert->exec();
+    if(alert->clickedButton() == Y){
+        for(int i = 0; i < user.BasketData.size(); ++i){
+            data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID);
+        }
+        ui->list_book_in_basket->clear();
+        user.BasketData.clear();
+    }
+    else if(alert->clickedButton() == N)
+        alert->close();
 }

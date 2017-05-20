@@ -60,6 +60,7 @@ Database::Database()
         int birthday = query1.record().indexOf("DAY OF BIRTH");
         int realID = query1.record().indexOf("ID/STUDENT ID");
         int career = query1.record().indexOf("CAREER");
+        int email = query1.record().indexOf("Email");
         while (query1.next())
         {
            User_c tempUser;
@@ -69,12 +70,14 @@ Database::Database()
            QString tempDayOfBirth = query1.value(birthday).toString();
            QString tempID_StudentID = query1.value(realID).toString();
            QString tempCareer = query1.value(career).toString();
+           QString tempEmail = query1.value(email).toString();
            tempUser.UserID=tempUserID;
            tempUser.Name=tempName;
            tempUser.Gender=tempGender;
            tempUser.DayOfBirth=tempDayOfBirth;
            tempUser.ID_StudentID=tempID_StudentID;
            tempUser.Career=tempCareer;
+           tempUser.email=tempEmail;
            UserData.append(tempUser);
         }
         query1.clear();
@@ -126,6 +129,17 @@ Database::Database()
            AccountRoleMapData.append(tempAccountRoleMap);
         }
         query1.clear();
+        query1.exec("SELECT * FROM UserDemand");
+        IdUser = query1.record().indexOf("UserID");
+        int BookId = query1.record().indexOf("BorrowBookID");
+        while (query1.next())
+        {
+            UserDemand_c tempDemand;
+            tempDemand.UserID = query1.value(IdUser).toString();
+            tempDemand.BorrowBookID = query1.value(BookId).toString();
+            UserDemandData.append(tempDemand);
+        }
+        BookId = NULL;
         idrowRole_ID = NULL;
         account_no = NULL;
         idrowRole_desc = NULL;
@@ -149,6 +163,12 @@ Database::Database()
         imageIndex = NULL;
 }
 
+void Database::write_into_userdemand_data(QString userid, QString borrowBookId)
+{
+    QSqlQuery query;
+    query.exec("INSERT INTO UserDemand (UserID, BorrowBookID) "
+                  "VALUES ('"+userid+"', '"+borrowBookId+"')");
+}
 
 Database::~Database()
 {

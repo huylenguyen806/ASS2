@@ -52,7 +52,7 @@ void DisplayBookWidget::set_displaying_book()
     ui->publisher_genre_language->setTextFormat(Qt::RichText);
     ui->publisher_genre_language->setText("<b>Publisher: </b>" + book_info->publisher + "<br />"
                                           + "<b>Genre: </b>" + book_info->genre +
-                                          "<br /><b>Publish Date: </b>" + book_info->publisherDate);
+                                          "<br /><b>Publish Date: </b>" + book_info->publishedDate);
     ui->publisher_genre_language->setFont(QFont("Myriad Pro",12));
     ui->publisher_genre_language->setWordWrap(true);
 }
