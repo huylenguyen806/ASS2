@@ -166,8 +166,44 @@ Database::Database()
 void Database::write_into_userdemand_data(QString userid, QString borrowBookId)
 {
     QSqlQuery query;
-    query.exec("INSERT INTO UserDemand (UserID, BorrowBookID) "
+    query.prepare("INSERT INTO UserDemand (UserID, BorrowBookID) "
                   "VALUES ('"+userid+"', '"+borrowBookId+"')");
+    if(query.exec())
+    {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Your request has been sent.");
+        alert->setWindowIcon(QIcon(":/images/OK.png"));
+        alert->setWindowTitle("Success");
+        alert->show();
+    }
+    else {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Unexpected issues occur, fail to sent your request.");
+        alert->setWindowIcon(QIcon(":/images/error.png"));
+        alert->setWindowTitle("Error");
+        alert->show();
+    }
+}
+
+void Database::change_password(QString userID, QString newpassword)
+{
+    QSqlQuery query;
+    query.prepare("UPDATE Account SET PASSWORD = '"+newpassword+"' WHERE ID='"+userID+"'");
+    if(query.exec())
+    {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Your password has been changed.");
+        alert->setWindowIcon(QIcon(":/images/OK.png"));
+        alert->setWindowTitle("Success");
+        alert->show();
+    }
+    else {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Unexpected issues occur, fail to change your password.");
+        alert->setWindowIcon(QIcon(":/images/error.png"));
+        alert->setWindowTitle("Error");
+        alert->show();
+    }
 }
 
 Database::~Database()

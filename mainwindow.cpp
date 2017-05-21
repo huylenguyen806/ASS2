@@ -582,8 +582,11 @@ void MainWindow::on_ok_change_pass_button_clicked()
             else createMessageBox("Error", "Please enter and confirm your new password.");
         }
         else if(ui->new_pass->text() == ui->confirm_new_pass->text()){
-            //change password in data here
+            data.change_password(user.currentUserID, ui->new_pass->text());
+            clear_all_lineEdit();
         }
+        else if(ui->new_pass->text() != ui->confirm_new_pass->text())
+            createMessageBox("Error", "Wrong confirmed password.");
     }
     else createMessageBox("Error", "Wrong current password.");
 }
@@ -622,4 +625,19 @@ void MainWindow::on_borrow_all_button_clicked()
     }
     else if(alert->clickedButton() == N)
         alert->close();
+}
+
+void MainWindow::on_confirm_new_pass_returnPressed()
+{
+    on_ok_change_pass_button_clicked();
+}
+
+void MainWindow::on_new_pass_returnPressed()
+{
+    on_ok_change_pass_button_clicked();
+}
+
+void MainWindow::on_change_current_pass_returnPressed()
+{
+    on_ok_change_pass_button_clicked();
 }

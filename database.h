@@ -20,6 +20,7 @@ public:
     QVector<Role_c> RoleData;
     QVector<UserDemand_c> UserDemandData;
     void write_into_userdemand_data(QString userid, QString borrowBookId);
+    void change_password(QString userID, QString newpassword);
 };
 
 #endif // DATABASE_H

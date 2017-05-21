@@ -117,6 +117,12 @@ private slots:
 
     void on_borrow_all_button_clicked();
 
+    void on_confirm_new_pass_returnPressed();
+
+    void on_new_pass_returnPressed();
+
+    void on_change_current_pass_returnPressed();
+
 private:
     Ui::MainWindow *ui;
     Database data;
