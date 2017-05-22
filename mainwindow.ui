@@ -982,7 +982,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>2</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -1096,6 +1096,96 @@ QPushButton:hover {
                 <property name="text">
                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;THIS IS YOUR BASKET &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                 </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QWidget" name="widget_7" native="true">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>25</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>45</height>
+                 </size>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="label_2">
+                   <property name="styleSheet">
+                    <string notr="true">font: 16pt &quot;Myriad Pro&quot;;</string>
+                   </property>
+                   <property name="text">
+                    <string>Set all duration: </string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QSpinBox" name="set_all_duration">
+                   <property name="minimumSize">
+                    <size>
+                     <width>55</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="minimum">
+                    <number>1</number>
+                   </property>
+                   <property name="maximum">
+                    <number>30</number>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_2">
+                   <property name="minimumSize">
+                    <size>
+                     <width>40</width>
+                     <height>25</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+                   </property>
+                   <property name="text">
+                    <string>OK</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_12">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>421</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
                </widget>
               </item>
               <item>
@@ -3750,6 +3840,9 @@ QPushButton#add_book_button:hover {
              <layout class="QVBoxLayout" name="verticalLayout_41">
               <item>
                <widget class="QTabWidget" name="librarian_tab">
+                <property name="styleSheet">
+                 <string notr="true">font: 14pt &quot;Myriad Pro&quot;;</string>
+                </property>
                 <property name="currentIndex">
                  <number>2</number>
                 </property>
@@ -3774,8 +3867,8 @@ QPushButton#add_book_button:hover {
                       <rect>
                        <x>0</x>
                        <y>0</y>
-                       <width>670</width>
-                       <height>606</height>
+                       <width>63</width>
+                       <height>16</height>
                       </rect>
                      </property>
                     </widget>
@@ -3801,40 +3894,7 @@ QPushButton#add_book_button:hover {
                      <layout class="QVBoxLayout" name="verticalLayout_42">
                       <item>
                        <layout class="QGridLayout" name="gridLayout_7">
-                        <item row="0" column="0">
-                         <widget class="QPushButton" name="clear_noti_librarian_button">
-                          <property name="minimumSize">
-                           <size>
-                            <width>75</width>
-                            <height>65</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">QPushButton#clear_noti_librarian_button {
-    background-color: rgb(199,237,252);
-    border-style: outset;
-    border-width: 1px;
-    border-radius: 14px;
-    border-color: white;
-	font:normal 200 14pt &quot;Myriad Pro&quot;;
-    max-width: 5em;
-    padding: 2px;
-}
-QPushButton#clear_noti_librarian_button:pressed {
-    background-color: rgb(178,231,250);
-    border-style: outset;
-}
-QPushButton#clear_noti_librarian_button:hover {
-    background-color: rgb(178,231,250);
-    border-style: inset;
-}</string>
-                          </property>
-                          <property name="text">
-                           <string>Clear</string>
-                          </property>
-                         </widget>
-                        </item>
-                        <item row="1" column="0">
+                        <item row="2" column="0">
                          <widget class="QPushButton" name="clear_all_noti_librarian_button">
                           <property name="minimumSize">
                            <size>
@@ -3867,7 +3927,40 @@ QPushButton#clear_all_noti_librarian_button:hover {
                           </property>
                          </widget>
                         </item>
-                        <item row="2" column="0">
+                        <item row="1" column="0">
+                         <widget class="QPushButton" name="clear_noti_librarian_button">
+                          <property name="minimumSize">
+                           <size>
+                            <width>75</width>
+                            <height>65</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QPushButton#clear_noti_librarian_button {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton#clear_noti_librarian_button:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton#clear_noti_librarian_button:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+                          </property>
+                          <property name="text">
+                           <string>Clear</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="3" column="0">
                          <widget class="QPushButton" name="undo_noti_button">
                           <property name="minimumSize">
                            <size>
@@ -3897,6 +3990,39 @@ QPushButton#undo_noti_button:hover {
                           </property>
                           <property name="text">
                            <string>Undo</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item row="0" column="0">
+                         <widget class="QPushButton" name="pushButton">
+                          <property name="minimumSize">
+                           <size>
+                            <width>75</width>
+                            <height>65</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+                          </property>
+                          <property name="text">
+                           <string>Detail</string>
                           </property>
                          </widget>
                         </item>

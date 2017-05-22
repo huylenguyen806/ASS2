@@ -6,6 +6,11 @@
 #include <QIcon>
 #include <QSqlQuery>
 #include <QApplication>
+UserDemand_c::UserDemand_c()
+{
+
+}
+
 Database::Database()
 {
     QSqlDatabase mydb = QSqlDatabase::addDatabase("QSQLITE");
@@ -170,11 +175,10 @@ void Database::write_into_userdemand_data(QString userid, QString borrowBookId)
                   "VALUES ('"+userid+"', '"+borrowBookId+"')");
     if(query.exec())
     {
-        QMessageBox *alert = new QMessageBox();
-        alert->setText("Your request has been sent.");
-        alert->setWindowIcon(QIcon(":/images/OK.png"));
-        alert->setWindowTitle("Success");
-        alert->show();
+        UserDemand_c temp;
+        temp.UserID = userid;
+        temp.BorrowBookID = borrowBookId;
+        UserDemandData.append(temp);
     }
     else {
         QMessageBox *alert = new QMessageBox();

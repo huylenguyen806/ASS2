@@ -44,3 +44,27 @@ void BookManagement::showeditbook()
 {
     ui->stackedWidget->setCurrentWidget(ui->edit_book);
 }
+
+void BookManagement::showBorrowBookInfo(User_c user, Books_c book)
+{
+    ui->stackedWidget->setCurrentWidget(ui->librarian_noti);
+    ui->user_info->setTextFormat(Qt::RichText);
+    ui->user_info->setText("<b>Name: </b> " + user.Name + "<br />" +
+                           "<b>LibID: </b> " + user.UserID);
+    QPixmap pix;
+    pix.loadFromData(book.Image);
+    ui->book_image->setPixmap(pix);
+    ui->book_name->setText(book.BName);
+    ui->book_name->setFont(QFont("Myriad Pro",14,-1,QFont::Bold));
+    ui->book_info->setTextFormat(Qt::RichText);
+    ui->book_info->setText("<b>Author: </b> " + book.Author + "<br />" +
+                           "<b>Published Date: </b> " + book.PublishedDate + "<br />" +
+                           "<b>Genre: </b> " + book.Kind + "<br />" +
+                           "<b>Publisher: </b> " + book.Publisher + "<br />" +
+                           "<b>BookID: </b> " + book.BookID);
+}
+
+void BookManagement::on_accept_button_clicked()
+{
+    emit accept_button_signals(this->request);
+}

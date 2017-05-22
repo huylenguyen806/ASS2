@@ -51,6 +51,7 @@ public:
     QString Publisher;
     QString Kind;
     QByteArray Image;
+    int Amount;
 };
 
 class UserDemand_c
@@ -58,6 +59,17 @@ class UserDemand_c
 public:
     QString UserID;
     QString BorrowBookID;
+    int Duration;
+    UserDemand_c();
+};
+
+class OrderList_c
+{
+public:
+    QString UserID;
+    QString BookID;
+    QString BorrowDay;
+    QString ReturnDay;
 };
 
 class CurrentUser

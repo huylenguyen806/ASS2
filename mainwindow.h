@@ -30,7 +30,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-
+signals:
+    void set_all_duration_signal(int* duration);
 private slots:
 
     void on_edit_book_manage_button_clicked();
@@ -123,6 +124,10 @@ private slots:
 
     void on_change_current_pass_returnPressed();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
     Database data;
@@ -131,8 +136,10 @@ private:
     void set_usermanager();
     void set_librarian();
     void login();
-    void get_user_role(QString role);
+    void get_user_role(QString roleid);
     void get_current_user(QString userID);
+    void send_request_to_librarian(QString userID, QString borrowBookID);
+    void get_librarian_noti();
 };
 
 #endif // MAINWINDOW_H

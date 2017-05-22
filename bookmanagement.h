@@ -2,6 +2,7 @@
 #define BOOKMANAGEMENT_H
 
 #include <QWidget>
+#include <maindatabase.h>
 
 namespace Ui {
 class BookManagement;
@@ -12,9 +13,12 @@ class BookManagement : public QWidget
     Q_OBJECT
 
 public:
+    UserDemand_c *request = new UserDemand_c();
     explicit BookManagement(QWidget *parent = 0);
     ~BookManagement();
 
+signals:
+    void accept_button_signals(UserDemand_c *order);
 public slots:
     void on_cancel_add_book_button_clicked();
 
@@ -23,6 +27,11 @@ public slots:
     void showaddbook();
 
     void showeditbook();
+
+    void showBorrowBookInfo();
+
+private slots:
+    void on_accept_button_clicked();
 
 private:
     Ui::BookManagement *ui;

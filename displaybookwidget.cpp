@@ -55,4 +55,19 @@ void DisplayBookWidget::set_displaying_book()
                                           "<br /><b>Publish Date: </b>" + book_info->publishedDate);
     ui->publisher_genre_language->setFont(QFont("Myriad Pro",12));
     ui->publisher_genre_language->setWordWrap(true);
+    QPixmap pix;
+    pix.loadFromData(book_info->Image);
+    pix.scaledToWidth(50);
+    ui->image->setPixmap(pix);
+}
+
+void DisplayBookWidget::hideDuration()
+{
+    ui->duration->hide();
+    ui->label->hide();
+}
+
+void DisplayBookWidget::on_set_all_duration_signal(int duration)
+{
+    ui->duration->setValue(duration);
 }

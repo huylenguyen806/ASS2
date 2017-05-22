@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     createDisplayBookWidget();
     createBookManagerWidget();
     ui->manage_user_label->setHidden(true);
+    get_librarian_noti();
 }
 
 MainWindow::~MainWindow()
@@ -35,10 +36,12 @@ void MainWindow::put_in_basket_click(books* book_info)
         displaybook->book_info->genre = book_info->genre;
         displaybook->book_info->publishedDate = book_info->publishedDate;
         displaybook->book_info->publisher = book_info->publisher;
+        displaybook->book_info->Image = book_info->Image;
         displaybook->set_displaying_book();
         displaybook->hideButton();
         displaybook->hideRButton();
-        newitem->setSizeHint(QSize(0,150));
+        connect(this,set_all_duration_signal(int*),)
+        newitem->setSizeHint(QSize(0,175));
         ui->list_book_in_basket->addItem(newitem);
         ui->list_book_in_basket->setItemWidget(newitem,displaybook);
         //put in vector basketData
@@ -64,11 +67,13 @@ void MainWindow::createBookManagerWidget()
         displaybook->book_info->publisher = data.BookData[i].Publisher;
         displaybook->book_info->genre = data.BookData[i].Kind;
         displaybook->book_info->publishedDate = data.BookData[i].PublishedDate;
+        displaybook->book_info->Image = data.BookData[i].Image;
         displaybook->set_displaying_book();
         displaybook->hideButton();
         displaybook->hideRButton();
+        displaybook->hideDuration();
         QListWidgetItem *newitem = new QListWidgetItem();
-        newitem->setSizeHint(QSize(0,150));
+        newitem->setSizeHint(QSize(0,175));
         ui->manage_book_area->addItem(newitem);
         ui->manage_book_area->setItemWidget(newitem,displaybook);
     }
@@ -87,8 +92,10 @@ void MainWindow::createDisplayBookWidget()
         displaybook->book_info->publisher = data.BookData[i].Publisher;
         displaybook->book_info->genre = data.BookData[i].Kind;
         displaybook->book_info->publishedDate = data.BookData[i].PublishedDate;
+        displaybook->book_info->Image = data.BookData[i].Image;
         displaybook->set_displaying_book();
         displaybook->hideRButton();
+        displaybook->hideDuration();
         vlayout->addWidget(displaybook,0,0);
         //connect to slot
         connect(displaybook,SIGNAL(put_in_basket_button_clicked(books*)),this,SLOT(put_in_basket_click(books*)));
@@ -408,6 +415,7 @@ void MainWindow::on_borrow_button_clicked()
             for(int i = 0; i < user.BasketData.size(); ++i){
                 if(idrow == i){
                     data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID);
+                    send_request_to_librarian(user.currentUserID, user.BasketData[i].BookID);
                     user.BasketData.erase(user.BasketData.begin() + i);
                     delete ui->list_book_in_basket->currentItem();
                     ui->list_book_in_basket->clearSelection();
@@ -482,12 +490,7 @@ void MainWindow::login()
                     get_current_user(user.currentUserID);
                     for(int j = 0; j < data.AccountRoleMapData.size(); ++j){
                         if(data.AccountRoleMapData[j].Account_No == data.AccountData[i].Username){
-                            for(int k = 0; k < data.RoleData.size(); ++k){
-                                if(data.RoleData[k].Role_ID == data.AccountRoleMapData[j].roles){
-                                    user.currentRole = data.RoleData[k].Role_Desc;
-                                    get_user_role(data.RoleData[k].Role_Desc);
-                                }
-                            }
+                            get_user_role(data.AccountRoleMapData[j].roles);
                         }
                     }
                     check = 1;
@@ -514,37 +517,45 @@ void MainWindow::on_lineEdit_password_returnPressed()
     login();
 }
 
-void MainWindow::get_user_role(QString role)
+void MainWindow::get_user_role(QString roleid)
 {
-    if(role.contains('&')){
+    if(roleid.contains(' ')){
         QVector<QString> role_vec;
         QString temp;
-        for(int i = 0; i < role.length(); ++i){
-            if(role[i] != '&'){
-                temp.append(role[i]);
+        for(int i = 0; i < roleid.length(); ++i){
+            if(roleid[i] != ' '){
+                temp.append(roleid[i]);
             }
-            if(role[i] == '&' || i == role.length() - 1){
+            if(roleid[i] == ' ' || i == roleid.length() - 1){
                 role_vec.append(temp);
                 temp.clear();
                 continue;
             }
         }
         for(int i = 0; i < role_vec.size(); ++i){
-            if(role_vec[i] == "READER")
-                ui->role_select->addItem("Reader");
-            else if(role_vec[i] == "USER_MANAGER")
-                ui->role_select->addItem("UserManager");
-            else if(role_vec[i] == "LIBRARIAN")
-                ui->role_select->addItem("Librarian");
+            for(int j = 0; j < data.RoleData.size(); ++j){
+                if(role_vec[i] == data.RoleData[j].Role_ID){
+                    if(data.RoleData[j].Role_Desc == "READER")
+                        ui->role_select->addItem("Reader");
+                    else if(data.RoleData[j].Role_Desc == "USER_MANAGER")
+                        ui->role_select->addItem("UserManager");
+                    else if(data.RoleData[j].Role_Desc == "LIBRARIAN")
+                        ui->role_select->addItem("Librarian");
+                }
+            }
         }
     }
     else {
-        if(role == "READER")
-            ui->role_select->addItem("Reader");
-        else if(role == "USER_MANAGER")
-            ui->role_select->addItem("UserManager");
-        else if(role == "LIBRARIAN")
-            ui->role_select->addItem("Librarian");
+        for(int j = 0; j < data.RoleData.size(); ++j){
+            if(roleid == data.RoleData[j].Role_ID){
+                if(data.RoleData[j].Role_Desc == "READER")
+                    ui->role_select->addItem("Reader");
+                else if(data.RoleData[j].Role_Desc == "USER_MANAGER")
+                    ui->role_select->addItem("UserManager");
+                else if(data.RoleData[j].Role_Desc == "LIBRARIAN")
+                    ui->role_select->addItem("Librarian");
+            }
+        }
     }
 }
 
@@ -619,6 +630,7 @@ void MainWindow::on_borrow_all_button_clicked()
     if(alert->clickedButton() == Y){
         for(int i = 0; i < user.BasketData.size(); ++i){
             data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID);
+            send_request_to_librarian(user.currentUserID, user.BasketData[i].BookID);
         }
         ui->list_book_in_basket->clear();
         user.BasketData.clear();
@@ -640,4 +652,64 @@ void MainWindow::on_new_pass_returnPressed()
 void MainWindow::on_change_current_pass_returnPressed()
 {
     on_ok_change_pass_button_clicked();
+}
+
+void MainWindow::send_request_to_librarian(QString userID, QString borrowBookID)
+{
+    QString name;
+    QString bookname;
+    for(int i = 0 ; i < data.UserData.size(); ++i){
+        if(data.UserData[i].UserID == userID){
+            name = data.UserData[i].Name;
+        }
+    }
+    for(int i = 0; i < user.BasketData.size(); ++i){
+        if(user.BasketData[i].BookID == borrowBookID){
+            bookname = user.BasketData[i].BName;
+        }
+    }
+    QListWidgetItem *newitem = new QListWidgetItem();
+    newitem->setText(name + " (ID: " + userID + ") want to borrow " + bookname + " (BookID: " + borrowBookID + ")");
+    ui->librarian_noti_list->addItem(newitem);
+}
+
+void MainWindow::get_librarian_noti()
+{
+    for(int i = 0; i < data.UserDemandData.size(); ++i){
+        QString name;
+        QString bookname;
+        for(int j = 0 ; j < data.UserData.size(); ++j){
+            if(data.UserData[j].UserID == data.UserDemandData[i].UserID){
+                name = data.UserData[j].Name;
+            }
+        }
+        for(int j = 0; j < data.BookData.size(); ++j){
+            if(data.BookData[j].BookID == data.UserDemandData[i].BorrowBookID)
+                bookname = data.BookData[j].BName;
+        }
+        QListWidgetItem *newitem = new QListWidgetItem();
+        newitem->setText(name + " (ID: " + data.UserDemandData[i].UserID +
+                         ") want to borrow " + bookname + " (BookID: " + data.UserDemandData[i].BorrowBookID + ")");
+        ui->librarian_noti_list->addItem(newitem);
+    }
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    if(ui->librarian_noti_list->selectedItems().size() = 0){
+        createMessageBox("Error", "Please choose an item to see its detail.");
+    }
+    else {
+        for(int i = 0; i < data.UserDemandData.size(); ++i){
+            if(ui->librarian_noti_list->currentRow() == i){
+                BookManagement *widget = new BookManagement();
+                widget->
+            }
+        }
+    }
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    emit set_all_duration_signal(ui->set_all_duration->value());
 }
