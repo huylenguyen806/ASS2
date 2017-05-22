@@ -40,8 +40,8 @@ void MainWindow::put_in_basket_click(books* book_info)
         displaybook->set_displaying_book();
         displaybook->hideButton();
         displaybook->hideRButton();
-        connect(this,set_all_duration_signal(int*),)
-        newitem->setSizeHint(QSize(0,175));
+        connect(this, SIGNAL(set_duration_button_clicked(int)), displaybook, SLOT(set_all_duration_signal(int)));
+        newitem->setSizeHint(QSize(0,200));
         ui->list_book_in_basket->addItem(newitem);
         ui->list_book_in_basket->setItemWidget(newitem,displaybook);
         //put in vector basketData
@@ -73,7 +73,7 @@ void MainWindow::createBookManagerWidget()
         displaybook->hideRButton();
         displaybook->hideDuration();
         QListWidgetItem *newitem = new QListWidgetItem();
-        newitem->setSizeHint(QSize(0,175));
+        newitem->setSizeHint(QSize(0,200));
         ui->manage_book_area->addItem(newitem);
         ui->manage_book_area->setItemWidget(newitem,displaybook);
     }
@@ -694,22 +694,38 @@ void MainWindow::get_librarian_noti()
     }
 }
 
-void MainWindow::on_pushButton_clicked()
+
+void MainWindow::on_Detail_clicked()
 {
-    if(ui->librarian_noti_list->selectedItems().size() = 0){
+    if(ui->librarian_noti_list->selectedItems().size() == 0){
         createMessageBox("Error", "Please choose an item to see its detail.");
     }
     else {
         for(int i = 0; i < data.UserDemandData.size(); ++i){
             if(ui->librarian_noti_list->currentRow() == i){
                 BookManagement *widget = new BookManagement();
-                widget->
+                User_c user;
+                Books_c book;
+                for(int j = 0; j < data.UserData.size(); ++j){
+                    if(data.UserDemandData[i].UserID == data.UserData[j].UserID){
+                        user = data.UserData[j];
+                        break;
+                    }
+                }
+                for(int j = 0; j < data.BookData.size(); ++j){
+                    if(data.UserDemandData[i].BorrowBookID == data.BookData[j].BookID){
+                        book = data.BookData[j];
+                        break;
+                    }
+                }
+                widget->showBorrowBookInfo(user, book);
+                widget->show();
             }
         }
     }
 }
 
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_set_duration_button_clicked()
 {
-    emit set_all_duration_signal(ui->set_all_duration->value());
+    emit set_duration_button_clicked(ui->set_all_duration->value());
 }

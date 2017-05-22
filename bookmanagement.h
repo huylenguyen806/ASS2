@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <maindatabase.h>
+#include <QPixmap>
 
 namespace Ui {
 class BookManagement;
@@ -28,10 +29,12 @@ public slots:
 
     void showeditbook();
 
-    void showBorrowBookInfo();
+    void showBorrowBookInfo(User_c user, Books_c book);
 
 private slots:
     void on_accept_button_clicked();
+
+    void on_deny_button_clicked();
 
 private:
     Ui::BookManagement *ui;

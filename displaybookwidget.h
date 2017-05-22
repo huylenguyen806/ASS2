@@ -38,9 +38,9 @@ public:
     ~DisplayBookWidget();
 signals:
     void put_in_basket_button_clicked(books* book_info);
-public slots:
+private slots:
     void on_put_in_basket_button_clicked();
-    void on_set_all_duration_signal(int duration);
+    void set_all_duration_signal(int duration);
 private:
     Ui::DisplayBookWidget *ui;
 };

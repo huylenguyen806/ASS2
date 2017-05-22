@@ -252,27 +252,70 @@
           </widget>
          </item>
          <item>
-          <layout class="QVBoxLayout" name="verticalLayout_7" stretch="1,2">
+          <layout class="QVBoxLayout" name="verticalLayout_7" stretch="0,1,0,2">
            <item>
-            <widget class="QLabel" name="user_info">
+            <widget class="QLabel" name="label_14">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Myriad Pro&quot;;</string>
+             </property>
              <property name="text">
-              <string>TextLabel</string>
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Reader's info : &lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,1">
+             <item>
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="user_info">
+               <property name="styleSheet">
+                <string notr="true">font: 14pt &quot;Myriad Pro&quot;;</string>
+               </property>
+               <property name="text">
+                <string>TextLabel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="label_15">
+             <property name="styleSheet">
+              <string notr="true">font: 14pt &quot;Myriad Pro&quot;;</string>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Want to borrow :&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QWidget" name="widget" native="true">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>250</height>
+              </size>
+             </property>
              <layout class="QHBoxLayout" name="horizontalLayout_3">
               <item>
                <widget class="QLabel" name="book_image">
                 <property name="maximumSize">
                  <size>
-                  <width>100</width>
-                  <height>125</height>
+                  <width>150</width>
+                  <height>200</height>
                  </size>
                 </property>
                 <property name="text">
                  <string>TextLabel</string>
+                </property>
+                <property name="scaledContents">
+                 <bool>true</bool>
                 </property>
                </widget>
               </item>
@@ -283,10 +326,16 @@
                   <property name="text">
                    <string>TextLabel</string>
                   </property>
+                  <property name="wordWrap">
+                   <bool>true</bool>
+                  </property>
                  </widget>
                 </item>
                 <item>
                  <widget class="QLabel" name="book_info">
+                  <property name="styleSheet">
+                   <string notr="true">font: 12pt &quot;Myriad Pro&quot;;</string>
+                  </property>
                   <property name="text">
                    <string>TextLabel</string>
                   </property>

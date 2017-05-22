@@ -31,7 +31,7 @@ public:
     ~MainWindow();
 
 signals:
-    void set_all_duration_signal(int* duration);
+    void set_duration_button_clicked(int duration);
 private slots:
 
     void on_edit_book_manage_button_clicked();
@@ -124,9 +124,9 @@ private slots:
 
     void on_change_current_pass_returnPressed();
 
-    void on_pushButton_clicked();
+    void on_Detail_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_set_duration_button_clicked();
 
 private:
     Ui::MainWindow *ui;

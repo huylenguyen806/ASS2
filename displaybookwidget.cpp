@@ -57,7 +57,6 @@ void DisplayBookWidget::set_displaying_book()
     ui->publisher_genre_language->setWordWrap(true);
     QPixmap pix;
     pix.loadFromData(book_info->Image);
-    pix.scaledToWidth(50);
     ui->image->setPixmap(pix);
 }
 
@@ -65,9 +64,10 @@ void DisplayBookWidget::hideDuration()
 {
     ui->duration->hide();
     ui->label->hide();
+    ui->duration_label->hide();
 }
 
-void DisplayBookWidget::on_set_all_duration_signal(int duration)
+void DisplayBookWidget::set_all_duration_signal(int duration)
 {
     ui->duration->setValue(duration);
 }

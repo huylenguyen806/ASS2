@@ -55,7 +55,7 @@ void BookManagement::showBorrowBookInfo(User_c user, Books_c book)
     pix.loadFromData(book.Image);
     ui->book_image->setPixmap(pix);
     ui->book_name->setText(book.BName);
-    ui->book_name->setFont(QFont("Myriad Pro",14,-1,QFont::Bold));
+    ui->book_name->setFont(QFont("Myriad Pro",14,QFont::Bold));
     ui->book_info->setTextFormat(Qt::RichText);
     ui->book_info->setText("<b>Author: </b> " + book.Author + "<br />" +
                            "<b>Published Date: </b> " + book.PublishedDate + "<br />" +
@@ -67,4 +67,9 @@ void BookManagement::showBorrowBookInfo(User_c user, Books_c book)
 void BookManagement::on_accept_button_clicked()
 {
     emit accept_button_signals(this->request);
+}
+
+void BookManagement::on_deny_button_clicked()
+{
+    this->close();
 }
