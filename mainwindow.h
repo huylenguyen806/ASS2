@@ -18,6 +18,9 @@
 #include <QSqlRecord>
 #include <QApplication>
 #include "database.h"
+#include "readernotifications.h"
+#include "noti_item.h"
+#include <QDesktopServices>
 namespace Ui {
 class MainWindow;
 }
@@ -33,6 +36,25 @@ public:
 signals:
     void set_duration_button_clicked(int duration);
 private slots:
+    void receive_lostbook_punishment(QString UserID, QString BookID, QString message, QString money);
+
+    void show_lost_book_detail(User_c user, Books_c book);
+
+    void send_lost_book(books *lost);
+
+    void create_newbook_noti(books *newbook);
+
+    void read_pdf_books(books *read_book);
+
+    void return_book(books *return_book);
+
+    void delete_readernoti_indata(ReaderNoti_c noti);
+
+    void show_reader_noti_detail(ReaderNoti_c noti, Books_c book);
+
+    void get_reason_for_denial(QString UserID, QString BookID, QString content, int on);
+
+    void get_each_duration(QString bookID, int duration);
 
     void on_edit_book_manage_button_clicked();
 
@@ -128,6 +150,14 @@ private slots:
 
     void on_set_duration_button_clicked();
 
+    void accept_reader_request_about_borrowing_book(UserDemand_c *request);
+
+    void on_reader_clearall_button_clicked();
+
+    void selectCurrentReaderNotiItem(QListWidgetItem* item);
+
+    void on_librarian_tab_tabBarClicked(int index);
+
 private:
     Ui::MainWindow *ui;
     Database data;
@@ -136,10 +166,15 @@ private:
     void set_usermanager();
     void set_librarian();
     void login();
+    void show_reader_noti();
     void get_user_role(QString roleid);
     void get_current_user(QString userID);
     void send_request_to_librarian(QString userID, QString borrowBookID);
     void get_librarian_noti();
+    void show_accounts();
+    void resetRealAmountOfBooks();
+    void show_reader_borrowed_books();
+    void show_lost_books();
 };
 
 #endif // MAINWINDOW_H

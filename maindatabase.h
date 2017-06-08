@@ -52,6 +52,11 @@ public:
     QString Kind;
     QByteArray Image;
     int Amount;
+    QByteArray Pdf;
+    //addition (not exist in database)
+    int duration;
+    int realAmmount;
+    QString content_detail;
 };
 
 class UserDemand_c
@@ -72,6 +77,24 @@ public:
     QString ReturnDay;
 };
 
+class ReaderNoti_c
+{
+public:
+    int ON;
+    QString UserID;
+    QString date;
+    QString content;
+    QString BookID;
+    QString account_no;
+};
+
+class LostBooks_c
+{
+public:
+    QString UserID;
+    QString BookID;
+};
+
 class CurrentUser
 {
 public:
@@ -86,6 +109,7 @@ public:
     QString currentCareer;
     QString currentEmail;
     QString currentPass;
+    int currentNumberOfBorrowedBooks = 0;
     QVector<Books_c> BasketData;
     void clear(){
         currentAccount_name.clear();
@@ -100,6 +124,7 @@ public:
         currentUserID.clear();
         currentPass.clear();
         BasketData.clear();
+        currentNumberOfBorrowedBooks = 0;
     }
 };
 

@@ -15,11 +15,19 @@ class BookManagement : public QWidget
 
 public:
     UserDemand_c *request = new UserDemand_c();
+    int on;
+    QString money;
+    QString message;
+    QString UserID;
+    QString BookID;
+    void show_lost_book_widget(User_c user, Books_c book);
     explicit BookManagement(QWidget *parent = 0);
     ~BookManagement();
 
 signals:
     void accept_button_signals(UserDemand_c *order);
+    void send_reason_for_denial(QString UserID, QString BookID, QString content, int on);
+    void send_lost_book_punishment(QString UserID, QString BookID, QString message, QString money);
 public slots:
     void on_cancel_add_book_button_clicked();
 
@@ -29,12 +37,20 @@ public slots:
 
     void showeditbook();
 
-    void showBorrowBookInfo(User_c user, Books_c book);
+    void showBorrowBookInfo(User_c user, Books_c book, int duration);
 
 private slots:
     void on_accept_button_clicked();
 
     void on_deny_button_clicked();
+
+    void on_cancel_refusal_clicked();
+
+    void on_ok_refusal_clicked();
+
+    void on_OK_lost_book_clicked();
+
+    void on_Cancel_lost_book_clicked();
 
 private:
     Ui::BookManagement *ui;

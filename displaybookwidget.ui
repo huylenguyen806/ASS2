@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>684</width>
-    <height>211</height>
+    <width>807</width>
+    <height>224</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,6 +40,22 @@
        </widget>
       </item>
       <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeType">
+         <enum>QSizePolicy::Fixed</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>10</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,1">
         <item>
          <widget class="QLabel" name="title">
@@ -49,7 +65,7 @@
          </widget>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,2,0,0">
+         <layout class="QHBoxLayout" name="horizontalLayout" stretch="3,3,0,0">
           <item>
            <widget class="QLabel" name="content_author">
             <property name="text">
@@ -151,7 +167,7 @@ QPushButton:hover {
             <item>
              <widget class="QPushButton" name="read_button">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
@@ -218,6 +234,41 @@ QPushButton:hover {
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="lost_book_button">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton {
+	height: 35px;
+    background-color: #7bcd8a;
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 20px;
+    border-color: white;
+    font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 3em;
+    padding: 2px;
+}
+QPushButton:pressed {
+	background-color:#095115;
+	border-style: outset;
+	border-style: inset;
+}
+QPushButton:hover {
+	background-color: #b5dfa5;
+	border-style: inset;
+}</string>
+              </property>
+              <property name="text">
+               <string>Lost</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
          </layout>
@@ -226,7 +277,7 @@ QPushButton:hover {
       </item>
      </layout>
      <zorder>image</zorder>
-     <zorder></zorder>
+     <zorder>horizontalSpacer</zorder>
     </widget>
    </item>
    <item>
