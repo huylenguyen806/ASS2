@@ -10,6 +10,13 @@ books::~books()
 
 }
 
+void DisplayBookWidget::show_only_book_info()
+{
+    hideButton();
+    hideRButton();
+    hideDuration();
+}
+
 void DisplayBookWidget::hideButton()
 {
     ui->put_in_basket_button->hide();
@@ -82,7 +89,7 @@ void DisplayBookWidget::set_displaying_book()
     ui->content_author->setTextFormat(Qt::RichText);
     ui->content_author->setText("<b>ID: </b>" + book_info->bookID +
                                 "<br />" + "<b>Author: </b>" + book_info->author +
-                                "<br /><b>Amount: </b>" + QString::number(book_info->realAmount) +
+                                "<br /><b>Real amount: </b>" + QString::number(book_info->realAmount) +
                                 "/" +QString::number(book_info->amount));
     ui->content_author->setFont(QFont("Myriad Pro",14));
     ui->content_author->setWordWrap(true);

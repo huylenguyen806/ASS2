@@ -11,13 +11,27 @@ MainWindow::MainWindow(QWidget *parent) :
     show_viewer();
     createDisplayBookWidget();
     createBookManagerWidget();
-    get_librarian_noti();
     ui->manage_user_label->setHidden(true);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::show_lib_borrowed_books()
+{
+    data.add_data_to_lib_borrowedbooks();
+    ui->lib_borrowed_books_list->clear();
+    for(int i = 0; i < data.LibBorrowBooksData.size(); ++i){
+        QListWidgetItem *item = new QListWidgetItem();
+        item->setSizeHint(QSize(0,40));
+        item->setText("UserID: " + data.LibBorrowBooksData[i].UserID + " - " + data.LibBorrowBooksData[i].UserName +
+                      ". Number of borrowed books: " + QString::number(data.LibBorrowBooksData[i].BorrowedBooks.size()));
+        item->setToolTip(data.LibBorrowBooksData[i].UserID);
+        ui->lib_borrowed_books_list->addItem(item);
+    }
+    ui->lib_number_of_borrowed_books->display(data.LibBorrowBooksData.size());
 }
 
 void MainWindow::create_newbook_noti(books *newbook)
@@ -207,6 +221,12 @@ void MainWindow::return_book(books *return_book)
         if(data.delete_book_from_orderlist(user.currentUserID, return_book->bookID)){
             createMessageBox("OK", "Return successfully.");
             show_reader_borrowed_books();
+            for(int i = 0; i < data.BookData.size(); ++i){
+                if(data.BookData[i].BookID == return_book->bookID){
+                    data.BookData[i].realAmmount++;
+                    break;
+                }
+            }
         }
     }
     else if(box->clickedButton() == N)
@@ -276,12 +296,15 @@ void MainWindow::put_in_basket_click(books* book_info)
         createMessageBox("OK", "The book is now in your basket.");
         //put in vector basketData
         Books_c tempBook;
+        tempBook.Image = book_info->Image;
         tempBook.BName = book_info->title;
         tempBook.Author = book_info->author;
         tempBook.BookID = book_info->bookID;
         tempBook.Kind = book_info->genre;
         tempBook.PublishedDate = book_info->publishedDate;
         tempBook.Publisher = book_info->publisher;
+        tempBook.Amount = book_info->amount;
+        tempBook.realAmmount = book_info->realAmount;
         tempBook.duration = 1;
         user.BasketData.append(tempBook);
         QListWidgetItem *newitem = new QListWidgetItem();
@@ -548,6 +571,7 @@ void MainWindow::on_manage_demand_button_clicked()
 {
     ui->main_ui->setCurrentWidget(ui->reader_demand);
     ui->librarian_tab->setCurrentWidget(ui->lib_borrowed_book);
+    show_lib_borrowed_books();
 }
 
 void MainWindow::on_reset_pass_button_clicked()
@@ -701,16 +725,28 @@ void MainWindow::on_borrow_button_clicked()
             int idrow = ui->list_book_in_basket->currentRow();
             for(int i = 0; i < user.BasketData.size(); ++i){
                 if(idrow == i){
-                    //write in to database
-                    data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID, user.BasketData[i].duration);
-                    //send request to librarian
-                    send_request_to_librarian(user.currentUserID, user.BasketData[i].BookID);
-                    //erase from basket
-                    user.BasketData.erase(user.BasketData.begin() + i);
-                    delete ui->list_book_in_basket->currentItem();
-                    //clear selection in basket
-                    ui->list_book_in_basket->clearSelection();
-                    break;
+                    bool check = 0;
+                    for(int j = 0; j < data.OrderListData.size(); ++j){
+                        if(data.OrderListData[i].UserID == user.currentUserID &&
+                                data.OrderListData[i].BookID == user.BasketData[i].BookID){
+                            check = 1;
+                            break;
+                        }
+                    }
+                    if(check == 1)
+                        createMessageBox("Error", "You have borrowed this book.");
+                    else if(check == 0){
+                        //write in to database
+                        data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID, user.BasketData[i].duration);
+                        //send request to librarian
+                        send_request_to_librarian(user.currentUserID, user.BasketData[i].BookID);
+                        //erase from basket
+                        user.BasketData.erase(user.BasketData.begin() + i);
+                        delete ui->list_book_in_basket->currentItem();
+                        //clear selection in basket
+                        ui->list_book_in_basket->clearSelection();
+                        break;
+                    }
                 }
             }
         }
@@ -931,11 +967,51 @@ void MainWindow::on_borrow_all_button_clicked()
     alert->exec();
     if(alert->clickedButton() == Y){
         for(int i = 0; i < user.BasketData.size(); ++i){
-            data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID, user.BasketData[i].duration);
-            send_request_to_librarian(user.currentUserID, user.BasketData[i].BookID);
+            bool check = 0;
+            for(int j = 0; j < data.OrderListData.size(); ++j){
+                if(data.OrderListData[j].UserID == user.currentUserID &&
+                        data.OrderListData[j].BookID == user.BasketData[i].BookID){
+                    check = 1;
+                    break;
+                }
+            }
+            if(check == 0){
+                //write in to database
+                data.write_into_userdemand_data(user.currentUserID, user.BasketData[i].BookID, user.BasketData[i].duration);
+                //send request to librarian
+                send_request_to_librarian(user.currentUserID, user.BasketData[i].BookID);
+                //erase from basket
+                user.BasketData.erase(user.BasketData.begin() + i);
+                i--;
+            }
         }
         ui->list_book_in_basket->clear();
-        user.BasketData.clear();
+        if(user.BasketData.isEmpty() == false){
+            createMessageBox("Warning", "The remains are already borrowed by you.");
+            for(int i = 0; i < user.BasketData.size(); ++i){
+                QListWidgetItem *newitem = new QListWidgetItem();
+                DisplayBookWidget* displaybook = new DisplayBookWidget();
+                displaybook->book_info->title = user.BasketData[i].BName;
+                displaybook->book_info->author = user.BasketData[i].Author;
+                displaybook->book_info->bookID = user.BasketData[i].BookID;
+                displaybook->book_info->genre = user.BasketData[i].Kind;
+                displaybook->book_info->publishedDate = user.BasketData[i].PublishedDate;
+                displaybook->book_info->publisher = user.BasketData[i].Publisher;
+                displaybook->book_info->Image = user.BasketData[i].Image;
+                displaybook->book_info->amount = user.BasketData[i].Amount;
+                displaybook->book_info->realAmount = user.BasketData[i].realAmmount;
+                displaybook->set_displaying_book();
+                displaybook->hideButton();
+                displaybook->hideRButton();
+                //edit each duration after changing the value in the set_all_duration_spinbox
+                connect(this, SIGNAL(set_duration_button_clicked(int)), displaybook, SLOT(set_all_duration_signal(int)));
+                newitem->setSizeHint(QSize(0,230));
+                ui->list_book_in_basket->addItem(newitem);
+                ui->list_book_in_basket->setItemWidget(newitem,displaybook);
+                //get duration after editing in basket
+                connect(displaybook, SIGNAL(send_each_duration(QString,int)), this, SLOT(get_each_duration(QString,int)));
+            }
+        }
     }
     else if(alert->clickedButton() == N)
         alert->close();
@@ -977,6 +1053,7 @@ void MainWindow::send_request_to_librarian(QString userID, QString borrowBookID)
 
 void MainWindow::get_librarian_noti()
 {
+    ui->librarian_noti_list->clear();
     for(int i = 0; i < data.UserDemandData.size(); ++i){
         QString name;
         QString bookname;
@@ -992,6 +1069,7 @@ void MainWindow::get_librarian_noti()
         QListWidgetItem *newitem = new QListWidgetItem();
         newitem->setText(name + " (ID: " + data.UserDemandData[i].UserID +
                          ") want to borrow " + bookname + " (BookID: " + data.UserDemandData[i].BorrowBookID + ")");
+        newitem->setToolTip(data.UserDemandData[i].UserID + " " + data.UserDemandData[i].BorrowBookID);
         ui->librarian_noti_list->addItem(newitem);
     }
 }
@@ -1094,8 +1172,12 @@ void MainWindow::on_reader_clearall_button_clicked()
 
 void MainWindow::on_librarian_tab_tabBarClicked(int index)
 {
-    if(index == 1)
+    if(index == 0)
+        show_lib_borrowed_books();
+    else if(index == 1)
         show_lost_books();
+    else if(index == 2)
+        get_librarian_noti();
 }
 
 void MainWindow::on_clear_all_lost_book_clicked()
@@ -1134,4 +1216,87 @@ void MainWindow::on_clear_all_lost_book_clicked()
         show_lost_books();
     }
     else createMessageBox("Error", "There is no lost book notification to clear.");
+}
+
+void MainWindow::on_lib_borrowed_books_detail_clicked()
+{
+    if(ui->lib_borrowed_books_list->selectedItems().size() == 0)
+        createMessageBox("Error", "No record is selected.");
+    else {
+        for(int i = 0; i < data.LibBorrowBooksData.size(); ++i){
+            if(data.LibBorrowBooksData[i].UserID == ui->lib_borrowed_books_list->currentItem()->toolTip()){
+                BookManagement *noti = new BookManagement();
+                noti->setMaximumWidth(600);
+                noti->setMinimumWidth(600);
+                noti->setMaximumHeight(500);
+                noti->setMinimumHeight(500);
+                noti->show_borrowed_books(data.LibBorrowBooksData[i]);
+                noti->show();
+                break;
+            }
+        }
+    }
+}
+
+void MainWindow::on_clear_noti_librarian_button_clicked()
+{
+    if(ui->librarian_noti_list->selectedItems().size() == 0)
+        createMessageBox("Error", "No record is selected.");
+    else {
+        QMessageBox *noti = new QMessageBox();
+        noti->setWindowIcon(QIcon(":/images/warning.png"));
+        noti->setWindowTitle("Warning");
+        noti->setText("Are you sure you want to clear this notification?");
+        QPushButton *Y = noti->addButton(QMessageBox::Yes);
+        QPushButton *N = noti->addButton(QMessageBox::No);
+        noti->setDefaultButton(N);
+        noti->exec();
+        if(noti->clickedButton() == Y){
+            QString *temp = new QString(ui->librarian_noti_list->currentItem()->toolTip());
+            QTextStream in(temp,QIODevice::ReadOnly);
+            QString UserID, BorrowedBookID;
+            in >> UserID >> BorrowedBookID;
+            if(data.delete_from_userdemand_data(UserID, BorrowedBookID)){
+                get_librarian_noti();
+                createMessageBox("OK", "Delete successfully.");
+            }
+        }
+        else if(noti->clickedButton() == N)
+            noti->close();
+    }
+}
+
+void MainWindow::on_clear_all_noti_librarian_button_clicked()
+{
+    QMessageBox *noti = new QMessageBox();
+    noti->setWindowIcon(QIcon(":/images/warning.png"));
+    noti->setWindowTitle("Warning");
+    noti->setText("Are you sure you want to clear this notification?");
+    QPushButton *Y = noti->addButton(QMessageBox::Yes);
+    QPushButton *N = noti->addButton(QMessageBox::No);
+    noti->setDefaultButton(N);
+    noti->exec();
+    if(noti->clickedButton() == Y){
+        for(int i = 0; i < data.UserDemandData.size(); ++i){
+            QString UserID = data.UserDemandData[i].UserID;
+            QString BorrowBookID = data.UserDemandData[i].BorrowBookID;
+            QSqlQuery qry;
+            qry.prepare("DELETE FROM UserDemand WHERE UserID = '"+UserID+"' and BorrowBookID = '"+BorrowBookID+"'");
+            if(qry.exec()){
+                data.UserDemandData.erase(data.UserDemandData.begin() + i);
+                i--;
+            }
+            else {
+                QMessageBox *alert = new QMessageBox();
+                alert->setText("Unexpected issues occur, process has failed.");
+                alert->setWindowIcon(QIcon(":/images/error.png"));
+                alert->setWindowTitle("Error");
+                alert->show();
+            }
+            qry.clear();
+        }
+        get_librarian_noti();
+    }
+    else if(noti->clickedButton() == N)
+        noti->close();
 }

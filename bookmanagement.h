@@ -21,6 +21,7 @@ public:
     QString UserID;
     QString BookID;
     void show_lost_book_widget(User_c user, Books_c book);
+    void show_borrowed_books(LibBorrowedBooks_c data);
     explicit BookManagement(QWidget *parent = 0);
     ~BookManagement();
 

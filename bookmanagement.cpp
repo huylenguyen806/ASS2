@@ -2,6 +2,7 @@
 #include "ui_bookmanagement.h"
 #include <QVariant>
 #include <QMessageBox>
+#include "displaybookwidget.h"
 
 BookManagement::BookManagement(QWidget *parent) :
     QWidget(parent),
@@ -17,8 +18,38 @@ BookManagement::~BookManagement()
     delete ui;
 }
 
+void BookManagement::show_borrowed_books(LibBorrowedBooks_c data)
+{
+    ui->borrowed_book_list->clear();
+    setWindowIcon(QIcon(":/images/detail_icon.ico"));
+    setWindowTitle("Borrowed Books");
+    ui->stackedWidget->setCurrentWidget(ui->borrowed_books);
+    ui->borrowed_books_user->setTextFormat(Qt::RichText);
+    ui->borrowed_books_user->setFont(QFont("Myriad Pro",14));
+    ui->borrowed_books_user->setText("<b>Name: </b>" + data.UserName + "<br /><b>UserID: </b>" + data.UserID);
+    ui->borrowed_books_user->setWordWrap(true);
+    for(int i = 0; i < data.BorrowedBooks.size(); ++i){
+        QListWidgetItem *item = new QListWidgetItem();
+        item->setSizeHint(QSize(0,230));
+        DisplayBookWidget *widget = new DisplayBookWidget();
+        widget->book_info->bookID = data.BorrowedBooks[i].BookID;
+        widget->book_info->genre = data.BorrowedBooks[i].Kind;
+        widget->book_info->Image = data.BorrowedBooks[i].Image;
+        widget->book_info->publishedDate = data.BorrowedBooks[i].PublishedDate;
+        widget->book_info->publisher = data.BorrowedBooks[i].Publisher;
+        widget->book_info->title = data.BorrowedBooks[i].BName;
+        widget->book_info->author = data.BorrowedBooks[i].Author;
+        widget->set_displaying_borrowed_book();
+        widget->show_only_book_info();
+        ui->borrowed_book_list->addItem(item);
+        ui->borrowed_book_list->setItemWidget(item,widget);
+    }
+}
+
 void BookManagement::show_lost_book_widget(User_c user, Books_c book)
 {
+    setWindowIcon(QIcon(":/images/detail_icon.ico"));
+    setWindowTitle("Lost Books");
     this->UserID = user.UserID;
     this->BookID = book.BookID;
     ui->stackedWidget->setCurrentWidget(ui->manage_lost_books);
@@ -74,6 +105,8 @@ void BookManagement::showeditbook()
 
 void BookManagement::showBorrowBookInfo(User_c user, Books_c book, int duration)
 {
+    setWindowIcon(QIcon(":/images/detail_icon.ico"));
+    setWindowTitle("Management for borrowing books");
     request->UserID = user.UserID;
     request->BorrowBookID = book.BookID;
     request->Duration = duration;

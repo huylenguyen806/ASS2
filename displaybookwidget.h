@@ -38,6 +38,7 @@ public:
     void hideRButton();
     void hideDuration();
     void resetRealAmount();
+    void show_only_book_info();
     QString returndate;
     void set_displaying_borrowed_book();
     explicit DisplayBookWidget(QWidget *parent = 0);

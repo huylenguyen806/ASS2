@@ -24,7 +24,9 @@ public:
     QVector<ReaderNoti_c> ReaderNotiData;
     QVector<OrderList_c> currentOrderList;
     QVector<LostBooks_c> LostBooksData;
+    QVector<LibBorrowedBooks_c> LibBorrowBooksData;
     void write_into_userdemand_data(QString userid, QString borrowBookId, int duration);
+    bool delete_from_userdemand_data(QString UserID, QString BorrowedBookID);
     void change_password(QString userID, QString newpassword);
     bool write_into_orderlist(UserDemand_c *request);
     QVector<int> set_next_date(QDate currentdate, int duration);
@@ -35,6 +37,7 @@ public:
     bool delete_data_in_lostbooks(QString UserID, QString BookID);
     bool write_into_lostbooks(QString UserID, QString BookID, bool checkstate);
     bool change_lostbook_checkstate(LostBooks_c lost);
+    void add_data_to_lib_borrowedbooks();
 };
 
 #endif // DATABASE_H

@@ -77,6 +77,14 @@ public:
     QString ReturnDay;
 };
 
+class LibBorrowedBooks_c
+{
+public:
+    QString UserID;
+    QString UserName;
+    QVector<Books_c> BorrowedBooks;
+};
+
 class ReaderNoti_c
 {
 public:

@@ -21,6 +21,7 @@
 #include "readernotifications.h"
 #include "noti_item.h"
 #include <QDesktopServices>
+#include <QTextStream>
 namespace Ui {
 class MainWindow;
 }
@@ -160,6 +161,12 @@ private slots:
 
     void on_clear_all_lost_book_clicked();
 
+    void on_lib_borrowed_books_detail_clicked();
+
+    void on_clear_noti_librarian_button_clicked();
+
+    void on_clear_all_noti_librarian_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Database data;
@@ -177,6 +184,7 @@ private:
     void resetRealAmountOfBooks();
     void show_reader_borrowed_books();
     void show_lost_books();
+    void show_lib_borrowed_books();
 };
 
 #endif // MAINWINDOW_H

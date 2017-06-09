@@ -358,6 +358,27 @@ bool Database::write_into_readernoti(QString UserID, QString BookID, QString con
     }
 }
 
+bool Database::delete_from_userdemand_data(QString UserID, QString BorrowedBookID)
+{
+    QSqlQuery qry;
+    qry.prepare("DELETE FROM UserDemand WHERE UserID = '"+UserID+"' and BorrowBookID = '"+BorrowedBookID+"'");
+    if(qry.exec()){
+        for(int i = 0; i < UserDemandData.size(); ++i){
+            if(UserDemandData[i].UserID == UserID && UserDemandData[i].BorrowBookID == BorrowedBookID)
+                UserDemandData.erase(UserDemandData.begin() + i);
+        }
+        return true;
+    }
+    else {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Unexpected issues occur, process has failed.");
+        alert->setWindowIcon(QIcon(":/images/error.png"));
+        alert->setWindowTitle("Error");
+        alert->show();
+        return false;
+    }
+}
+
 bool Database::delete_reader_noti_indata(ReaderNoti_c noti)
 {
     QSqlQuery query1;
@@ -541,6 +562,26 @@ void Database::change_password(QString userID, QString newpassword)
         alert->setWindowIcon(QIcon(":/images/error.png"));
         alert->setWindowTitle("Error");
         alert->show();
+    }
+}
+
+void Database::add_data_to_lib_borrowedbooks()
+{
+    LibBorrowBooksData.clear();
+    for(int i = 0; i < UserData.size(); ++i){
+        LibBorrowedBooks_c temp;
+        temp.UserID = UserData[i].UserID;
+        temp.UserName = UserData[i].Name;
+        for(int j = 0; j < OrderListData.size(); ++j){
+            if(OrderListData[j].UserID == UserData[i].UserID){
+                for(int k = 0; k < BookData.size(); ++k){
+                    if(BookData[k].BookID == OrderListData[j].BookID)
+                        temp.BorrowedBooks.append(BookData[k]);
+                }
+            }
+        }
+        if(temp.BorrowedBooks.isEmpty() == false)
+            LibBorrowBooksData.append(temp);
     }
 }
 
