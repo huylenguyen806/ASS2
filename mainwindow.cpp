@@ -51,11 +51,15 @@ void MainWindow::create_newbook_noti(books *newbook)
 void MainWindow::read_pdf_books(books *read_book)
 {
     QByteArray pdf = read_book->Pdf;
-    QFile file(qApp->applicationDirPath() + "/pdf_temp.pdf");
-    file.open(QIODevice::WriteOnly);
-    file.write(pdf);
-    file.close();
-    QDesktopServices::openUrl(QUrl(qApp->applicationDirPath() + "/pdf_temp.pdf"));
+    if(pdf.isEmpty() == true)
+        createMessageBox("Error", "Sorry, this book doesn't have pdf file.");
+    else {
+        QFile file(qApp->applicationDirPath() + "/pdf_temp.pdf");
+        file.open(QIODevice::WriteOnly);
+        file.write(pdf);
+        file.close();
+        QDesktopServices::openUrl(QUrl(qApp->applicationDirPath() + "/pdf_temp.pdf"));
+    }
 }
 
 void MainWindow::show_reader_borrowed_books()
