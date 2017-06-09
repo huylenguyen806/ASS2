@@ -28,6 +28,7 @@ signals:
     void accept_button_signals(UserDemand_c *order);
     void send_reason_for_denial(QString UserID, QString BookID, QString content, int on);
     void send_lost_book_punishment(QString UserID, QString BookID, QString message, QString money);
+    void delete_lost_book(QString UserID, QString BookID);
 public slots:
     void on_cancel_add_book_button_clicked();
 
@@ -51,6 +52,8 @@ private slots:
     void on_OK_lost_book_clicked();
 
     void on_Cancel_lost_book_clicked();
+
+    void on_delete_lost_book_clicked();
 
 private:
     Ui::BookManagement *ui;

@@ -34,7 +34,6 @@ void noti_item::hide_lost_book_detail()
 void noti_item::on_pushButton_clicked()
 {
     emit show_detail(this->noti,this->book);
-    emit selectItem(this->item);
 }
 
 void noti_item::set_lost_book_info(QString UserID, QString UserName, QString BookID, QString BName)
@@ -48,4 +47,14 @@ void noti_item::set_lost_book_info(QString UserID, QString UserName, QString Boo
 void noti_item::on_lostbook_detail_clicked()
 {
     emit lost_book_detail(this->user, this->book);
+}
+
+void noti_item::change_background_color_to_red()
+{
+    this->setStyleSheet("background-color: #ff3737");
+}
+
+void noti_item::change_background_color_to_green()
+{
+    this->setStyleSheet("background-color: #00ff9b");
 }

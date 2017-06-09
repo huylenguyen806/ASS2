@@ -38,10 +38,10 @@ void MainWindow::read_pdf_books(books *read_book)
 {
     QByteArray pdf = read_book->Pdf;
     QFile file(qApp->applicationDirPath() + "/pdf_temp.pdf");
-        file.open(QIODevice::WriteOnly);
-        file.write(pdf);
-        file.close();
-        QDesktopServices::openUrl(QUrl(qApp->applicationDirPath() + "/pdf_temp.pdf"));
+    file.open(QIODevice::WriteOnly);
+    file.write(pdf);
+    file.close();
+    QDesktopServices::openUrl(QUrl(qApp->applicationDirPath() + "/pdf_temp.pdf"));
 }
 
 void MainWindow::show_reader_borrowed_books()
@@ -83,9 +83,21 @@ void MainWindow::show_reader_borrowed_books()
 
 void MainWindow::send_lost_book(books *lost)
 {
-    if(data.write_into_lostbooks(user.currentUserID, lost->bookID)){
-        createMessageBox("OK", "Send notification successfully.");
+    QMessageBox *box = new QMessageBox();
+    box->setText("Are you sure you want to inform librarian that this book is lost?");
+    box->setWindowTitle("Warning");
+    box->setWindowIcon(QIcon(":/images/warning.png"));
+    QPushButton *Y = box->addButton(QMessageBox::Yes);
+    QPushButton *N = box->addButton(QMessageBox::No);
+    box->setDefaultButton(N);
+    box->exec();
+    if(box->clickedButton() == Y){
+        if(data.write_into_lostbooks(user.currentUserID, lost->bookID, false)){
+            createMessageBox("OK", "Send notification successfully.");
+        }
     }
+    else if(box->clickedButton() == N)
+        box->close();
 }
 
 void MainWindow::show_lost_books()
@@ -98,15 +110,23 @@ void MainWindow::show_lost_books()
                 for(int k = 0; k < data.BookData.size(); ++k){
                     if(data.BookData[k].BookID == data.LostBooksData[i].BookID){
                         noti_item *newitem = new noti_item();
+                        QListWidgetItem *item = new QListWidgetItem();
                         newitem->hide_reader_noti_detail();
                         newitem->user = data.UserData[j];
                         newitem->book = data.BookData[k];
                         newitem->set_lost_book_info(data.UserData[j].UserID, data.UserData[j].Name,
                                                     data.BookData[k].BookID, data.BookData[k].BName);
+                        if(data.LostBooksData[i].CheckState == true){
+                            newitem->change_background_color_to_green();
+                            item->setBackgroundColor(QColor("#00ff9b"));
+                        }
+                        else if(data.LostBooksData[i].CheckState == false){
+                            newitem->change_background_color_to_red();
+                            item->setBackgroundColor(QColor("#ff3737"));
+                        }
                         connect(newitem,SIGNAL(lost_book_detail(User_c,Books_c)),
                                 this, SLOT(show_lost_book_detail(User_c,Books_c)));
-                        QListWidgetItem *item = new QListWidgetItem();
-                        item->setSizeHint(QSize(0,70));
+                        item->setSizeHint(QSize(0,65));
                         ui->lost_books_list->addItem(item);
                         ui->lost_books_list->setItemWidget(item,newitem);
                         count++;
@@ -126,7 +146,27 @@ void MainWindow::show_lost_book_detail(User_c user, Books_c book)
     noti->setWindowIcon(QIcon(":/images/detail_icon.ico"));
     connect(noti,SIGNAL(send_lost_book_punishment(QString,QString,QString,QString)),
             this,SLOT(receive_lostbook_punishment(QString,QString,QString,QString)));
+    connect(noti,SIGNAL(delete_lost_book(QString,QString)), this, SLOT(delete_lost_book(QString,QString)));
     noti->show();
+}
+
+void MainWindow::delete_lost_book(QString UserID, QString BookID)
+{
+    QMessageBox *box = new QMessageBox();
+    box->setText("Are you sure you want to delete this lost book notification?");
+    box->setWindowTitle("Warning");
+    box->setWindowIcon(QIcon(":/images/warning.png"));
+    QPushButton *Y = box->addButton(QMessageBox::Yes);
+    QPushButton *N = box->addButton(QMessageBox::No);
+    box->setDefaultButton(N);
+    box->exec();
+    if(box->clickedButton() == Y){
+        if(data.delete_data_in_lostbooks(UserID,BookID)){
+            show_lost_books();
+        }
+    }
+    else if(box->clickedButton() == N)
+        box->close();
 }
 
 void MainWindow::receive_lostbook_punishment(QString UserID, QString BookID, QString message, QString money)
@@ -134,8 +174,8 @@ void MainWindow::receive_lostbook_punishment(QString UserID, QString BookID, QSt
     QString content;
     for(int i = 0; i < data.BookData.size(); ++i){
         if(data.BookData[i].BookID == BookID){
-            content = "You've lost : " + data.BookData[i].BName + ". Message : "
-                    + message + ". Punishment : pay " + money + " VND";
+            content = "You've lost : " + data.BookData[i].BName + "<br />Message : "
+                    + message + "<br />Punishment : pay " + money + " VND";
             break;
         }
     }
@@ -143,7 +183,11 @@ void MainWindow::receive_lostbook_punishment(QString UserID, QString BookID, QSt
     if(data.ReaderNotiData.isEmpty() == false)
         on = data.ReaderNotiData[data.ReaderNotiData.size() - 1].ON + 1;
     if(data.write_into_readernoti(UserID,BookID,content,on)){
-        if(data.delete_data_in_lostbooks(UserID,BookID)){
+        LostBooks_c lost;
+        lost.UserID = UserID;
+        lost.BookID = BookID;
+        lost.CheckState = 1;
+        if(data.change_lostbook_checkstate(lost)){
             createMessageBox("OK", "Punishment message has been sent.");
             show_lost_books();
         }
@@ -171,6 +215,7 @@ void MainWindow::return_book(books *return_book)
 
 void MainWindow::show_reader_noti()
 {
+    int count = 0;
     ui->reader_noti_list->clear();
     for(int i = 0; i < data.ReaderNotiData.size(); ++i){
         if(data.ReaderNotiData[i].UserID == user.currentUserID){
@@ -185,21 +230,16 @@ void MainWindow::show_reader_noti()
                     break;
                 }
             }
-            newitem->set_info(data.ReaderNotiData[i].date + " : " + data.ReaderNotiData[i].content);
-            connect(newitem, SIGNAL(selectItem(QListWidgetItem*)),
-                    this, SLOT(selectCurrentReaderNotiItem(QListWidgetItem*)));
+            newitem->set_info("On the date : " + data.ReaderNotiData[i].date + "<br />" + data.ReaderNotiData[i].content);
             connect(newitem,SIGNAL(show_detail(ReaderNoti_c,Books_c)),
                     this, SLOT(show_reader_noti_detail(ReaderNoti_c,Books_c)));
-            item->setSizeHint(QSize(0,40));
+            item->setSizeHint(QSize(0,65));
             ui->reader_noti_list->addItem(item);
             ui->reader_noti_list->setItemWidget(item, newitem);
+            count++;
         }
     }
-}
-
-void MainWindow::selectCurrentReaderNotiItem(QListWidgetItem *item)
-{
-    ui->reader_noti_list->setItemSelected(item,true);
+    ui->number_of_reader_notifications->display(count);
 }
 
 void MainWindow::show_reader_noti_detail(ReaderNoti_c noti, Books_c book)
@@ -213,10 +253,8 @@ void MainWindow::show_reader_noti_detail(ReaderNoti_c noti, Books_c book)
 
 void MainWindow::delete_readernoti_indata(ReaderNoti_c noti)
 {
-    for(int i = 0; i < ui->reader_noti_list->selectedItems().size(); ++i)
-        delete ui->reader_noti_list->selectedItems()[i];
     if(data.delete_reader_noti_indata(noti)){
-        createMessageBox("OK", "Delete successfully.");
+        show_reader_noti();
     }
     else createMessageBox("Error", "Unexpected issue occurs, process fails successfully.");
 }
@@ -535,10 +573,10 @@ void MainWindow::on_edit_account_button_clicked()
     if(ui->list_Accounts->selectedItems().size() != 0)
     {
         //for(int i = 0; i < data.AccountData.size(); ++i){
-            //if(data.AccountData[i].)
-            ManageAccount *edit = new ManageAccount();
-            edit->showedit();
-            edit->show();
+        //if(data.AccountData[i].)
+        ManageAccount *edit = new ManageAccount();
+        edit->showedit();
+        edit->show();
         //}
         //add code show info and edit info in database here
     }
@@ -1030,28 +1068,70 @@ void MainWindow::on_set_duration_button_clicked()
 
 void MainWindow::on_reader_clearall_button_clicked()
 {
-    QMessageBox *noti = new QMessageBox();
-    noti->setText("Are you sure you want to clear all?");
-    noti->setWindowIcon(QIcon(":/images/warning.png"));
-    noti->setWindowTitle("Warning");
-    QPushButton *Y = noti->addButton(QMessageBox::Yes);
-    QPushButton *N = noti->addButton(QMessageBox::No);
-    noti->exec();
-    if(noti->clickedButton() == Y){
-        for(int i = 0; i < data.ReaderNotiData.size(); ++i){
-            if(data.ReaderNotiData[i].UserID == user.currentUserID){
-                data.delete_all_reader_noti(data.ReaderNotiData[i]);
-                data.ReaderNotiData.erase(data.ReaderNotiData.begin() + i);
+    if(!data.ReaderNotiData.isEmpty()){
+        QMessageBox *noti = new QMessageBox();
+        noti->setText("Are you sure you want to clear all?");
+        noti->setWindowIcon(QIcon(":/images/warning.png"));
+        noti->setWindowTitle("Warning");
+        QPushButton *Y = noti->addButton(QMessageBox::Yes);
+        QPushButton *N = noti->addButton(QMessageBox::No);
+        noti->setDefaultButton(N);
+        noti->exec();
+        if(noti->clickedButton() == Y){
+            for(int i = 0; i < data.ReaderNotiData.size(); ++i){
+                if(data.ReaderNotiData[i].UserID == user.currentUserID){
+                    data.delete_all_reader_noti(data.ReaderNotiData[i]);
+                    data.ReaderNotiData.erase(data.ReaderNotiData.begin() + i);
+                }
             }
         }
+        else if(noti->clickedButton() == N)
+            noti->close();
+        show_reader_noti();
     }
-    else if(noti->clickedButton() == N)
-        noti->close();
-    ui->reader_noti_list->clear();
+    else createMessageBox("Error", "There is no reader notification to clear.");
 }
 
 void MainWindow::on_librarian_tab_tabBarClicked(int index)
 {
     if(index == 1)
         show_lost_books();
+}
+
+void MainWindow::on_clear_all_lost_book_clicked()
+{
+    if(!data.LostBooksData.isEmpty()){
+        QMessageBox *noti = new QMessageBox();
+        noti->setWindowIcon(QIcon(":/images/warning.png"));
+        noti->setWindowTitle("Warning");
+        noti->setText("Are you sure you want to clear all lost books?");
+        QPushButton *Y = noti->addButton(QMessageBox::Yes);
+        QPushButton *N = noti->addButton(QMessageBox::No);
+        noti->setDefaultButton(N);
+        noti->exec();
+        if(noti->clickedButton() == Y){
+            QSqlQuery qry;
+            for(int i = 0; i < data.LostBooksData.size(); ++i){
+                QString UserID = data.LostBooksData[i].UserID;
+                QString BookID = data.LostBooksData[i].BookID;
+                qry.prepare("DELETE FROM LostBooks WHERE UserID = '"+UserID+"' and BookID = '"+BookID+"'");
+                if(qry.exec()){
+                    data.LostBooksData.erase(data.LostBooksData.begin() + i);
+                    i--;
+                }
+                else {
+                    QMessageBox *alert = new QMessageBox();
+                    alert->setText("Unexpected issues occur, process has failed.");
+                    alert->setWindowIcon(QIcon(":/images/error.png"));
+                    alert->setWindowTitle("Error");
+                    alert->show();
+                }
+                qry.clear();
+            }
+        }
+        else if(noti->clickedButton() == N)
+            noti->close();
+        show_lost_books();
+    }
+    else createMessageBox("Error", "There is no lost book notification to clear.");
 }

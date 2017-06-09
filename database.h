@@ -33,7 +33,8 @@ public:
     void delete_all_reader_noti(ReaderNoti_c noti);
     bool delete_book_from_orderlist(QString UserID, QString BookID);
     bool delete_data_in_lostbooks(QString UserID, QString BookID);
-    bool write_into_lostbooks(QString UserID, QString BookID);
+    bool write_into_lostbooks(QString UserID, QString BookID, bool checkstate);
+    bool change_lostbook_checkstate(LostBooks_c lost);
 };
 
 #endif // DATABASE_H

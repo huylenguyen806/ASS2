@@ -163,3 +163,8 @@ void BookManagement::on_Cancel_lost_book_clicked()
 {
     this->close();
 }
+
+void BookManagement::on_delete_lost_book_clicked()
+{
+    emit delete_lost_book(this->UserID, this->BookID);
+}

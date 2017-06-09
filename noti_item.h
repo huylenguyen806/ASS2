@@ -22,11 +22,12 @@ public:
     void hide_reader_noti_detail();
     void hide_lost_book_detail();
     void set_lost_book_info(QString UserID, QString UserName, QString BookID, QString BName);
+    void change_background_color_to_red();
+    void change_background_color_to_green();
     explicit noti_item(QWidget *parent = 0);
     ~noti_item();
 signals:
     void show_detail(ReaderNoti_c noti, Books_c book);
-    void selectItem(QListWidgetItem*);
     void lost_book_detail(User_c user, Books_c book);
 private slots:
     void on_pushButton_clicked();

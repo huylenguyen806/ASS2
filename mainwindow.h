@@ -36,6 +36,8 @@ public:
 signals:
     void set_duration_button_clicked(int duration);
 private slots:
+    void delete_lost_book(QString UserID, QString BookID);
+
     void receive_lostbook_punishment(QString UserID, QString BookID, QString message, QString money);
 
     void show_lost_book_detail(User_c user, Books_c book);
@@ -154,9 +156,9 @@ private slots:
 
     void on_reader_clearall_button_clicked();
 
-    void selectCurrentReaderNotiItem(QListWidgetItem* item);
-
     void on_librarian_tab_tabBarClicked(int index);
+
+    void on_clear_all_lost_book_clicked();
 
 private:
     Ui::MainWindow *ui;

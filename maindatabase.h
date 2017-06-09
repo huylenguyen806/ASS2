@@ -93,6 +93,7 @@ class LostBooks_c
 public:
     QString UserID;
     QString BookID;
+    bool CheckState;
 };
 
 class CurrentUser

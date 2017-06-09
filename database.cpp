@@ -198,11 +198,13 @@ Database::Database()
     query1.exec("SELECT * FROM LostBooks");
     IdUser = query1.record().indexOf("UserID");
     BookId = query1.record().indexOf("BookId");
+    int checkstate = query1.record().indexOf("CheckState");
     while(query1.next())
     {
         LostBooks_c temp;
         temp.UserID = query1.value(IdUser).toString();
         temp.BookID = query1.value(BookId).toString();
+        temp.CheckState = query1.value(checkstate).toBool();
         LostBooksData.append(temp);
     }
     query1.clear();
@@ -234,7 +236,7 @@ Database::Database()
     imageIndex = NULL;
 }
 
-bool Database::write_into_lostbooks(QString UserID, QString BookID)
+bool Database::write_into_lostbooks(QString UserID, QString BookID, bool checkstate)
 {
     QSqlQuery qry;
     qry.prepare("INSERT INTO LostBooks (UserID, BookID) VALUES (:UserID, :BookID)");
@@ -244,6 +246,7 @@ bool Database::write_into_lostbooks(QString UserID, QString BookID)
         LostBooks_c temp;
         temp.UserID = UserID;
         temp.BookID = BookID;
+        temp.CheckState = checkstate;
         LostBooksData.append(temp);
         return true;
     }
@@ -265,6 +268,31 @@ bool Database::delete_data_in_lostbooks(QString UserID, QString BookID)
         for(int i = 0; i < LostBooksData.size(); ++i){
             if(LostBooksData[i].UserID == UserID && LostBooksData[i].BookID == BookID)
                 LostBooksData.erase(LostBooksData.begin() + i);
+        }
+        return true;
+    }
+    else {
+        QMessageBox *alert = new QMessageBox();
+        alert->setText("Unexpected issues occur, process has failed.");
+        alert->setWindowIcon(QIcon(":/images/error.png"));
+        alert->setWindowTitle("Error");
+        alert->show();
+        return false;
+    }
+}
+
+bool Database::change_lostbook_checkstate(LostBooks_c lost)
+{
+    QSqlQuery qry;
+    QString UserID = lost.UserID;
+    QString BookID = lost.BookID;
+    bool checkstate = lost.CheckState;
+    qry.prepare("UPDATE LostBooks SET CheckState = ? WHERE UserID = '"+UserID+"' and BookID = '"+BookID+"'");
+    qry.addBindValue(checkstate);
+    if(qry.exec()){
+        for(int i = 0; i < LostBooksData.size(); ++i){
+            if(LostBooksData[i].UserID == UserID && LostBooksData[i].BookID == BookID)
+                LostBooksData[i].CheckState = checkstate;
         }
         return true;
     }

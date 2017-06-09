@@ -763,6 +763,13 @@
             </widget>
            </item>
            <item>
+            <widget class="QPushButton" name="delete_lost_book">
+             <property name="text">
+              <string>Delete</string>
+             </property>
+            </widget>
+           </item>
+           <item>
             <widget class="QPushButton" name="Cancel_lost_book">
              <property name="text">
               <string>Cancel</string>

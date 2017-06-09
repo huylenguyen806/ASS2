@@ -6,12 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>515</width>
-    <height>51</height>
+    <width>541</width>
+    <height>70</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
@@ -35,20 +38,20 @@
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>0</height>
+         <width>90</width>
+         <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
+         <width>121</width>
          <height>16777215</height>
         </size>
        </property>
@@ -59,7 +62,24 @@
         </size>
        </property>
        <property name="styleSheet">
-        <string notr="true">font: 14pt &quot;Myriad Pro&quot;;</string>
+        <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
        </property>
        <property name="text">
         <string>Detail</string>
@@ -83,13 +103,42 @@
      <item>
       <widget class="QPushButton" name="lostbook_detail">
        <property name="sizePolicy">
-        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>121</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="styleSheet">
-        <string notr="true">font: 14pt &quot;Myriad Pro&quot;;</string>
+        <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
        </property>
        <property name="text">
         <string>Detail</string>
