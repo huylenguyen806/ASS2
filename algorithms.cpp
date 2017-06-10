@@ -231,35 +231,238 @@ void Search::findBookPublisher(QString Publisher)
 
 void Search::findAccountName(QString accountName)
 {
-
+    if(accountName.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Accounts.size(); ++i){
+            if(this->Accounts[i].Username.contains(accountName) == false){
+                this->Accounts.erase(this->Accounts.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Accounts.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(accountName,this->Accounts[i].Username));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    Account_c t = this->Accounts[i];
+                    this->Accounts[i] = this->Accounts[j];
+                    this->Accounts[j] = t;
+                }
+            }
+        }
+    }
 }
 
 void Search::findUserName(QString UserName)
 {
-
+    if(UserName.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Users.size(); ++i){
+            if(this->Users[i].Name.contains(UserName) == false){
+                this->Users.erase(this->Users.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Users.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(UserName,this->Users[i].Name));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    User_c t = this->Users[i];
+                    this->Users[i] = this->Users[j];
+                    this->Users[j] = t;
+                }
+            }
+        }
+    }
 }
 
 void Search::findUserGender(QString UserGender)
 {
-
+    if(UserGender.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Users.size(); ++i){
+            if(this->Users[i].Gender.contains(UserGender) == false){
+                this->Users.erase(this->Users.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Users.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(UserGender,this->Users[i].Gender));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    User_c t = this->Users[i];
+                    this->Users[i] = this->Users[j];
+                    this->Users[j] = t;
+                }
+            }
+        }
+    }
 }
 
 void Search::findUserEmail(QString email)
 {
-
+    if(email.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Users.size(); ++i){
+            if(this->Users[i].email.contains(email) == false){
+                this->Users.erase(this->Users.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Users.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(email,this->Users[i].email));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    User_c t = this->Users[i];
+                    this->Users[i] = this->Users[j];
+                    this->Users[j] = t;
+                }
+            }
+        }
+    }
 }
 
 void Search::findUserRealID(QString RealID)
 {
-
+    if(RealID.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Users.size(); ++i){
+            if(this->Users[i].ID_StudentID.contains(RealID) == false){
+                this->Users.erase(this->Users.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Users.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(RealID,this->Users[i].ID_StudentID));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    User_c t = this->Users[i];
+                    this->Users[i] = this->Users[j];
+                    this->Users[j] = t;
+                }
+            }
+        }
+    }
 }
 
 void Search::findUserCareer(QString Career)
 {
-
+    if(Career.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Users.size(); ++i){
+            if(this->Users[i].Career.contains(Career) == false){
+                this->Users.erase(this->Users.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Users.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(Career,this->Users[i].Career));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    User_c t = this->Users[i];
+                    this->Users[i] = this->Users[j];
+                    this->Users[j] = t;
+                }
+            }
+        }
+    }
 }
 
 void Search::findUserBirthday(QString birthday)
 {
-
+    if(birthday.isEmpty() == false){
+        QVector<int> number;
+        for(int i = 0; i < this->Users.size(); ++i){
+            if(this->Users[i].DayOfBirth.contains(birthday) == false){
+                this->Users.erase(this->Users.begin() + i);
+                i--;
+            }
+        }
+        for(int i = 0; i < this->Users.size(); ++i)
+            number.append(LevenshteinDistance::get_differences_between_2_strings(birthday,this->Users[i].DayOfBirth));
+        for(int i = 0; i < number.size(); ++i){
+            int min = number[i];
+            for(int j = i; j < number.size(); ++j){
+                if(number[j] < min){
+                    min = number[j];
+                }
+            }
+            //swap
+            for(int j = 0; j < number.size(); ++j){
+                if(number[j] == min){
+                    int temp = number[i];
+                    number[i] = number[j];
+                    number[j] = temp;
+                    User_c t = this->Users[i];
+                    this->Users[i] = this->Users[j];
+                    this->Users[j] = t;
+                }
+            }
+        }
+    }
 }

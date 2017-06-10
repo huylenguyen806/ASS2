@@ -1383,6 +1383,7 @@ void MainWindow::advanced_book_search(QString BName, QString Genre, QString Auth
 
 void MainWindow::on_find_book_button_clicked()
 {
+    ui->search_books->clear();
     AdvancedSearch *search = new AdvancedSearch();
     search->set_book_search();
     connect(search,SIGNAL(send_advanced_book_search(QString,QString,QString,QString)),
