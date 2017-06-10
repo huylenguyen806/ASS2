@@ -3,6 +3,7 @@
 #include "database.h"
 #include <QVector>
 #include <QMessageBox>
+#include <QCryptographicHash>
 
 class LevenshteinDistance
 {

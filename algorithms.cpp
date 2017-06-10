@@ -1,5 +1,6 @@
 #include "algorithms.h"
 
+//Levenshtein Distance
 int LevenshteinDistance::get_differences_between_2_strings(QString s, QString t)
 {
     //degenerate cases
@@ -40,7 +41,7 @@ int LevenshteinDistance::get_differences_between_2_strings(QString s, QString t)
     return d[s.length()][t.length()];
 }
 
-
+//Search
 Search::Search(QVector<Books_c> b)
 {
     this->Books = b;

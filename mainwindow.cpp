@@ -813,6 +813,13 @@ void MainWindow::login()
     }
     else {
         bool check = 0;
+        //encode
+        QCryptographicHash md5(QCryptographicHash::Md5);
+        QByteArray input;
+        input.append(password);
+        md5.addData(input);
+        password = md5.result().toHex();
+        //check
         for(int i = 0; i < data.AccountData.size(); ++i){
             if(data.AccountData[i].Username == account && data.AccountData[i].Password == password){
                 if(data.AccountData[i].active == true){
