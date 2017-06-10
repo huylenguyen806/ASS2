@@ -28,7 +28,7 @@ Database::Database()
     }
 
     // Lấy đống dữ liệu trong sql vào vector book
-    QSqlQuery query1("SELECT * FROM BOOKS");
+    QSqlQuery query1("SELECT * FROM BOOKS ORDER BY BNAME ASC");
     int idIndex = query1.record().indexOf("BOOKID");
     int nameIndex = query1.record().indexOf("BNAME");
     int authorIndex = query1.record().indexOf("AUTHOR");

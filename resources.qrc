@@ -7,5 +7,7 @@
         <file>Libpro.png</file>
         <file>Libpro2.png</file>
         <file>detail_icon.ico</file>
+        <file>refresh.png</file>
+        <file>search.png</file>
     </qresource>
 </RCC>

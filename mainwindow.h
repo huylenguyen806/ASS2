@@ -22,6 +22,8 @@
 #include "noti_item.h"
 #include <QDesktopServices>
 #include <QTextStream>
+#include "algorithms.h"
+#include "advancedsearch.h"
 namespace Ui {
 class MainWindow;
 }
@@ -167,10 +169,19 @@ private slots:
 
     void on_clear_all_noti_librarian_button_clicked();
 
+    void on_search_books_returnPressed();
+
+    void on_refresh_book_button_clicked();
+
+    void advanced_book_search(QString BName, QString Genre, QString Author, QString Publisher);
+
+    void on_find_book_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     Database data;
     CurrentUser user;
+    int bookAmount;
     void set_reader();
     void set_usermanager();
     void set_librarian();

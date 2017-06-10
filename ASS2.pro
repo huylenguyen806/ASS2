@@ -32,7 +32,9 @@ SOURCES += main.cpp\
     database.cpp \
     loginform.cpp \
     readernotifications.cpp \
-    noti_item.cpp
+    noti_item.cpp \
+    algorithms.cpp \
+    advancedsearch.cpp
 
 HEADERS  += mainwindow.h \
     manageaccount.h \
@@ -42,7 +44,9 @@ HEADERS  += mainwindow.h \
     maindatabase.h \
     loginform.h \
     readernotifications.h \
-    noti_item.h
+    noti_item.h \
+    algorithms.h \
+    advancedsearch.h
 
 FORMS    += mainwindow.ui \
     manageaccount.ui \
@@ -50,7 +54,8 @@ FORMS    += mainwindow.ui \
     displaybookwidget.ui \
     loginform.ui \
     readernotifications.ui \
-    noti_item.ui
+    noti_item.ui \
+    advancedsearch.ui
 
 RESOURCES += \
     resources.qrc

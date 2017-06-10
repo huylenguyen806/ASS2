@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowIcon(QIcon(":/images/Libpro_icon.ico"));
     show_viewer();
     createDisplayBookWidget();
+    bookAmount = data.BookData.size();
     createBookManagerWidget();
     ui->manage_user_label->setHidden(true);
 }
@@ -373,8 +374,10 @@ void MainWindow::createBookManagerWidget()
 
 void MainWindow::createDisplayBookWidget()
 {
-    QVBoxLayout *vlayout = new QVBoxLayout(ui->book_scoll_area);
+    ui->book_list->clear();
     for(int i = 0; i < data.BookData.size(); ++i){
+        QListWidgetItem *item = new QListWidgetItem();
+        item->setSizeHint(QSize(0,235));
         //get data
         DisplayBookWidget* displaybook = new DisplayBookWidget();
         displaybook->book_info->title = data.BookData[i].BName;
@@ -389,13 +392,11 @@ void MainWindow::createDisplayBookWidget()
         displaybook->set_displaying_book();
         displaybook->hideRButton();
         displaybook->hideDuration();
-        vlayout->addWidget(displaybook,0,0);
         //connect to slot
         connect(displaybook,SIGNAL(put_in_basket_button_clicked(books*)),this,SLOT(put_in_basket_click(books*)));
+        ui->book_list->addItem(item);
+        ui->book_list->setItemWidget(item,displaybook);
     }
-    //create spacer
-    QSpacerItem *newspacer = new QSpacerItem(20,20,QSizePolicy::Expanding,QSizePolicy::Expanding);
-    vlayout->addSpacerItem(newspacer);
 }
 
 void MainWindow::resetRealAmountOfBooks()
@@ -523,6 +524,8 @@ void MainWindow::on_reader_find_book_button_clicked()
     ui->main_ui->setCurrentWidget(ui->find_books);
     clear_all_lineEdit();
     resetRealAmountOfBooks();
+    if(bookAmount != data.BookData.size())
+        createDisplayBookWidget();
 }
 
 void MainWindow::on_goto_basket_button_clicked()
@@ -1303,4 +1306,86 @@ void MainWindow::on_clear_all_noti_librarian_button_clicked()
     }
     else if(noti->clickedButton() == N)
         noti->close();
+}
+
+void MainWindow::on_search_books_returnPressed()
+{
+    Search booktitle(data.BookData);
+    booktitle.findBookName(ui->search_books->text());
+    QVector<Books_c> tempdata = booktitle.getBookData();
+    ui->book_list->clear();
+    if(tempdata.isEmpty() == false){
+        for(int i = 0; i < tempdata.size(); ++i){
+            QListWidgetItem *item = new QListWidgetItem();
+            item->setSizeHint(QSize(0,235));
+            //get data
+            DisplayBookWidget* displaybook = new DisplayBookWidget();
+            displaybook->book_info->title = tempdata[i].BName;
+            displaybook->book_info->bookID = tempdata[i].BookID;
+            displaybook->book_info->author = tempdata[i].Author;
+            displaybook->book_info->publisher = tempdata[i].Publisher;
+            displaybook->book_info->genre = tempdata[i].Kind;
+            displaybook->book_info->publishedDate = tempdata[i].PublishedDate;
+            displaybook->book_info->Image = tempdata[i].Image;
+            displaybook->book_info->amount = tempdata[i].Amount;
+            displaybook->book_info->realAmount = tempdata[i].realAmmount;
+            displaybook->set_displaying_book();
+            displaybook->hideRButton();
+            displaybook->hideDuration();
+            //connect to slot
+            connect(displaybook,SIGNAL(put_in_basket_button_clicked(books*)),this,SLOT(put_in_basket_click(books*)));
+            ui->book_list->addItem(item);
+            ui->book_list->setItemWidget(item,displaybook);
+        }
+    }
+}
+
+void MainWindow::on_refresh_book_button_clicked()
+{
+    ui->search_books->clear();
+    createDisplayBookWidget();
+}
+
+void MainWindow::advanced_book_search(QString BName, QString Genre, QString Author, QString Publisher)
+{
+    Search find(data.BookData);
+    find.findBookName(BName);
+    find.findBookGenre(Genre);
+    find.findBookAuthor(Author);
+    find.findBookPublisher(Publisher);
+    QVector<Books_c> tempdata = find.getBookData();
+    ui->book_list->clear();
+    if(tempdata.isEmpty() == false){
+        for(int i = 0; i < tempdata.size(); ++i){
+            QListWidgetItem *item = new QListWidgetItem();
+            item->setSizeHint(QSize(0,235));
+            //get data
+            DisplayBookWidget* displaybook = new DisplayBookWidget();
+            displaybook->book_info->title = tempdata[i].BName;
+            displaybook->book_info->bookID = tempdata[i].BookID;
+            displaybook->book_info->author = tempdata[i].Author;
+            displaybook->book_info->publisher = tempdata[i].Publisher;
+            displaybook->book_info->genre = tempdata[i].Kind;
+            displaybook->book_info->publishedDate = tempdata[i].PublishedDate;
+            displaybook->book_info->Image = tempdata[i].Image;
+            displaybook->book_info->amount = tempdata[i].Amount;
+            displaybook->book_info->realAmount = tempdata[i].realAmmount;
+            displaybook->set_displaying_book();
+            displaybook->hideRButton();
+            displaybook->hideDuration();
+            //connect to slot
+            connect(displaybook,SIGNAL(put_in_basket_button_clicked(books*)),this,SLOT(put_in_basket_click(books*)));
+            ui->book_list->addItem(item);
+            ui->book_list->setItemWidget(item,displaybook);
+        }
+    }
+}
+
+void MainWindow::on_find_book_button_clicked()
+{
+    AdvancedSearch *search = new AdvancedSearch();
+    search->set_book_search();
+    connect(search,SIGNAL(send_advanced_book_search(QString,QString,QString,QString)),
+            this,SLOT(advanced_book_search(QString,QString,QString,QString)));
+    search->show();
 }
