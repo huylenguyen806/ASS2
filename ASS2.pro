@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     readernotifications.cpp \
     noti_item.cpp \
     algorithms.cpp \
-    advancedsearch.cpp
+    advancedsearch.cpp \
+    managebooks.cpp
 
 HEADERS  += mainwindow.h \
     manageaccount.h \
@@ -46,7 +47,8 @@ HEADERS  += mainwindow.h \
     readernotifications.h \
     noti_item.h \
     algorithms.h \
-    advancedsearch.h
+    advancedsearch.h \
+    managebooks.h
 
 FORMS    += mainwindow.ui \
     manageaccount.ui \
@@ -55,7 +57,10 @@ FORMS    += mainwindow.ui \
     loginform.ui \
     readernotifications.ui \
     noti_item.ui \
-    advancedsearch.ui
+    advancedsearch.ui \
+    managebooks.ui
 
 RESOURCES += \
     resources.qrc
+
+DISTFILES +=

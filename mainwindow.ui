@@ -33,7 +33,7 @@
        <number>0</number>
       </property>
       <widget class="QWidget" name="rolePage">
-       <layout class="QVBoxLayout" name="verticalLayout_35">
+       <layout class="QVBoxLayout" name="verticalLayout_31">
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,3">
           <item>
@@ -982,7 +982,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>4</number>
+             <number>7</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -3972,9 +3972,9 @@ QPushButton#unlock_account_button:hover {
                   <item>
                    <layout class="QHBoxLayout" name="horizontalLayout_42">
                     <item>
-                     <widget class="QLineEdit" name="search_book_manage">
+                     <widget class="QLineEdit" name="box_search_book_manage">
                       <property name="styleSheet">
-                       <string notr="true">QLineEdit#search_book_manage {
+                       <string notr="true">QLineEdit#box_search_book_manage {
     height: 30px;
     border: 1px;
 	font:normal 200 14pt &quot;Myriad Pro&quot;;
@@ -3984,7 +3984,7 @@ QPushButton#unlock_account_button:hover {
     background: rgb(245,249,252);
     selection-background-color: darkgray;
 }
-QLineEdit#search_book_manage:hover {
+QLineEdit#box_search_book_manage:hover {
     height: 30px;
     border: 1px;
 	border-style: solid;
@@ -3993,7 +3993,7 @@ QLineEdit#search_book_manage:hover {
     background: rgb(255,255,255);
     selection-background-color: darkgray;
 }
-QLineEdit#search_book_manage:focus {
+QLineEdit#box_search_book_manage:focus {
     height: 30px;
     border: 1px;
 	border-style: solid;
@@ -4009,6 +4009,9 @@ QLineEdit#search_book_manage:focus {
                       <property name="placeholderText">
                        <string>Find Book</string>
                       </property>
+                      <property name="clearButtonEnabled">
+                       <bool>true</bool>
+                      </property>
                      </widget>
                     </item>
                    </layout>
@@ -4018,6 +4021,45 @@ QLineEdit#search_book_manage:focus {
                     <property name="bottomMargin">
                      <number>0</number>
                     </property>
+                    <item>
+                     <widget class="QPushButton" name="pushbutton_open_book">
+                      <property name="minimumSize">
+                       <size>
+                        <width>98</width>
+                        <height>50</height>
+                       </size>
+                      </property>
+                      <property name="cursor">
+                       <cursorShape>PointingHandCursor</cursorShape>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">QPushButton#remove_book_button {
+	color: rgb(255, 255, 255);
+	height: 25;
+    background-color: rgb(0,175,240);
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(245, 249, 252);;
+	border-radius: 13px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 4em;
+    padding: 2px;
+}
+QPushButton#remove_book_button:pressed {
+    background-color: rgb(0,138,195);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#remove_book_button:hover {
+    background-color: rgb(0,158,218);
+    border-style: inset;
+}</string>
+                      </property>
+                      <property name="text">
+                       <string>Open book</string>
+                      </property>
+                     </widget>
+                    </item>
                     <item>
                      <widget class="QPushButton" name="remove_book_button">
                       <property name="minimumSize">
@@ -4138,7 +4180,48 @@ QPushButton#add_book_button:hover {
                    </layout>
                   </item>
                   <item>
-                   <widget class="QListWidget" name="manage_book_area"/>
+                   <widget class="QTableWidget" name="table_manage_book">
+                    <column>
+                     <property name="text">
+                      <string>BOOK ID</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>IMAGE</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>BOOK NAME</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>PUBLISHED DATE</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>New Column</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>PUBLISHER</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>GENRE</string>
+                     </property>
+                    </column>
+                    <column>
+                     <property name="text">
+                      <string>AMOUNT</string>
+                     </property>
+                    </column>
+                   </widget>
                   </item>
                  </layout>
                 </item>

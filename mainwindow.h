@@ -24,6 +24,7 @@
 #include <QTextStream>
 #include "algorithms.h"
 #include "advancedsearch.h"
+#include"managebooks.h"
 namespace Ui {
 class MainWindow;
 }
@@ -105,7 +106,7 @@ private slots:
 
     void put_in_basket_click(books *book_info);
 
-    void createBookManagerWidget();
+    //void createBookManagerWidget();
 
     void ListItemClicked(QWidget *widget);
 
@@ -176,7 +177,18 @@ private slots:
     void advanced_book_search(QString BName, QString Genre, QString Author, QString Publisher);
 
     void on_find_book_button_clicked();
+    void on_pushbutton_open_book_clicked();
 
+    void on_search_book_manage_textChanged(const QString &arg1);
+
+    void on_box_search_book_manage_textChanged(const QString &arg1);
+
+public:
+    void connect_database();
+    void disconnect_database();
+    void show_table_manage_book_first_time();
+    void show_table_manage_book();
+    QSqlDatabase mydb;
 private:
     Ui::MainWindow *ui;
     Database data;

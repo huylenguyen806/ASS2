@@ -11,8 +11,9 @@ MainWindow::MainWindow(QWidget *parent) :
     show_viewer();
     createDisplayBookWidget();
     bookAmount = data.BookData.size();
-    createBookManagerWidget();
+    //createBookManagerWidget();
     ui->manage_user_label->setHidden(true);
+    show_table_manage_book_first_time();
 }
 
 MainWindow::~MainWindow()
@@ -347,7 +348,7 @@ void MainWindow::get_each_duration(QString bookID, int duration)
     }
 }
 
-void MainWindow::createBookManagerWidget()
+/*void MainWindow::createBookManagerWidget()
 {
     for(int i = 0; i < data.BookData.size(); ++i){
         //get data
@@ -369,8 +370,8 @@ void MainWindow::createBookManagerWidget()
         newitem->setSizeHint(QSize(0,230));
         ui->manage_book_area->addItem(newitem);
         ui->manage_book_area->setItemWidget(newitem,displaybook);
-    }
-}
+    }ok ok got it z xó luón hay óó // cu comment di okie
+}*/
 
 void MainWindow::createDisplayBookWidget()
 {
@@ -454,9 +455,19 @@ void MainWindow::show_viewer()
 
 void MainWindow::on_edit_book_manage_button_clicked()
 {
-    BookManagement *edit = new BookManagement();
-    edit->showeditbook();
-    edit->show();
+    if(ui->table_manage_book->currentIndex().isValid())
+    {
+        QString id=ui->table_manage_book->item(ui->table_manage_book->currentRow(),0)->text();
+        this->close();
+        managebooks *edit_books= new managebooks;
+        edit_books->show();
+        edit_books->show_book_to_edit(id);
+    }
+    else
+    {
+         QMessageBox msgbox(QMessageBox::Warning,"No book is selected","Please select a book to edit");
+         msgbox.exec();
+    }
 }
 
 void MainWindow::on_add_account_button_clicked()
@@ -468,9 +479,10 @@ void MainWindow::on_add_account_button_clicked()
 
 void MainWindow::on_add_book_button_clicked()
 {
-    BookManagement *add = new BookManagement();
-    add->showaddbook();
-    add->show();
+    this->close();
+   managebooks *addbook=new managebooks;
+   addbook->show();
+   addbook->show_book_to_add();
 }
 
 void MainWindow::on_info_button_clicked()
@@ -713,7 +725,28 @@ void MainWindow::on_remove_frome_basket_button_clicked()
 
 void MainWindow::on_remove_book_button_clicked()
 {
+    connect_database();
+    if(!ui->table_manage_book->currentIndex().isValid())
+    {
+        QMessageBox msgbox(QMessageBox::Warning,"No book to remove","Please select a book to remove");
+        msgbox.exec();
+    }
+    else
+    {
+        QMessageBox askbox(QMessageBox::Question,"Remove book","Do you want to remove this book?",
+                           QMessageBox::Yes|QMessageBox::No);
+        if(askbox.exec()==QMessageBox::Yes)
+        {
+            QString temp_bookid=ui->table_manage_book->item(ui->table_manage_book->currentRow(),0)->text();
+            QSqlQuery qry(mydb);
+            qry.prepare("DELETE from BOOKS where BOOKID=:id");
+            qry.bindValue(":id",temp_bookid);
+            qry.exec();
+            show_table_manage_book();
+        }
+    }
 
+    disconnect_database();
 }
 
 void MainWindow::on_borrow_button_clicked()
@@ -1397,4 +1430,162 @@ void MainWindow::on_find_book_button_clicked()
     connect(search,SIGNAL(send_advanced_book_search(QString,QString,QString,QString)),
             this,SLOT(advanced_book_search(QString,QString,QString,QString)));
     search->show();
+}
+void MainWindow::connect_database()
+{
+    mydb = QSqlDatabase::addDatabase("QSQLITE");
+    mydb.setDatabaseName(qApp->applicationDirPath() + "/database/libpro.sqlite");
+    if(!mydb.open())
+           {
+                QMessageBox *alert = new QMessageBox();
+                alert->setText("Error: connection with database failed");
+                alert->setWindowIcon(QIcon(":/images/error.png"));
+                alert->setWindowTitle("Error");
+                alert->show();
+           }
+           else
+           {
+              qDebug() << "Database: connection ok";
+           }
+}
+void MainWindow::disconnect_database()
+{
+    mydb.close();
+    mydb=QSqlDatabase();
+    mydb.removeDatabase(mydb.connectionName());
+}
+void MainWindow::show_table_manage_book()
+{
+    ui->main_ui->setCurrentWidget(ui->books_info);
+    show_table_manage_book_first_time();
+}
+
+void MainWindow::show_table_manage_book_first_time()
+{
+     connect_database();
+     int num_rows,r,c;
+     QSqlQuery qry(mydb);
+     if(!qry.exec("SELECT count(BOOKID) as num_rows FROM BOOKS")) qDebug()<<qry.lastError().text();
+     qry.first();
+     num_rows=qry.value(0).toInt();
+     ui->table_manage_book->setRowCount(num_rows);
+     ui->table_manage_book->setIconSize(QSize(32,32));
+     if(!qry.exec("SELECT BOOKID, BNAME, PUBLISHEDDATE, AUTHOR, PUBLISHER, KIND, IMAGE,AMOUNT FROM BOOKS ORDER BY BOOKID")) qDebug()<<qry.lastError().text();
+     for(r=0,qry.first();qry.isValid();qry.next(),++r)
+     {
+         ui->table_manage_book->setItem(r,0,new QTableWidgetItem(qry.value(0).toString()));
+         QPixmap pix;
+         QByteArray temp_image=qry.value(6).toByteArray();
+         pix.loadFromData(temp_image);
+         QLabel *label_icon= new QLabel;
+         label_icon->setPixmap(pix.scaled(100,100,Qt::KeepAspectRatio));
+         label_icon->setAlignment(Qt::AlignHCenter);
+         ui->table_manage_book->setCellWidget(r,1,label_icon);
+         for(c=2;c<7;++c)
+         {
+             ui->table_manage_book->setItem(r,c,new QTableWidgetItem(qry.value(c-1).toString()));
+         }
+         ui->table_manage_book->setItem(r,7,new QTableWidgetItem(qry.value(7).toString()));
+     }
+     ui->table_manage_book->resizeColumnToContents(1);
+     ui->table_manage_book->resizeRowsToContents();
+     disconnect_database();
+}
+
+void MainWindow::on_pushbutton_open_book_clicked()
+{
+    connect_database();
+    if(ui->table_manage_book->currentIndex().isValid())
+    {
+        QString temp_bookid=ui->table_manage_book->item(ui->table_manage_book->currentRow(),0)->text();
+        QSqlQuery qry(mydb);
+        qry.prepare("SELECT * FROM BOOKS WHERE BOOKID='"+temp_bookid+"'");
+        qry.exec();
+        qry.first();
+        QByteArray bytearray_pdf=qry.value(8).toByteArray();
+        if(bytearray_pdf.isNull())
+        {
+            QMessageBox msgbox(QMessageBox::Information,"No content","This book doesn't include any contents. Please insert its content in <b>Edit book</b>");
+            msgbox.exec();
+        }
+        else
+        {
+            QFile file_pdf(qApp->applicationDirPath() + "/pdf_temp.pdf");
+            file_pdf.open(QIODevice::WriteOnly);
+            file_pdf.write(bytearray_pdf);
+            file_pdf.close();
+            QDesktopServices op;
+            op.openUrl(QUrl(qApp->applicationDirPath() + "/pdf_temp.pdf"));
+        }
+    }
+    else
+    {
+        QMessageBox msgbox(QMessageBox::Warning,"Error","Please choose book to open");
+        msgbox.exec();
+    }
+    disconnect_database();
+}
+
+
+void MainWindow::on_search_book_manage_textChanged(const QString &arg1)
+{
+    connect_database();
+    int num_rows;
+    num_rows=ui->table_manage_book->rowCount();
+    QSqlQuery qry(mydb);
+    if(arg1!="")
+    {
+        for(int i=0;i<num_rows;++i)
+            if(!ui->table_manage_book->isHidden())
+                ui->table_manage_book->hideRow(i);
+       if(!qry.exec("select * from BOOKS where BNAME LIKE '%"+arg1+"%' or AUTHOR LIKE '%"+arg1+"%' or PUBLISHER LIKE '%"+arg1+"%'")) qDebug()<<qry.lastError().text();
+       while(qry.next())
+       {
+            QString temp_bookid=qry.value(0).toString();
+            for(int i=0;i<ui->table_manage_book->rowCount();++i)
+            {
+                if(ui->table_manage_book->item(i,0)->text()==temp_bookid)
+                    ui->table_manage_book->showRow(i);
+            }
+       }
+    }
+    else
+    {
+        for(int i=0;i<num_rows;++i)
+            if(!ui->table_manage_book->isHidden())
+                ui->table_manage_book->showRow(i);
+    }
+    disconnect_database();
+}
+
+
+void MainWindow::on_box_search_book_manage_textChanged(const QString &arg1)
+{
+    connect_database();
+    int num_rows;
+    num_rows=ui->table_manage_book->rowCount();
+    QSqlQuery qry(mydb);
+    if(arg1!="")
+    {
+        for(int i=0;i<num_rows;++i)
+            if(!ui->table_manage_book->isHidden())
+                ui->table_manage_book->hideRow(i);
+       if(!qry.exec("select * from BOOKS where BNAME LIKE '%"+arg1+"%' or AUTHOR LIKE '%"+arg1+"%' or PUBLISHER LIKE '%"+arg1+"%'")) qDebug()<<qry.lastError().text();
+       while(qry.next())
+       {
+            QString temp_bookid=qry.value(0).toString();
+            for(int i=0;i<ui->table_manage_book->rowCount();++i)
+            {
+                if(ui->table_manage_book->item(i,0)->text()==temp_bookid)
+                    ui->table_manage_book->showRow(i);
+            }
+       }
+    }
+    else
+    {
+        for(int i=0;i<num_rows;++i)
+            if(!ui->table_manage_book->isHidden())
+                ui->table_manage_book->showRow(i);
+    }
+    disconnect_database();
 }
