@@ -1174,6 +1174,7 @@ void MainWindow::on_reader_clearall_button_clicked()
                 if(data.ReaderNotiData[i].UserID == user.currentUserID){
                     data.delete_all_reader_noti(data.ReaderNotiData[i]);
                     data.ReaderNotiData.erase(data.ReaderNotiData.begin() + i);
+                    i--;
                 }
             }
         }

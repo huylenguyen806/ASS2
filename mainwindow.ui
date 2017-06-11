@@ -982,7 +982,7 @@ QPushButton#librarian_change_pass_button:hover {
 </string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>4</number>
             </property>
             <widget class="QWidget" name="find_books">
              <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -2717,7 +2717,7 @@ QPushButton:hover {
                   </property>
                   <property name="maximumSize">
                    <size>
-                    <width>16777215</width>
+                    <width>121</width>
                     <height>16777215</height>
                    </size>
                   </property>
