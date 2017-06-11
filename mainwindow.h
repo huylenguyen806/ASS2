@@ -18,6 +18,12 @@
 #include <QSqlRecord>
 #include <QApplication>
 #include "database.h"
+#include "readernotifications.h"
+#include "noti_item.h"
+#include <QDesktopServices>
+#include <QTextStream>
+#include "algorithms.h"
+#include "advancedsearch.h"
 namespace Ui {
 class MainWindow;
 }
@@ -31,8 +37,29 @@ public:
     ~MainWindow();
 
 signals:
-    void set_all_duration_signal(int* duration);
+    void set_duration_button_clicked(int duration);
 private slots:
+    void delete_lost_book(QString UserID, QString BookID);
+
+    void receive_lostbook_punishment(QString UserID, QString BookID, QString message, QString money);
+
+    void show_lost_book_detail(User_c user, Books_c book);
+
+    void send_lost_book(books *lost);
+
+    void create_newbook_noti(books *newbook);
+
+    void read_pdf_books(books *read_book);
+
+    void return_book(books *return_book);
+
+    void delete_readernoti_indata(ReaderNoti_c noti);
+
+    void show_reader_noti_detail(ReaderNoti_c noti, Books_c book);
+
+    void get_reason_for_denial(QString UserID, QString BookID, QString content, int on);
+
+    void get_each_duration(QString bookID, int duration);
 
     void on_edit_book_manage_button_clicked();
 
@@ -124,22 +151,51 @@ private slots:
 
     void on_change_current_pass_returnPressed();
 
-    void on_pushButton_clicked();
+    void on_Detail_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_set_duration_button_clicked();
+
+    void accept_reader_request_about_borrowing_book(UserDemand_c *request);
+
+    void on_reader_clearall_button_clicked();
+
+    void on_librarian_tab_tabBarClicked(int index);
+
+    void on_clear_all_lost_book_clicked();
+
+    void on_lib_borrowed_books_detail_clicked();
+
+    void on_clear_noti_librarian_button_clicked();
+
+    void on_clear_all_noti_librarian_button_clicked();
+
+    void on_search_books_returnPressed();
+
+    void on_refresh_book_button_clicked();
+
+    void advanced_book_search(QString BName, QString Genre, QString Author, QString Publisher);
+
+    void on_find_book_button_clicked();
 
 private:
     Ui::MainWindow *ui;
     Database data;
     CurrentUser user;
+    int bookAmount;
     void set_reader();
     void set_usermanager();
     void set_librarian();
     void login();
+    void show_reader_noti();
     void get_user_role(QString roleid);
     void get_current_user(QString userID);
     void send_request_to_librarian(QString userID, QString borrowBookID);
     void get_librarian_noti();
+    void show_accounts();
+    void resetRealAmountOfBooks();
+    void show_reader_borrowed_books();
+    void show_lost_books();
+    void show_lib_borrowed_books();
 };
 
 #endif // MAINWINDOW_H

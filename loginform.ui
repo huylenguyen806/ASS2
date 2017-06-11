@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>loginform</class>
+ <widget class="QWidget" name="loginform">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>492</width>
+    <height>382</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <spacer name="horizontalSpacer">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>27</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QWidget" name="login_widget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>350</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(245, 249, 252);
+</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_13">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_33">
+            <item>
+             <widget class="QLabel" name="label_21">
+              <property name="minimumSize">
+               <size>
+                <width>300</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>200</height>
+               </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">image: url(:/images/Libpro2.png);</string>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_27">
+            <property name="spacing">
+             <number>6</number>
+            </property>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_21">
+              <item>
+               <widget class="QLabel" name="label_22">
+                <property name="styleSheet">
+                 <string notr="true">QLabel#label_22 {
+	height: 35pt;
+    background-color: rgb(245, 249, 252);
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 5em;
+	min-height: 35px;
+}</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Username: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_23">
+                <property name="styleSheet">
+                 <string notr="true">QLabel#label_23 {
+height: 35pt;
+    background-color: rgb(245, 249, 252);
+    border-style: solid;
+	border-width: 0px;
+    border-color: rgb(255,255,255);
+	border-top-color: rgb(204,239,254);
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 3em;
+	min-height: 35px;
+}</string>
+                </property>
+                <property name="text">
+                 <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;Password: &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_22">
+              <item>
+               <widget class="QLineEdit" name="lineEdit_username">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit#lineEdit_username {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#lineEdit_username:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#lineEdit_username:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEdit_password">
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit#lineEdit_password {
+    height: 30px;
+    border: 1px;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+	border-style: solid;
+	border-color: rgb(184,203,219);
+    padding: 0 8px;
+    background: rgb(245,249,252);
+    selection-background-color: darkgray;
+}
+QLineEdit#lineEdit_password:hover {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(153,173,189);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}
+QLineEdit#lineEdit_password:focus {
+    height: 30px;
+    border: 1px;
+	border-style: solid;
+	border-color: rgb(0,175,240);
+    padding: 0 8px;
+    background: rgb(255,255,255);
+    selection-background-color: darkgray;
+}</string>
+                </property>
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_28">
+            <item>
+             <widget class="QPushButton" name="other_login_button">
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton#other_login_button {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 5em;
+    padding: 2px;
+}
+QPushButton#other_login_button:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#other_login_button:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+              </property>
+              <property name="text">
+               <string>Login</string>
+              </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
+              <property name="default">
+               <bool>true</bool>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="close_login_form_button">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton#close_login_form_button {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 14px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    min-width: 5em;
+    padding: 2px;
+}
+QPushButton#close_login_form_button:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+    border-style: inset;
+}
+QPushButton#close_login_form_button:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+              </property>
+              <property name="text">
+               <string>Close</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_23">
+            <item>
+             <widget class="QLabel" name="label_24">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(0, 0, 0);</string>
+              </property>
+              <property name="text">
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:10pt; font-style:italic; text-decoration: underline;&quot;&gt;BKU FCP&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <spacer name="horizontalSpacer_2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>27</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

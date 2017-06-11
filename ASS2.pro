@@ -29,19 +29,33 @@ SOURCES += main.cpp\
     manageaccount.cpp \
     bookmanagement.cpp \
     displaybookwidget.cpp \
-    database.cpp
+    database.cpp \
+    loginform.cpp \
+    readernotifications.cpp \
+    noti_item.cpp \
+    algorithms.cpp \
+    advancedsearch.cpp
 
 HEADERS  += mainwindow.h \
     manageaccount.h \
     bookmanagement.h \
     displaybookwidget.h \
     database.h \
-    maindatabase.h
+    maindatabase.h \
+    loginform.h \
+    readernotifications.h \
+    noti_item.h \
+    algorithms.h \
+    advancedsearch.h
 
 FORMS    += mainwindow.ui \
     manageaccount.ui \
     bookmanagement.ui \
-    displaybookwidget.ui
+    displaybookwidget.ui \
+    loginform.ui \
+    readernotifications.ui \
+    noti_item.ui \
+    advancedsearch.ui
 
 RESOURCES += \
     resources.qrc

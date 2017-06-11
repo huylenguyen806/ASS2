@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>noti_item</class>
+ <widget class="QWidget" name="noti_item">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>541</width>
+    <height>70</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,0">
+     <item>
+      <widget class="QLabel" name="info">
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Plain</enum>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+       <property name="wordWrap">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="pushButton">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>121</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="baseSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>Detail</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normalon>:/images/detail_icon.ico</normalon>
+        </iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="lostbook_detail">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>121</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    background-color: rgb(199,237,252);
+    border-style: outset;
+    border-width: 1px;
+    border-radius: 5px;
+    border-color: white;
+	font:normal 200 14pt &quot;Myriad Pro&quot;;
+    max-width: 5em;
+    padding: 2px;
+}
+QPushButton:pressed {
+    background-color: rgb(178,231,250);
+    border-style: outset;
+}
+QPushButton:hover {
+    background-color: rgb(178,231,250);
+    border-style: inset;
+}</string>
+       </property>
+       <property name="text">
+        <string>Detail</string>
+       </property>
+       <property name="icon">
+        <iconset resource="resources.qrc">
+         <normaloff>:/images/detail_icon.ico</normaloff>:/images/detail_icon.ico</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

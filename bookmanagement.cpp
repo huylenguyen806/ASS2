@@ -1,5 +1,8 @@
 #include "bookmanagement.h"
 #include "ui_bookmanagement.h"
+#include <QVariant>
+#include <QMessageBox>
+#include "displaybookwidget.h"
 
 BookManagement::BookManagement(QWidget *parent) :
     QWidget(parent),
@@ -13,6 +16,61 @@ BookManagement::BookManagement(QWidget *parent) :
 BookManagement::~BookManagement()
 {
     delete ui;
+}
+
+void BookManagement::show_borrowed_books(LibBorrowedBooks_c data)
+{
+    ui->borrowed_book_list->clear();
+    setWindowIcon(QIcon(":/images/detail_icon.ico"));
+    setWindowTitle("Borrowed Books");
+    ui->stackedWidget->setCurrentWidget(ui->borrowed_books);
+    ui->borrowed_books_user->setTextFormat(Qt::RichText);
+    ui->borrowed_books_user->setFont(QFont("Myriad Pro",14));
+    ui->borrowed_books_user->setText("<b>Name: </b>" + data.UserName + "<br /><b>UserID: </b>" + data.UserID);
+    ui->borrowed_books_user->setWordWrap(true);
+    for(int i = 0; i < data.BorrowedBooks.size(); ++i){
+        QListWidgetItem *item = new QListWidgetItem();
+        item->setSizeHint(QSize(0,230));
+        DisplayBookWidget *widget = new DisplayBookWidget();
+        widget->book_info->bookID = data.BorrowedBooks[i].BookID;
+        widget->book_info->genre = data.BorrowedBooks[i].Kind;
+        widget->book_info->Image = data.BorrowedBooks[i].Image;
+        widget->book_info->publishedDate = data.BorrowedBooks[i].PublishedDate;
+        widget->book_info->publisher = data.BorrowedBooks[i].Publisher;
+        widget->book_info->title = data.BorrowedBooks[i].BName;
+        widget->book_info->author = data.BorrowedBooks[i].Author;
+        widget->set_displaying_borrowed_book();
+        widget->show_only_book_info();
+        ui->borrowed_book_list->addItem(item);
+        ui->borrowed_book_list->setItemWidget(item,widget);
+    }
+}
+
+void BookManagement::show_lost_book_widget(User_c user, Books_c book)
+{
+    setWindowIcon(QIcon(":/images/detail_icon.ico"));
+    setWindowTitle("Lost Books");
+    this->UserID = user.UserID;
+    this->BookID = book.BookID;
+    ui->stackedWidget->setCurrentWidget(ui->manage_lost_books);
+    ui->lost_book_user_info->setTextFormat(Qt::RichText);
+    ui->lost_book_user_info->setFont(QFont("Myriad Pro",14));
+    ui->lost_book_user_info->setText("<b>Name : </b>" + user.Name + "<br /><b>UserID : </b>" + user.UserID);
+    ui->lost_book_user_info->setWordWrap(true);
+    ui->book_name_lost->setFont(QFont("Myriad Pro",14,QFont::Bold));
+    ui->book_name_lost->setText(book.BName);
+    ui->book_name_lost->setWordWrap(true);
+    QPixmap pix;
+    pix.loadFromData(book.Image);
+    ui->book_image_lost->setPixmap(pix);
+    ui->book_info_lost->setTextFormat(Qt::RichText);
+    ui->book_info_lost->setFont(QFont("Myriad Pro",14));
+    ui->book_info_lost->setText("<b>Author: </b> " + book.Author + "<br />" +
+                           "<b>Published Date: </b> " + book.PublishedDate + "<br />" +
+                           "<b>Genre: </b> " + book.Kind + "<br />" +
+                           "<b>Publisher: </b> " + book.Publisher + "<br />" +
+                           "<b>BookID: </b> " + book.BookID);
+    ui->book_info_lost->setWordWrap(true);
 }
 
 void BookManagement::on_cancel_add_book_button_clicked()
@@ -45,8 +103,13 @@ void BookManagement::showeditbook()
     ui->stackedWidget->setCurrentWidget(ui->edit_book);
 }
 
-void BookManagement::showBorrowBookInfo(User_c user, Books_c book)
+void BookManagement::showBorrowBookInfo(User_c user, Books_c book, int duration)
 {
+    setWindowIcon(QIcon(":/images/detail_icon.ico"));
+    setWindowTitle("Management for borrowing books");
+    request->UserID = user.UserID;
+    request->BorrowBookID = book.BookID;
+    request->Duration = duration;
     ui->stackedWidget->setCurrentWidget(ui->librarian_noti);
     ui->user_info->setTextFormat(Qt::RichText);
     ui->user_info->setText("<b>Name: </b> " + user.Name + "<br />" +
@@ -55,16 +118,86 @@ void BookManagement::showBorrowBookInfo(User_c user, Books_c book)
     pix.loadFromData(book.Image);
     ui->book_image->setPixmap(pix);
     ui->book_name->setText(book.BName);
-    ui->book_name->setFont(QFont("Myriad Pro",14,-1,QFont::Bold));
+    ui->book_name->setFont(QFont("Myriad Pro",14,QFont::Bold));
+    ui->book_name->setWordWrap(true);
     ui->book_info->setTextFormat(Qt::RichText);
     ui->book_info->setText("<b>Author: </b> " + book.Author + "<br />" +
                            "<b>Published Date: </b> " + book.PublishedDate + "<br />" +
                            "<b>Genre: </b> " + book.Kind + "<br />" +
                            "<b>Publisher: </b> " + book.Publisher + "<br />" +
                            "<b>BookID: </b> " + book.BookID);
+    ui->book_info->setWordWrap(true);
+    ui->duration_label->setFont(QFont("Myriad Pro",14,-1,false));
+    ui->duration_label->setTextFormat(Qt::RichText);
+    if(duration == 1)
+        ui->duration_label->setText(" 1 Day");
+    else
+        ui->duration_label->setText(" " + QVariant(duration).toString() + " Days");
+    ui->current_amount->setTextFormat(Qt::RichText);
+    ui->current_amount->setFont(QFont("Myriad Pro",14,-1,false));
+    ui->current_amount->setText(QString::number(book.realAmmount) + "/" + QString::number(book.Amount));
+    if(book.realAmmount == 0)
+        ui->accept_button->setDisabled(true);
 }
 
 void BookManagement::on_accept_button_clicked()
 {
     emit accept_button_signals(this->request);
+    this->close();
+}
+
+void BookManagement::on_deny_button_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->deny_reason);
+}
+
+void BookManagement::on_cancel_refusal_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->librarian_noti);
+}
+
+void BookManagement::on_ok_refusal_clicked()
+{
+    if(ui->run_out_of_book->isChecked()){
+        QString content = "Fail to borrow (ran out of books)";
+        emit send_reason_for_denial(this->request->UserID, this->request->BorrowBookID, content,this->on);
+        this->close();
+    }
+    else if(ui->monthly_cost_unpaid->isChecked()){
+        emit send_reason_for_denial(this->request->UserID, this->request->BorrowBookID,
+                                    "Fail to borrow (monthly cost unpaid)", this->on);
+        this->close();
+    }
+    else if(ui->different->isChecked()){
+        emit send_reason_for_denial(this->request->UserID, this->request->BorrowBookID,
+                                    ui->different_reason->toPlainText(), this->on);
+        this->close();
+    }
+}
+
+void BookManagement::on_OK_lost_book_clicked()
+{
+    message = ui->message_punishment->toPlainText();
+    money = ui->money_punishment->text();
+    if(!message.isEmpty() && !money.isEmpty()){
+        emit send_lost_book_punishment(this->UserID, this->BookID, this->message, this->money);
+        this->close();
+    }
+    else {
+        QMessageBox *noti = new QMessageBox();
+        noti->setText("Please enter message and money for punishment.");
+        noti->setWindowIcon(QIcon(":/images/error.png"));
+        noti->setWindowTitle("Error");
+        noti->show();
+    }
+}
+
+void BookManagement::on_Cancel_lost_book_clicked()
+{
+    this->close();
+}
+
+void BookManagement::on_delete_lost_book_clicked()
+{
+    emit delete_lost_book(this->UserID, this->BookID);
 }
